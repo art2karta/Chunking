@@ -1,37 +1,61 @@
-# My Git Repository
+# MDX Chunking For RAG
 
-This project is designed to provide a template for creating a Python application. It includes the main logic of the application in `Main.py`, along with a `.gitignore` file to manage ignored files and a `README.md` for documentation.
+This project chunks API documentation in MDX format into JSONL records suitable for retrieval-augmented generation (RAG).
 
-## Overview
+## What This Chunker Does
 
-This project serves as a starting point for Python developers looking to set up a new application with Git version control.
+1. Splits documents by MDX headings (strict section boundaries).
+2. Detects API endpoints such as /routing/7.0.0/global and /public_transport/2.0.
+3. Builds token-aware chunks with overlap, tuned for method-level retrieval.
+4. Writes JSONL with metadata: source file, section path, section kind, endpoint list, token estimate, and text.
 
-## Installation
+## Recommended Parameters
 
-To get started with this project, clone the repository to your local machine:
+For API docs, defaults are aligned with your target setup:
 
-```
-git clone https://your-repository-url.git
-```
+1. Window size: around 650 tokens.
+2. Min/max boundaries: 500/800 tokens.
+3. Overlap: 12%.
 
-Navigate into the project directory:
+This keeps nearby method description context while preserving semantic boundaries.
 
-```
-cd my-git-repo
-```
+## Run
 
-## Usage
+From the project folder:
 
-After cloning the repository, you can run the main application by executing:
-
-```
+```bash
 python Main.py
 ```
 
-## Contributing
+Default inputs:
 
-Contributions are welcome! Please feel free to submit a pull request or open an issue for any suggestions or improvements.
+1. ../overview.mdx
+2. ../start.mdx
+3. ../examples.mdx
 
-## License
+Default output:
 
-This project is licensed under the MIT License. See the LICENSE file for more details.
+1. ./out/rag_chunks.jsonl
+
+## Custom Run Example
+
+```bash
+python Main.py --inputs ../overview.mdx ../start.mdx ../examples.mdx --output ./out/rag_chunks.jsonl --target-tokens 650 --min-tokens 500 --max-tokens 800 --overlap 0.12
+```
+
+## Output Format
+
+Each line in JSONL is a chunk object:
+
+```json
+{
+	"id": "start-s5-c2",
+	"source": "start.mdx",
+	"section_path": "Начало работы > Построение маршрута на автомобиле",
+	"section_level": 2,
+	"section_kind": "reference",
+	"endpoints": ["/routing/7.0.0/global"],
+	"tokens_estimate": 642,
+	"text": "..."
+}
+```
