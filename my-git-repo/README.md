@@ -1,61 +1,129 @@
-# MDX Chunking For RAG
+# Скрипт чанкинга DOCX с LangChain
 
-This project chunks API documentation in MDX format into JSONL records suitable for retrieval-augmented generation (RAG).
+Этот проект содержит скрипт `chunking_langchain.py`, который читает Word-документы (`.docx`) и разбивает текст на чанки для дальнейшей загрузки в LLM/RAG-пайплайн.
 
-## What This Chunker Does
+## Что делает скрипт
 
-1. Splits documents by MDX headings (strict section boundaries).
-2. Detects API endpoints such as /routing/7.0.0/global and /public_transport/2.0.
-3. Builds token-aware chunks with overlap, tuned for method-level retrieval.
-4. Writes JSONL with metadata: source file, section path, section kind, endpoint list, token estimate, and text.
+- Находит входные `.docx`-файлы:
+  - либо из списка `input_files`
+  - либо рекурсивно из папки `input_dir`
+- Читает документ через `python-docx`
+- Определяет метку документа:
+  - сначала пытается взять `sidebar: ...`
+  - если такой строки нет, берет заголовок из первых абзацев
+- Очищает текст:
+  - убирает пустые абзацы
+  - исключает строку `sidebar: ...`
+  - нормализует лишние пробелы
+- Делит текст на промежуточные единицы через LangChain:
+  - `MarkdownHeaderTextSplitter` (по `#`, `##`, `###`)
+  - `RecursiveCharacterTextSplitter` для слишком длинных фрагментов
+- Собирает финальные чанки с ограничениями по токенам
+- Добавляет адаптивный overlap между соседними чанками
+- Сохраняет результат в `.txt` в папку `chunks_output`
 
-## Recommended Parameters
+## Какие библиотеки использует
 
-For API docs, defaults are aligned with your target setup:
+- `python-docx` — чтение `.docx`
+- `langchain-text-splitters` — разбиение текста
+- `tiktoken` — подсчет токенов (если не установлен, используется fallback по символам)
+- Стандартная библиотека Python: `re`, `pathlib`
 
-1. Window size: around 650 tokens.
-2. Min/max boundaries: 500/800 tokens.
-3. Overlap: 12%.
+## Логика чанкинга
 
-This keeps nearby method description context while preserving semantic boundaries.
+### 1. Подсчет токенов
 
-## Run
+Сначала скрипт использует `tiktoken` (`cl100k_base`).
+Если пакет не установлен, включается fallback: примерно `4 символа ~= 1 токен`.
 
-From the project folder:
+### 2. Разделение на части через LangChain
+
+- Текст склеивается в markdown-представление
+- Деление по заголовкам (`#`, `##`, `###`) через `MarkdownHeaderTextSplitter`
+- Дополнительное рекурсивное деление длинных фрагментов через `RecursiveCharacterTextSplitter`
+
+### 3. Особая обработка кода
+
+Скрипт ищет код-блоки в формате:
+
+```text
+''' ... '''
+```
+
+Правила:
+
+- Если найден такой блок, он сохраняется как неделимый фрагмент
+- Чанк не обрывается внутри этого блока
+- Для чанков, которые содержат код, максимальный размер может быть увеличен до **1000 токенов**
+- Для обычных чанков (без кода) максимум остается прежним
+
+### 4. Размеры чанков
+
+Текущие параметры в скрипте:
+
+- `min_chunk_tokens = 500`
+- `max_chunk_tokens = 700`
+- `max_chunk_tokens_with_overlap = 805` (то есть `700 + 105`)
+- `min_merge_tokens = 350`
+
+### 5. Объединение маленьких чанков
+
+Если чанк слишком маленький (меньше `min_merge_tokens`), скрипт пытается объединить его с соседним, если новый размер укладывается в допустимый лимит:
+
+- до `700` токенов для чанков без кода
+- до `1000` токенов, если после объединения есть код
+
+### 6. Адаптивный overlap
+
+Для каждого чанка (кроме первого) добавляется хвост предыдущего чанка:
+
+- `15%` от предыдущего чанка
+- `40%`, если предыдущий чанк меньше `min_chunk_tokens`
+
+При этом итоговый размер чанка с overlap ограничивается `max_chunk_tokens_with_overlap`.
+
+## Формат результата
+
+Для каждого входного документа создается отдельный файл в `chunks_output`:
+
+- Имя содержит имя родительской папки и имя исходного файла
+- Внутри:
+  - путь к source-файлу
+  - название документа
+  - количество чанков
+  - параметры чанкинга
+  - статистика (`min/max/avg` токенов)
+  - сами чанки
+
+## Установка зависимостей
 
 ```bash
-python Main.py
+pip install python-docx langchain-text-splitters tiktoken
 ```
 
-Default inputs:
+## Как запускать
 
-1. ../overview.mdx
-2. ../start.mdx
-3. ../examples.mdx
-
-Default output:
-
-1. ./out/rag_chunks.jsonl
-
-## Custom Run Example
+1. Откройте `chunking_langchain.py`
+2. Настройте при необходимости:
+   - `input_files`
+   - `input_dir`
+   - `output_dir`
+3. Запустите:
 
 ```bash
-python Main.py --inputs ../overview.mdx ../start.mdx ../examples.mdx --output ./out/rag_chunks.jsonl --target-tokens 650 --min-tokens 500 --max-tokens 800 --overlap 0.12
+python chunking_langchain.py
 ```
 
-## Output Format
+## Где настраивать параметры
 
-Each line in JSONL is a chunk object:
+Внутри `main()` можно менять:
 
-```json
-{
-	"id": "start-s5-c2",
-	"source": "start.mdx",
-	"section_path": "Начало работы > Построение маршрута на автомобиле",
-	"section_level": 2,
-	"section_kind": "reference",
-	"endpoints": ["/routing/7.0.0/global"],
-	"tokens_estimate": 642,
-	"text": "..."
-}
-```
+- минимальный/максимальный размер чанка
+- входные и выходные директории
+- список конкретных файлов
+
+Для более тонкой настройки также можно изменить:
+
+- набор `separators` в `RecursiveCharacterTextSplitter`
+- правила merge/overlap
+- шаблон определения код-блоков

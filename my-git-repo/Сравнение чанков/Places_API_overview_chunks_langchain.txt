@@ -1,8 +1,8 @@
 Source file: c:\Users\ar.kartavtsev\Desktop\Chunking\my-git-repo\input_docs\Places API\overview.docx
 Document: placesAPI
 Total chunks: 13
-Chunk size before overlap: 500-700 tokens (LangChain: MarkdownHeaderTextSplitter + RecursiveCharacterTextSplitter)
-Overlap: 15% (or 40% if previous chunk < 500 tokens), target max with overlap: 805 tokens
+Chunk size before overlap: 600-700 tokens (LangChain: MarkdownHeaderTextSplitter + RecursiveCharacterTextSplitter)
+Overlap: 15% (or 40% if previous chunk < 600 tokens), target max with overlap: 805 tokens
 ================================================================================
 
 Statistics: Min=165 tokens, Max=791 tokens, Avg=538 tokens

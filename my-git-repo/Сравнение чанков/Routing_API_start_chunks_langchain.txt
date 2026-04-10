@@ -1,11 +1,11 @@
 Source file: c:\Users\ar.kartavtsev\Desktop\Chunking\my-git-repo\input_docs\Routing API\start.docx
 Document: routingapi
 Total chunks: 53
-Chunk size before overlap: 500-700 tokens (LangChain: MarkdownHeaderTextSplitter + RecursiveCharacterTextSplitter)
-Overlap: 15% (or 40% if previous chunk < 500 tokens), target max with overlap: 805 tokens
+Chunk size before overlap: 600-700 tokens (LangChain: MarkdownHeaderTextSplitter + RecursiveCharacterTextSplitter)
+Overlap: 15% (or 40% if previous chunk < 600 tokens), target max with overlap: 805 tokens
 ================================================================================
 
-Statistics: Min=153 tokens, Max=810 tokens, Avg=625 tokens
+Statistics: Min=153 tokens, Max=810 tokens, Avg=641 tokens
 ================================================================================
 
 --- CHUNK 1 (591 tokens / 1604 chars) ---
@@ -69,9 +69,18 @@ https://routing.api.2gis.com/routing/7.0.0/global?key=API_KEY
 
 ```
 
---- CHUNK 2 (415 tokens / 1152 chars) ---
+--- CHUNK 2 (556 tokens / 1524 chars) ---
 Document: routingapi
 
+## Построение маршрута на автомобиле {#car-route}  
+Чтобы построить маршрут на автомобиле для одной пары точек, отправьте POST-запрос к `/routing/7.0.0/global`:  
+1. В строке запроса укажите значение API-ключа в параметре `key`:  
+```http
+
+https://routing.api.2gis.com/routing/7.0.0/global?key=API_KEY
+
+```  
+2. В теле запроса передайте JSON с необходимыми параметрами:  
 ```json
 
 {
@@ -1019,9 +1028,23 @@ Document: routingapi
 
 "length": 19,
 
---- CHUNK 11 (765 tokens / 1663 chars) ---
+--- CHUNK 11 (806 tokens / 1799 chars) ---
 Document: routingapi
 
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "100 м прямо",
+
+"turn_angle": -29,
+
+"turn_direction": "keep_left",
+
+"type": "crossroad"
 
 },
 
@@ -1445,9 +1468,35 @@ Document: routingapi
 
 "length": 93,
 
---- CHUNK 15 (715 tokens / 1967 chars) ---
+--- CHUNK 15 (800 tokens / 2206 chars) ---
 Document: routingapi
 
+
+"style": "archway"
+
+},
+
+{
+
+"color": "ignore",
+
+"length": 3,
+
+"selection": "LINESTRING(37.656014 55.764887, 37.656064 55.764909)",
+
+"style": "living_zone"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "40 м прямо",
+
+"turn_angle": 89,
 
 "turn_direction": "right",
 
@@ -1809,9 +1858,39 @@ Document: routingapi
 
 "length": 58,
 
---- CHUNK 17 (637 tokens / 1613 chars) ---
+--- CHUNK 17 (782 tokens / 1971 chars) ---
 Document: routingapi
 
+
+"selection": "LINESTRING(37.583086 55.775486, 37.583150 55.775405, 37.583231 55.775307, 37.583253 55.775281, 37.583307 55.775231)",
+
+"style": "normal"
+
+}
+
+],
+
+"names": [
+
+"площадь Тверская Застава"
+
+]
+
+},
+
+"outcoming_path_comment": "30 м прямо",
+
+"type": "begin"
+
+},
+
+{
+
+"comment": "Поворот налево",
+
+"icon": "crossroad_left",
+
+"id": "6681834008659108422",
 
 "outcoming_path": {
 
@@ -1942,9 +2021,19 @@ Document: routingapi
 
 "length": 483,
 
---- CHUNK 18 (731 tokens / 1719 chars) ---
+--- CHUNK 18 (807 tokens / 1894 chars) ---
 Document: routingapi
 
+
+"length": 250,
+
+"selection": "LINESTRING(37.585492 55.776131, 37.585658 55.776039, 37.586214 55.775714, 37.588010 55.774663, 37.588280 55.774505)",
+
+"style": "normal"
+
+},
+
+{
 
 "color": "normal",
 
@@ -3842,9 +3931,53 @@ Document: routingapi
 
 "exit": true,
 
---- CHUNK 34 (692 tokens / 1599 chars) ---
+--- CHUNK 34 (807 tokens / 1895 chars) ---
 Document: routingapi
 
+
+"distance": 1318,
+
+"id": "3",
+
+"moving_duration": 360,
+
+"platforms": {
+
+"names": [
+
+"Малая Остроумовская",
+
+"Клуб Русакова - Сцена Мельников"
+
+]
+
+},
+
+"routes": [
+
+{
+
+"color": "#eb5a2b",
+
+"names": [
+
+"Т1",
+
+"7",
+
+"13"
+
+],
+
+"subtype": "tram",
+
+"subtype_name": "трамвай"
+
+}
+
+],
+
+"type": "passage",
 
 "waiting_duration": 164,
 
@@ -4275,9 +4408,27 @@ Document: routingapi
 
 "color": "#fe7f01",
 
---- CHUNK 37 (705 tokens / 1697 chars) ---
+--- CHUNK 37 (754 tokens / 1828 chars) ---
 Document: routingapi
 
+
+}
+
+],
+
+"platforms": [
+
+{
+
+"geometry": "POINT(37.636509 55.793613)",
+
+"id": "26"
+
+},
+
+{
+
+"geometry": "POINT(37.638915 55.808717)",
 
 "id": "27"
 
@@ -5136,9 +5287,29 @@ Document: routingapi
 
 {
 
---- CHUNK 44 (762 tokens / 1678 chars) ---
+--- CHUNK 44 (806 tokens / 1815 chars) ---
 Document: routingapi
 
+
+"names": [
+
+"25"
+
+],
+
+"subtype": "tram",
+
+"subtype_name": "трамвай"
+
+}
+
+],
+
+"type": "passage",
+
+"waiting_duration": 526,
+
+"waypoint": {
 
 "combined": false,
 
@@ -5444,9 +5615,59 @@ Document: routingapi
 
 {
 
---- CHUNK 46 (503 tokens / 1055 chars) ---
+--- CHUNK 46 (636 tokens / 1438 chars) ---
 Document: routingapi
 
+
+"total_duration": 2624,
+
+"total_walkway_distance": "пешком 21 мин",
+
+"transfer_count": 0,
+
+"waypoints": [
+
+{
+
+"combined": false,
+
+"routes_names": [
+
+"25"
+
+],
+
+"subtype": "tram"
+
+}
+
+]
+
+},
+
+{
+
+"crossing_count": 0,
+
+"id": "59",
+
+"movements": [
+
+{
+
+"alternatives": [
+
+{
+
+"geometry": [
+
+{
+
+"selection": "LINESTRING(37.697461 55.798227, 37.697219 55.798105)",
+
+"z_first": 0,
+
+"z_last": 0
 
 },
 
@@ -5872,9 +6093,23 @@ Document: routingapi
 
 {
 
---- CHUNK 52 (765 tokens / 1691 chars) ---
+--- CHUNK 52 (805 tokens / 1776 chars) ---
 Document: routingapi
 
+
+"Бориса Галушкина д.17",
+
+"Ярославская"
+
+]
+
+},
+
+"routes": [
+
+{
+
+"color": "#eb5a2b",
 
 "names": [
 

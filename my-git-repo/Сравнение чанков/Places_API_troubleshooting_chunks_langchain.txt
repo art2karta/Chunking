@@ -1,11 +1,11 @@
 Source file: c:\Users\ar.kartavtsev\Desktop\Chunking\my-git-repo\input_docs\Places API\troubleshooting.docx
 Document: placesAPI
 Total chunks: 4
-Chunk size before overlap: 500-700 tokens (LangChain: MarkdownHeaderTextSplitter + RecursiveCharacterTextSplitter)
-Overlap: 15% (or 40% if previous chunk < 500 tokens), target max with overlap: 805 tokens
+Chunk size before overlap: 600-700 tokens (LangChain: MarkdownHeaderTextSplitter + RecursiveCharacterTextSplitter)
+Overlap: 15% (or 40% if previous chunk < 600 tokens), target max with overlap: 805 tokens
 ================================================================================
 
-Statistics: Min=540 tokens, Max=804 tokens, Avg=639 tokens
+Statistics: Min=549 tokens, Max=804 tokens, Avg=673 tokens
 ================================================================================
 
 --- CHUNK 1 (549 tokens / 1472 chars) ---
@@ -108,9 +108,46 @@ https://catalog.api.2gis.com/3.0/items?q=Москва Доватора, 9&key=YO
 </details>  
 <br/>
 
---- CHUNK 2 (540 tokens / 1631 chars) ---
+--- CHUNK 2 (676 tokens / 1993 chars) ---
 Document: placesAPI
 
+
+}
+
+}
+
+```  
+</details>  
+<br/>  
+Пример исправленного запроса:  
+```http
+
+https://catalog.api.2gis.com/3.0/items?q=Москва Доватора, 9&key=YOUR_KEY
+
+```  
+<details>  
+<summary><i>Ответ</i></summary>  
+```json
+
+{
+
+"meta": {
+
+"api_version": "3.0.17799",
+
+"code": 200,
+
+"issue_date": "20240524"
+
+},
+
+"result": {
+
+"items": [
+
+{
+
+"address_name": "улица Доватора, 9",
 
 "full_name": "Москва, улица Доватора, 9",
 

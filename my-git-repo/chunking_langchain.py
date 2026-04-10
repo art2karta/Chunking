@@ -19,6 +19,9 @@ import re
 from pathlib import Path
 
 
+CODE_BLOCK_RE = re.compile(r"'''[\s\S]*?'''")
+
+
 def get_token_counter():
     """Initialize token counter for GPT-style tokenization."""
     try:
@@ -71,6 +74,32 @@ def clean_paragraphs(paragraphs, re_module):
     return cleaned
 
 
+def split_text_preserving_code_blocks(text):
+    """Split text into segments while preserving whole '''...''' code blocks."""
+    parts = []
+    last_end = 0
+
+    for match in CODE_BLOCK_RE.finditer(text):
+        before = text[last_end:match.start()]
+        if before.strip():
+            parts.append((before, False))
+
+        code_block = match.group(0)
+        if code_block.strip():
+            parts.append((code_block, True))
+
+        last_end = match.end()
+
+    tail = text[last_end:]
+    if tail.strip():
+        parts.append((tail, False))
+
+    if not parts and text.strip():
+        parts.append((text, False))
+
+    return parts
+
+
 def prepare_units_with_langchain(cleaned_paragraphs, token_counter, max_chunk_tokens):
     """Build intermediate units using LangChain markdown + recursive splitters."""
     from langchain_text_splitters import (
@@ -107,17 +136,28 @@ def prepare_units_with_langchain(cleaned_paragraphs, token_counter, max_chunk_to
         if not section:
             continue
 
-        for part in recursive_splitter.split_text(section):
-            chunk = part.strip()
-            if chunk:
-                prepared_units.append(chunk)
+        # Keep code blocks atomic, split only non-code text recursively.
+        for segment, is_code in split_text_preserving_code_blocks(section):
+            if is_code:
+                code_text = segment.strip()
+                if code_text:
+                    prepared_units.append({"text": code_text, "has_code": True})
+                continue
+
+            for part in recursive_splitter.split_text(segment):
+                chunk = part.strip()
+                if chunk:
+                    prepared_units.append({"text": chunk, "has_code": False})
 
     return prepared_units
 
 
 def merge_small_chunks(chunk_info, token_counter, min_merge_tokens, max_chunk_tokens):
     """Merge too-small chunks with neighbors if merged text still fits the limit."""
-    items = [{"text": text, "tokens": tokens} for text, tokens in chunk_info]
+    items = [
+        {"text": text, "tokens": tokens, "has_code": has_code}
+        for text, tokens, has_code in chunk_info
+    ]
     index = 0
 
     while index < len(items):
@@ -131,16 +171,28 @@ def merge_small_chunks(chunk_info, token_counter, min_merge_tokens, max_chunk_to
         if index + 1 < len(items):
             merged_text = current["text"] + "\n" + items[index + 1]["text"]
             merged_tokens = token_counter(merged_text)
-            if merged_tokens <= max_chunk_tokens:
-                items[index + 1] = {"text": merged_text, "tokens": merged_tokens}
+            merged_has_code = current["has_code"] or items[index + 1]["has_code"]
+            merge_limit = 1000 if merged_has_code else max_chunk_tokens
+            if merged_tokens <= merge_limit:
+                items[index + 1] = {
+                    "text": merged_text,
+                    "tokens": merged_tokens,
+                    "has_code": merged_has_code,
+                }
                 del items[index]
                 merged = True
 
         if not merged and index > 0:
             merged_text = items[index - 1]["text"] + "\n" + current["text"]
             merged_tokens = token_counter(merged_text)
-            if merged_tokens <= max_chunk_tokens:
-                items[index - 1] = {"text": merged_text, "tokens": merged_tokens}
+            merged_has_code = items[index - 1]["has_code"] or current["has_code"]
+            merge_limit = 1000 if merged_has_code else max_chunk_tokens
+            if merged_tokens <= merge_limit:
+                items[index - 1] = {
+                    "text": merged_text,
+                    "tokens": merged_tokens,
+                    "has_code": merged_has_code,
+                }
                 del items[index]
                 index -= 1
                 merged = True
@@ -148,7 +200,7 @@ def merge_small_chunks(chunk_info, token_counter, min_merge_tokens, max_chunk_to
         if not merged:
             index += 1
 
-    return [(item["text"], item["tokens"]) for item in items]
+    return [(item["text"], item["tokens"], item["has_code"]) for item in items]
 
 
 def build_chunks(
@@ -161,6 +213,7 @@ def build_chunks(
 ):
     """Build chunks with adaptive overlap from prepared text units."""
     current_chunk = []
+    current_has_code = False
     current_tokens = 0
     chunk_info = []
 
@@ -168,36 +221,46 @@ def build_chunks(
         text = "\n".join(parts)
         return text, token_counter(text)
 
-    for unit in prepared_units:
+    for unit_data in prepared_units:
+        unit = unit_data["text"]
+        unit_has_code = unit_data["has_code"]
         unit_tokens = token_counter(unit)
-        _, prospective_tokens = chunk_text_and_tokens(current_chunk + [unit])
 
-        if prospective_tokens > max_chunk_tokens:
+        prospective_parts = current_chunk + [unit]
+        _, prospective_tokens = chunk_text_and_tokens(prospective_parts)
+        prospective_has_code = current_has_code or unit_has_code
+        prospective_max = 1000 if prospective_has_code else max_chunk_tokens
+
+        if prospective_tokens > prospective_max:
             if current_chunk and current_tokens >= min_chunk_tokens:
                 chunk_text, chunk_tokens = chunk_text_and_tokens(current_chunk)
-                chunk_info.append((chunk_text, chunk_tokens))
+                chunk_info.append((chunk_text, chunk_tokens, current_has_code))
                 current_chunk = [unit]
+                current_has_code = unit_has_code
                 current_tokens = unit_tokens
             elif (not current_chunk) or (current_tokens < min_chunk_tokens and unit_tokens <= 200):
                 current_chunk.append(unit)
+                current_has_code = current_has_code or unit_has_code
                 _, current_tokens = chunk_text_and_tokens(current_chunk)
             elif current_chunk:
                 chunk_text, chunk_tokens = chunk_text_and_tokens(current_chunk)
-                chunk_info.append((chunk_text, chunk_tokens))
+                chunk_info.append((chunk_text, chunk_tokens, current_has_code))
                 current_chunk = [unit]
+                current_has_code = unit_has_code
                 current_tokens = unit_tokens
         else:
             current_chunk.append(unit)
+            current_has_code = prospective_has_code
             current_tokens = prospective_tokens
 
     if current_chunk:
         chunk_text, chunk_tokens = chunk_text_and_tokens(current_chunk)
-        chunk_info.append((chunk_text, chunk_tokens))
+        chunk_info.append((chunk_text, chunk_tokens, current_has_code))
 
     chunk_info = merge_small_chunks(chunk_info, token_counter, min_merge_tokens, max_chunk_tokens)
 
     chunks_with_overlap = []
-    for i, (chunk_text, tokens) in enumerate(chunk_info):
+    for i, (chunk_text, tokens, _chunk_has_code) in enumerate(chunk_info):
         if i > 0:
             prev_tokens = chunk_info[i - 1][1]
             overlap_percent = 0.40 if prev_tokens < min_chunk_tokens else 0.15
@@ -385,7 +448,7 @@ def main():
 
     token_counter = get_token_counter()
 
-    min_chunk_tokens = 600
+    min_chunk_tokens = 500
     max_chunk_tokens = 700
 
     input_files = [

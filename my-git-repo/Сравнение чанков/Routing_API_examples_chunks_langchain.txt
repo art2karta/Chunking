@@ -1,11 +1,11 @@
 Source file: c:\Users\ar.kartavtsev\Desktop\Chunking\my-git-repo\input_docs\Routing API\examples.docx
 Document: routingapi
-Total chunks: 598
-Chunk size before overlap: 500-700 tokens (LangChain: MarkdownHeaderTextSplitter + RecursiveCharacterTextSplitter)
-Overlap: 15% (or 40% if previous chunk < 500 tokens), target max with overlap: 805 tokens
+Total chunks: 597
+Chunk size before overlap: 600-700 tokens (LangChain: MarkdownHeaderTextSplitter + RecursiveCharacterTextSplitter)
+Overlap: 15% (or 40% if previous chunk < 600 tokens), target max with overlap: 805 tokens
 ================================================================================
 
-Statistics: Min=32 tokens, Max=810 tokens, Avg=647 tokens
+Statistics: Min=32 tokens, Max=812 tokens, Avg=662 tokens
 ================================================================================
 
 --- CHUNK 1 (469 tokens / 1246 chars) ---
@@ -768,9 +768,43 @@ Document: routingapi
 
 {
 
---- CHUNK 11 (716 tokens / 1641 chars) ---
+--- CHUNK 11 (805 tokens / 1905 chars) ---
 Document: routingapi
 
+
+}
+
+],
+
+"type": "passage",
+
+"waiting_duration": 64,
+
+"waypoint": {
+
+"combined": false,
+
+"comment": "",
+
+"name": "Мосгорсуд",
+
+"subtype": "tram"
+
+}
+
+},
+
+{
+
+"alternatives": [
+
+{
+
+"geometry": [
+
+{
+
+"selection": "LINESTRING(37.662182 55.821803, 37.662378 55.821714)",
 
 "z_first": 0,
 
@@ -1046,9 +1080,21 @@ Document: routingapi
 
 {
 
---- CHUNK 13 (759 tokens / 1608 chars) ---
+--- CHUNK 13 (811 tokens / 1728 chars) ---
 Document: routingapi
 
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.661553 55.820898, 37.661502 55.820849)",
+
+"z_first": 0,
 
 "z_last": 0
 
@@ -1358,9 +1404,41 @@ Document: routingapi
 
 {
 
---- CHUNK 15 (746 tokens / 1614 chars) ---
+--- CHUNK 15 (806 tokens / 1806 chars) ---
 Document: routingapi
 
+
+"mcc",
+
+"light_rail",
+
+"light_metro",
+
+"funicular_railway",
+
+"cable_car",
+
+"bus",
+
+"aeroexpress"
+
+],
+
+"waypoints": [
+
+{
+
+"combined": false,
+
+"routes_names": [
+
+"11"
+
+],
+
+"subtype": "tram"
+
+}
 
 ]
 
@@ -5750,9 +5828,37 @@ Document: routingapi
 
 "length": 93,
 
---- CHUNK 51 (689 tokens / 1902 chars) ---
+--- CHUNK 51 (803 tokens / 2211 chars) ---
 Document: routingapi
 
+
+"selection": "LINESTRING(37.655867 55.764818, 37.656014 55.764887)",
+
+"style": "archway"
+
+},
+
+{
+
+"color": "ignore",
+
+"length": 3,
+
+"selection": "LINESTRING(37.656014 55.764887, 37.656064 55.764909)",
+
+"style": "living_zone"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "40 м прямо",
+
+"turn_angle": 89,
 
 "turn_direction": "right",
 
@@ -7969,9 +8075,27 @@ Document: routingapi
 
 "length": 19,
 
---- CHUNK 68 (628 tokens / 1449 chars) ---
+--- CHUNK 68 (676 tokens / 1607 chars) ---
 Document: routingapi
 
+
+"style": "normal"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "100 м прямо",
+
+"turn_angle": -29,
+
+"turn_direction": "keep_left",
+
+"type": "crossroad"
 
 },
 
@@ -8056,9 +8180,29 @@ Document: routingapi
 
 "length": 525,
 
---- CHUNK 69 (733 tokens / 1694 chars) ---
+--- CHUNK 69 (796 tokens / 1869 chars) ---
 Document: routingapi
 
+
+"style": "normal"
+
+},
+
+{
+
+"color": "fast",
+
+"length": 17,
+
+"selection": "LINESTRING(37.607062 55.772839, 37.607333 55.772877)",
+
+"style": "normal"
+
+},
+
+{
+
+"color": "normal",
 
 "length": 105,
 
@@ -8252,9 +8396,25 @@ Document: routingapi
 
 "length": 644,
 
---- CHUNK 71 (669 tokens / 1599 chars) ---
+--- CHUNK 71 (808 tokens / 1920 chars) ---
 Document: routingapi
 
+
+"length": 104,
+
+"selection": "LINESTRING(37.644348 55.769976, 37.644647 55.769882, 37.645657 55.769580, 37.645818 55.769531)",
+
+"style": "normal"
+
+},
+
+{
+
+"color": "fast",
+
+"length": 135,
+
+"selection": "LINESTRING(37.645818 55.769531, 37.646121 55.769442, 37.646389 55.769364, 37.647223 55.769158, 37.647789 55.769017)",
 
 "style": "normal"
 
@@ -9047,9 +9207,17 @@ Document: routingapi
 
 "length": 964,
 
---- CHUNK 76 (751 tokens / 1708 chars) ---
+--- CHUNK 76 (765 tokens / 1754 chars) ---
 Document: routingapi
 
+
+"style": "normal"
+
+},
+
+{
+
+"color": "normal",
 
 "length": 152,
 
@@ -9265,9 +9433,43 @@ Document: routingapi
 
 "length": 462,
 
---- CHUNK 78 (663 tokens / 1610 chars) ---
+--- CHUNK 78 (769 tokens / 1920 chars) ---
 Document: routingapi
 
+
+"style": "normal"
+
+},
+
+{
+
+"color": "slow",
+
+"length": 58,
+
+"public_transport_lane": true,
+
+"selection": "LINESTRING(37.623755 55.759390, 37.624658 55.759515)",
+
+"style": "normal"
+
+}
+
+],
+
+"names": [
+
+"Охотный Ряд"
+
+]
+
+},
+
+"outcoming_path_comment": "700 м прямо",
+
+"turn_angle": -60,
+
+"turn_direction": "left",
 
 "type": "crossroad"
 
@@ -9378,9 +9580,11 @@ Document: routingapi
 
 "length": 465,
 
---- CHUNK 79 (741 tokens / 1615 chars) ---
+--- CHUNK 79 (803 tokens / 1748 chars) ---
 Document: routingapi
 
+
+"selection": "LINESTRING(37.629895 55.756632, 37.629978 55.756619, 37.630038 55.756617, 37.630106 55.756623, 37.630198 55.756645)",
 
 "style": "normal"
 
@@ -9698,9 +9902,35 @@ Document: routingapi
 
 "length": 93,
 
---- CHUNK 83 (696 tokens / 1922 chars) ---
+--- CHUNK 83 (803 tokens / 2212 chars) ---
 Document: routingapi
 
+
+"selection": "LINESTRING(37.655867 55.764818, 37.656014 55.764887)",
+
+"style": "archway"
+
+},
+
+{
+
+"color": "ignore",
+
+"length": 3,
+
+"selection": "LINESTRING(37.656014 55.764887, 37.656064 55.764909)",
+
+"style": "living_zone"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "40 м прямо",
 
 "turn_angle": 89,
 
@@ -11187,9 +11417,39 @@ Document: routingapi
 
 "length": 124,
 
---- CHUNK 102 (531 tokens / 1058 chars) ---
+--- CHUNK 102 (677 tokens / 1446 chars) ---
 Document: routingapi
 
+
+"zlevel": "zlevel-normal"
+
+},
+
+{
+
+"angles": "LINESTRING(0)",
+
+"length": 13,
+
+"selection": "LINESTRING(37.584011 55.776703 17440, 37.584150 55.776794 17450)",
+
+"style": "normal",
+
+"zlevel": "zlevel-normal"
+
+},
+
+{
+
+"angles": "LINESTRING(0)",
+
+"length": 18,
+
+"selection": "LINESTRING(37.584150 55.776794 17450, 37.584351 55.776915 17450)",
+
+"style": "crosswalk",
+
+"zlevel": "zlevel-normal"
 
 },
 
@@ -11366,9 +11626,15 @@ Document: routingapi
 
 "length": 456,
 
---- CHUNK 111 (753 tokens / 1519 chars) ---
+--- CHUNK 111 (804 tokens / 1651 chars) ---
 Document: routingapi
 
+
+"selection": "LINESTRING(37.645819 55.769532 17090, 37.645978 55.769695 17070)",
+
+"style": "crosswalk",
+
+"zlevel": "zlevel-normal"
 
 },
 
@@ -12916,9 +13182,39 @@ Document: routingapi
 
 "length": 124,
 
---- CHUNK 133 (531 tokens / 1058 chars) ---
+--- CHUNK 133 (677 tokens / 1446 chars) ---
 Document: routingapi
 
+
+"zlevel": "zlevel-normal"
+
+},
+
+{
+
+"angles": "LINESTRING(0)",
+
+"length": 13,
+
+"selection": "LINESTRING(37.584011 55.776703 17440, 37.584150 55.776794 17450)",
+
+"style": "normal",
+
+"zlevel": "zlevel-normal"
+
+},
+
+{
+
+"angles": "LINESTRING(0)",
+
+"length": 18,
+
+"selection": "LINESTRING(37.584150 55.776794 17450, 37.584351 55.776915 17450)",
+
+"style": "crosswalk",
+
+"zlevel": "zlevel-normal"
 
 },
 
@@ -13095,9 +13391,15 @@ Document: routingapi
 
 "length": 456,
 
---- CHUNK 142 (753 tokens / 1519 chars) ---
+--- CHUNK 142 (804 tokens / 1651 chars) ---
 Document: routingapi
 
+
+"selection": "LINESTRING(37.645819 55.769532 17090, 37.645978 55.769695 17070)",
+
+"style": "crosswalk",
+
+"zlevel": "zlevel-normal"
 
 },
 
@@ -14177,9 +14479,25 @@ Document: routingapi
 
 "length": 252,
 
---- CHUNK 152 (686 tokens / 1516 chars) ---
+--- CHUNK 152 (806 tokens / 1800 chars) ---
 Document: routingapi
 
+
+"outcoming_path": {
+
+"distance": 4041,
+
+"duration": 433,
+
+"geometry": [
+
+{
+
+"color": "slow",
+
+"length": 19,
+
+"selection": "LINESTRING(37.597716 55.770172, 37.597809 55.770140, 37.597831 55.770135, 37.597862 55.770132, 37.597883 55.770133, 37.597914 55.770137, 37.598008 55.770158)",
 
 "style": "normal"
 
@@ -14595,9 +14913,35 @@ Document: routingapi
 
 "length": 93,
 
---- CHUNK 156 (696 tokens / 1921 chars) ---
+--- CHUNK 156 (803 tokens / 2211 chars) ---
 Document: routingapi
 
+
+"selection": "LINESTRING(37.655867 55.764818, 37.656014 55.764887)",
+
+"style": "archway"
+
+},
+
+{
+
+"color": "ignore",
+
+"length": 3,
+
+"selection": "LINESTRING(37.656014 55.764887, 37.656064 55.764909)",
+
+"style": "living_zone"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "40 м прямо",
 
 "turn_angle": 89,
 
@@ -15130,9 +15474,21 @@ Document: routingapi
 
 "length": 767,
 
---- CHUNK 159 (728 tokens / 1707 chars) ---
+--- CHUNK 159 (799 tokens / 1881 chars) ---
 Document: routingapi
 
+
+"style": "normal"
+
+},
+
+{
+
+"color": "normal",
+
+"length": 226,
+
+"selection": "LINESTRING(37.585492 55.776131, 37.585658 55.776039, 37.586214 55.775714, 37.588010 55.774663)",
 
 "style": "normal"
 
@@ -15479,9 +15835,21 @@ Document: routingapi
 
 "length": 832,
 
---- CHUNK 162 (745 tokens / 1670 chars) ---
+--- CHUNK 162 (805 tokens / 1820 chars) ---
 Document: routingapi
 
+
+"length": 77,
+
+"selection": "LINESTRING(37.601329 55.771460, 37.602336 55.771763, 37.602421 55.771789)",
+
+"style": "normal"
+
+},
+
+{
+
+"color": "slow",
 
 "length": 128,
 
@@ -17140,9 +17508,21 @@ Document: routingapi
 
 "length": 92,
 
---- CHUNK 173 (693 tokens / 1497 chars) ---
+--- CHUNK 173 (806 tokens / 1748 chars) ---
 Document: routingapi
 
+
+"geometry": [
+
+{
+
+"angles": "LINESTRING(0, 0, 0, 0)",
+
+"color": "slow",
+
+"length": 98,
+
+"selection": "LINESTRING(37.592101 55.770047 17420, 37.592212 55.769983 17420, 37.592449 55.769843 17420, 37.592770 55.769654 17430, 37.593209 55.769397 17450)",
 
 "style": "normal"
 
@@ -18086,9 +18466,49 @@ Document: routingapi
 
 "geometry": {
 
---- CHUNK 183 (691 tokens / 1791 chars) ---
+--- CHUNK 183 (810 tokens / 2114 chars) ---
 Document: routingapi
 
+
+},
+
+{
+
+"original_point": {
+
+"lat": 55.76508099601444,
+
+"lon": 37.65655367382703
+
+},
+
+"projected_point": {
+
+"lat": 55.76508099601444,
+
+"lon": 37.65655367382703
+
+},
+
+"transit": false
+
+}
+
+]
+
+},
+
+{
+
+"algorithm": "с учётом пробок",
+
+"altitudes_info": {
+
+"elevation_gain": 5470,
+
+"elevation_loss": 6210,
+
+"max_altitude": 17720,
 
 "max_road_angle": 9,
 
@@ -18819,9 +19239,19 @@ Document: routingapi
 
 "length": 684,
 
---- CHUNK 190 (687 tokens / 1375 chars) ---
+--- CHUNK 190 (806 tokens / 1581 chars) ---
 Document: routingapi
 
+
+"selection": "LINESTRING(37.583638 55.743918 16100, 37.583658 55.743874 16070)",
+
+"style": "normal"
+
+},
+
+{
+
+"angles": "LINESTRING(0, 0, 0, 0, -1, 0, 0, 0, -1, -1, 0, 0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0)",
 
 "color": "slow",
 
@@ -19060,9 +19490,33 @@ Document: routingapi
 
 "length": 272,
 
---- CHUNK 193 (533 tokens / 1188 chars) ---
+--- CHUNK 193 (591 tokens / 1367 chars) ---
 Document: routingapi
 
+
+"style": "normal"
+
+}
+
+],
+
+"names": [
+
+"Коровий Вал"
+
+]
+
+},
+
+"outcoming_path_comment": "200 м прямо",
+
+"turn_angle": 23,
+
+"turn_direction": "keep_right",
+
+"type": "crossroad"
+
+},
 
 {
 
@@ -20300,9 +20754,37 @@ Document: routingapi
 
 "length": 30,
 
---- CHUNK 203 (719 tokens / 1780 chars) ---
+--- CHUNK 203 (797 tokens / 2010 chars) ---
 Document: routingapi
 
+
+}
+
+},
+
+"end_pedestrian_path": {
+
+"geometry": {
+
+"selection": "LINESTRING(37.656553 55.765080, 37.656625 55.765036)"
+
+}
+
+},
+
+"features": {
+
+"truck": "full"
+
+},
+
+"filter_road_types": [
+
+"highway"
+
+],
+
+"id": "15813856057797894308",
 
 "maneuvers": [
 
@@ -21199,9 +21681,21 @@ Document: routingapi
 
 "length": 547,
 
---- CHUNK 212 (650 tokens / 1329 chars) ---
+--- CHUNK 212 (754 tokens / 1566 chars) ---
 Document: routingapi
 
+
+"style": "normal"
+
+},
+
+{
+
+"color": "normal",
+
+"length": 370,
+
+"selection": "LINESTRING(37.617345 55.773557, 37.619000 55.773621, 37.619209 55.773628, 37.621035 55.773684, 37.621922 55.773690, 37.623161 55.773671, 37.623250 55.773668)",
 
 "style": "bridge"
 
@@ -21452,9 +21946,37 @@ Document: routingapi
 
 "length": 38,
 
---- CHUNK 215 (683 tokens / 1872 chars) ---
+--- CHUNK 215 (805 tokens / 2200 chars) ---
 Document: routingapi
 
+
+"outcoming_path": {
+
+"distance": 71,
+
+"duration": 45,
+
+"geometry": [
+
+{
+
+"angles": "LINESTRING(1, -6)",
+
+"color": "ignore",
+
+"length": 21,
+
+"selection": "LINESTRING(37.655591 55.764691 16920, 37.655782 55.764778 16950, 37.655867 55.764818 16820)",
+
+"style": "living_zone"
+
+},
+
+{
+
+"angles": "LINESTRING(3)",
+
+"color": "ignore",
 
 "length": 12,
 
@@ -21641,9 +22163,61 @@ Document: routingapi
 
 "geometry": {
 
---- CHUNK 216 (654 tokens / 1668 chars) ---
+--- CHUNK 216 (811 tokens / 2092 chars) ---
 Document: routingapi
 
+
+},
+
+"projected_point": {
+
+"lat": 55.77548691400483,
+
+"lon": 37.58308675494588
+
+},
+
+"transit": false
+
+},
+
+{
+
+"original_point": {
+
+"lat": 55.76508099601444,
+
+"lon": 37.65655367382703
+
+},
+
+"projected_point": {
+
+"lat": 55.76508099601444,
+
+"lon": 37.65655367382703
+
+},
+
+"transit": false
+
+}
+
+]
+
+},
+
+{
+
+"algorithm": "с учётом пробок",
+
+"altitudes_info": {
+
+"elevation_gain": 5470,
+
+"elevation_loss": 6210,
+
+"max_altitude": 17720,
 
 "max_road_angle": 9,
 
@@ -21786,9 +22360,15 @@ Document: routingapi
 
 "length": 88,
 
---- CHUNK 217 (692 tokens / 1679 chars) ---
+--- CHUNK 217 (797 tokens / 1907 chars) ---
 Document: routingapi
 
+
+"color": "slow-jams",
+
+"length": 58,
+
+"selection": "LINESTRING(37.583561 55.775318 17320, 37.583628 55.775341 17330, 37.583734 55.775385 17330, 37.583827 55.775434 17340, 37.584035 55.775570 17380, 37.584217 55.775689 17390)",
 
 "style": "normal"
 
@@ -22044,9 +22624,33 @@ Document: routingapi
 
 "length": 190,
 
---- CHUNK 219 (714 tokens / 1591 chars) ---
+--- CHUNK 219 (804 tokens / 1834 chars) ---
 Document: routingapi
 
+
+"Гашека"
+
+]
+
+},
+
+"outcoming_path_comment": "150 м прямо",
+
+"turn_angle": 90,
+
+"turn_direction": "right",
+
+"type": "crossroad"
+
+},
+
+{
+
+"comment": "Поворот налево на ул. 2-я Брестская",
+
+"icon": "crossroad_left",
+
+"id": "15785450559760604102",
 
 "outcoming_path": {
 
@@ -23067,9 +23671,15 @@ Document: routingapi
 
 "length": 518,
 
---- CHUNK 230 (723 tokens / 1520 chars) ---
+--- CHUNK 230 (798 tokens / 1691 chars) ---
 Document: routingapi
 
+
+"color": "normal",
+
+"length": 73,
+
+"selection": "LINESTRING(37.655954 55.749874 14640, 37.655958 55.749916 14630, 37.656003 55.750343 14940, 37.656020 55.750534 14940)",
 
 "style": "bridge"
 
@@ -23249,9 +23859,21 @@ Document: routingapi
 
 "length": 122,
 
---- CHUNK 232 (738 tokens / 1844 chars) ---
+--- CHUNK 232 (794 tokens / 1989 chars) ---
 Document: routingapi
 
+
+"turn_angle": 0,
+
+"turn_direction": "keep_left",
+
+"type": "crossroad"
+
+},
+
+{
+
+"comment": "Плавный поворот налево на ул. Садовая-Черногрязская",
 
 "icon": "crossroad_slightly_left",
 
@@ -24579,9 +25201,35 @@ Document: routingapi
 
 "length": 89,
 
---- CHUNK 242 (734 tokens / 1821 chars) ---
+--- CHUNK 242 (803 tokens / 2054 chars) ---
 Document: routingapi
 
+
+"style": "normal",
+
+"zlevel": "zlevel-normal"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "150 м прямо",
+
+"turn_angle": 0,
+
+"turn_direction": "straight",
+
+"type": "pedestrian_crossroad"
+
+},
+
+{
+
+"attribute": "onto_crosswalk",
 
 "comment": "Движение прямо",
 
@@ -25210,9 +25858,37 @@ Document: routingapi
 
 "length": 81,
 
---- CHUNK 247 (713 tokens / 1924 chars) ---
+--- CHUNK 247 (793 tokens / 2175 chars) ---
 Document: routingapi
 
+
+"style": "normal",
+
+"zlevel": "zlevel-normal"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "30 м прямо",
+
+"turn_angle": 66,
+
+"turn_direction": "right",
+
+"type": "pedestrian_crossroad"
+
+},
+
+{
+
+"attribute": "empty",
+
+"comment": "Поворот налево",
 
 "icon": "crossroad_left",
 
@@ -26805,9 +27481,31 @@ Document: routingapi
 
 "length": 292,
 
---- CHUNK 258 (665 tokens / 1835 chars) ---
+--- CHUNK 258 (725 tokens / 2031 chars) ---
 Document: routingapi
 
+
+"style": "normal",
+
+"zlevel": "zlevel-normal"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "50 м прямо",
+
+"turn_angle": -108,
+
+"turn_direction": "left",
+
+"type": "pedestrian_crossroad"
+
+},
 
 {
 
@@ -26960,9 +27658,27 @@ Document: routingapi
 
 "length": 8,
 
---- CHUNK 259 (729 tokens / 1888 chars) ---
+--- CHUNK 259 (808 tokens / 2098 chars) ---
 Document: routingapi
 
+
+{
+
+"angles": "LINESTRING(0)",
+
+"length": 1,
+
+"selection": "LINESTRING(37.653957 55.766294 17230, 37.653975 55.766281 17230)",
+
+"style": "normal",
+
+"zlevel": "zlevel-normal"
+
+},
+
+{
+
+"angles": "LINESTRING(-1)",
 
 "length": 12,
 
@@ -27985,9 +28701,35 @@ Document: routingapi
 
 "length": 89,
 
---- CHUNK 266 (577 tokens / 1500 chars) ---
+--- CHUNK 266 (646 tokens / 1733 chars) ---
 Document: routingapi
 
+
+"style": "normal",
+
+"zlevel": "zlevel-normal"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "150 м прямо",
+
+"turn_angle": 0,
+
+"turn_direction": "straight",
+
+"type": "pedestrian_crossroad"
+
+},
+
+{
+
+"attribute": "onto_crosswalk",
 
 "comment": "Движение прямо",
 
@@ -30801,9 +31543,27 @@ curl --request POST \
 
 {
 
---- CHUNK 286 (735 tokens / 1716 chars) ---
+--- CHUNK 286 (796 tokens / 1859 chars) ---
 Document: routingapi
 
+
+"z_first": 0,
+
+"z_last": -1
+
+},
+
+{
+
+"selection": "LINESTRING(37.698888 55.796256, 37.698982 55.796182)",
+
+"z_first": -1,
+
+"z_last": -1
+
+},
+
+{
 
 "selection": "LINESTRING(37.698982 55.796182, 37.699025 55.796149)",
 
@@ -31123,9 +31883,53 @@ Document: routingapi
 
 "exit": true,
 
---- CHUNK 288 (692 tokens / 1598 chars) ---
+--- CHUNK 288 (807 tokens / 1894 chars) ---
 Document: routingapi
 
+
+"distance": 1318,
+
+"id": "3",
+
+"moving_duration": 360,
+
+"platforms": {
+
+"names": [
+
+"Малая Остроумовская",
+
+"Клуб Русакова - Сцена Мельников"
+
+]
+
+},
+
+"routes": [
+
+{
+
+"color": "#eb5a2b",
+
+"names": [
+
+"13",
+
+"Т1",
+
+"7"
+
+],
+
+"subtype": "tram",
+
+"subtype_name": "трамвай"
+
+}
+
+],
+
+"type": "passage",
 
 "waiting_duration": 28,
 
@@ -31556,9 +32360,27 @@ Document: routingapi
 
 "color": "#fe7f01",
 
---- CHUNK 291 (705 tokens / 1697 chars) ---
+--- CHUNK 291 (754 tokens / 1828 chars) ---
 Document: routingapi
 
+
+}
+
+],
+
+"platforms": [
+
+{
+
+"geometry": "POINT(37.636509 55.793613)",
+
+"id": "26"
+
+},
+
+{
+
+"geometry": "POINT(37.638915 55.808717)",
 
 "id": "27"
 
@@ -32417,9 +33239,29 @@ Document: routingapi
 
 {
 
---- CHUNK 298 (762 tokens / 1678 chars) ---
+--- CHUNK 298 (806 tokens / 1815 chars) ---
 Document: routingapi
 
+
+"names": [
+
+"25"
+
+],
+
+"subtype": "tram",
+
+"subtype_name": "трамвай"
+
+}
+
+],
+
+"type": "passage",
+
+"waiting_duration": 270,
+
+"waypoint": {
 
 "combined": false,
 
@@ -32725,9 +33567,59 @@ Document: routingapi
 
 {
 
---- CHUNK 300 (503 tokens / 1055 chars) ---
+--- CHUNK 300 (636 tokens / 1438 chars) ---
 Document: routingapi
 
+
+"total_duration": 2368,
+
+"total_walkway_distance": "пешком 21 мин",
+
+"transfer_count": 0,
+
+"waypoints": [
+
+{
+
+"combined": false,
+
+"routes_names": [
+
+"25"
+
+],
+
+"subtype": "tram"
+
+}
+
+]
+
+},
+
+{
+
+"crossing_count": 0,
+
+"id": "59",
+
+"movements": [
+
+{
+
+"alternatives": [
+
+{
+
+"geometry": [
+
+{
+
+"selection": "LINESTRING(37.697461 55.798227, 37.697219 55.798105)",
+
+"z_first": 0,
+
+"z_last": 0
 
 },
 
@@ -33153,9 +34045,23 @@ Document: routingapi
 
 {
 
---- CHUNK 306 (766 tokens / 1692 chars) ---
+--- CHUNK 306 (806 tokens / 1777 chars) ---
 Document: routingapi
 
+
+"Бориса Галушкина д.17",
+
+"Ярославская"
+
+]
+
+},
+
+"routes": [
+
+{
+
+"color": "#eb5a2b",
 
 "names": [
 
@@ -33508,9 +34414,23 @@ Document: routingapi
 
 ]
 
---- CHUNK 310 (767 tokens / 2011 chars) ---
+--- CHUNK 310 (805 tokens / 2120 chars) ---
 Document: routingapi
 
+
+{
+
+"combined": false, // участок можно проехать только на трамвае
+
+"routes_names": [
+
+"13",
+
+"7",
+
+"Т1"
+
+],
 
 "subtype": "tram"
 
@@ -34024,9 +34944,13 @@ Document: routingapi
 
 ...
 
---- CHUNK 315 (712 tokens / 1803 chars) ---
+--- CHUNK 315 (756 tokens / 1907 chars) ---
 Document: routingapi
 
+
+"exit_entrance_number": "4", // номер выхода
+
+"line_name": "Калужско-Рижская линия", // название линии
 
 "ui_direction_suggest": "в сторону станции «Медведково»", // направление движения
 
@@ -34477,9 +35401,65 @@ Document: routingapi
 
 "exit": true,
 
---- CHUNK 320 (673 tokens / 1618 chars) ---
+--- CHUNK 320 (798 tokens / 1961 chars) ---
 Document: routingapi
 
+
+}
+
+],
+
+"platforms": [
+
+{
+
+"geometry": "POINT(37.699619 55.794675)",
+
+"id": "7"
+
+},
+
+{
+
+"geometry": "POINT(37.681257 55.789582)",
+
+"id": "8"
+
+}
+
+]
+
+}
+
+],
+
+"distance": 1303,
+
+"id": "3",
+
+"moving_duration": 240,
+
+"platforms": null,
+
+"routes": [
+
+{
+
+"color": "#1a73f0",
+
+"names": [
+
+"е66"
+
+],
+
+"subtype": "bus",
+
+"subtype_name": "автобус"
+
+}
+
+],
 
 "type": "passage",
 
@@ -34614,9 +35594,25 @@ Document: routingapi
 
 {
 
---- CHUNK 321 (735 tokens / 1780 chars) ---
+--- CHUNK 321 (764 tokens / 1853 chars) ---
 Document: routingapi
 
+
+"z_first": -1,
+
+"z_last": -2
+
+}
+
+]
+
+}
+
+],
+
+"distance": 244,
+
+"id": "9",
 
 "moving_duration": 232,
 
@@ -35298,9 +36294,37 @@ Document: routingapi
 
 {
 
---- CHUNK 325 (745 tokens / 1632 chars) ---
+--- CHUNK 325 (803 tokens / 1803 chars) ---
 Document: routingapi
 
+
+"mcc"
+
+],
+
+"waypoints": [
+
+{
+
+"combined": false,
+
+"routes_names": [
+
+"е66"
+
+],
+
+"subtype": "bus"
+
+},
+
+{
+
+"combined": false,
+
+"routes_names": [
+
+"Большая кольцевая линия"
 
 ],
 
@@ -35727,9 +36751,29 @@ Document: routingapi
 
 {
 
---- CHUNK 330 (762 tokens / 1678 chars) ---
+--- CHUNK 330 (806 tokens / 1815 chars) ---
 Document: routingapi
 
+
+"names": [
+
+"25"
+
+],
+
+"subtype": "tram",
+
+"subtype_name": "трамвай"
+
+}
+
+],
+
+"type": "passage",
+
+"waiting_duration": 609,
+
+"waypoint": {
 
 "combined": false,
 
@@ -36255,9 +37299,32 @@ fetchRoute();
 </HtmlExampleWithSrcCode>  
 <br />
 
---- CHUNK 335 (406 tokens / 1087 chars) ---
+--- CHUNK 335 (544 tokens / 1620 chars) ---
 Document: routingapi
 
+maneuver.outcoming_path.geometry &&  
+maneuver.outcoming_path.geometry.length > 0  
+) {  
+return maneuver.outcoming_path.geometry  
+.flatMap((geometry) => {  
+const selection = geometry.selection;  
+return selection  
+.replace("LINESTRING(", "")  
+.replace(")", "")  
+.split(",")  
+.map((point) => point.trim().split(" ").map(Number));  
+});  
+}  
+return [];  
+});  
+}  
+function renderRoute(coordinates, color) {  
+const routeLine = new mapgl.Polyline(map, {  
+coordinates,  
+width: 6,  
+color,  
+});  
+if (color === "#0078FF") {  
 if (mainRouteLine) mainRouteLine.destroy();  
 mainRouteLine = routeLine;  
 } else if (color === "#248A3F") {  
@@ -36453,9 +37520,49 @@ curl --request POST \
 
 "length": 9,
 
---- CHUNK 337 (621 tokens / 1445 chars) ---
+--- CHUNK 337 (764 tokens / 1859 chars) ---
 Document: routingapi
 
+
+"begin_pedestrian_path": {
+
+"geometry": {
+
+"selection": "LINESTRING(37.582590 55.775363, 37.583086 55.775486)"
+
+}
+
+},
+
+"end_pedestrian_path": {
+
+"geometry": {
+
+"selection": "LINESTRING(37.656553 55.765080, 37.656625 55.765036)"
+
+}
+
+},
+
+"filter_road_types": [
+
+"highway"
+
+],
+
+"id": "6867558150813012756",
+
+"maneuvers": [
+
+{
+
+"comment": "start",
+
+"icon": "start",
+
+"id": "5155396353217378856",
+
+"outcoming_path": {
 
 "distance": 509,
 
@@ -36548,9 +37655,31 @@ Document: routingapi
 
 "length": 189,
 
---- CHUNK 338 (712 tokens / 1783 chars) ---
+--- CHUNK 338 (802 tokens / 2010 chars) ---
 Document: routingapi
 
+
+"selection": "LINESTRING(37.588212 55.772329, 37.588581 55.772112, 37.588708 55.772038)",
+
+"style": "normal"
+
+}
+
+],
+
+"names": [
+
+"площадь Тверская Застава"
+
+]
+
+},
+
+"outcoming_path_comment": "500 м прямо",
+
+"type": "begin"
+
+},
 
 {
 
@@ -36830,9 +37959,45 @@ Document: routingapi
 
 "length": 112,
 
---- CHUNK 340 (684 tokens / 1627 chars) ---
+--- CHUNK 340 (805 tokens / 1959 chars) ---
 Document: routingapi
 
+
+"id": "752008670730828577",
+
+"outcoming_path": {
+
+"distance": 89,
+
+"duration": 76,
+
+"geometry": [
+
+{
+
+"color": "slow",
+
+"length": 89,
+
+"selection": "LINESTRING(37.598908 55.771419, 37.597742 55.770949)",
+
+"style": "normal"
+
+}
+
+],
+
+"names": [
+
+"Оружейный переулок"
+
+]
+
+},
+
+"outcoming_path_comment": "90 м прямо",
+
+"turn_angle": 98,
 
 "turn_direction": "right",
 
@@ -37119,9 +38284,21 @@ Document: routingapi
 
 "length": 746,
 
---- CHUNK 343 (726 tokens / 1735 chars) ---
+--- CHUNK 343 (786 tokens / 1885 chars) ---
 Document: routingapi
 
+
+"style": "normal"
+
+},
+
+{
+
+"color": "fast",
+
+"length": 32,
+
+"selection": "LINESTRING(37.645657 55.769580, 37.645818 55.769531, 37.646121 55.769442)",
 
 "style": "normal"
 
@@ -37785,9 +38962,21 @@ Document: routingapi
 
 "length": 50,
 
---- CHUNK 347 (723 tokens / 1743 chars) ---
+--- CHUNK 347 (783 tokens / 1893 chars) ---
 Document: routingapi
 
+
+"style": "normal"
+
+},
+
+{
+
+"color": "fast",
+
+"length": 16,
+
+"selection": "LINESTRING(37.584979 55.776188, 37.585058 55.776240, 37.585154 55.776303)",
 
 "style": "normal"
 
@@ -38417,9 +39606,19 @@ Document: routingapi
 
 "length": 292,
 
---- CHUNK 353 (750 tokens / 1675 chars) ---
+--- CHUNK 353 (770 tokens / 1734 chars) ---
 Document: routingapi
 
+
+"style": "normal"
+
+},
+
+{
+
+"color": "fast",
+
+"length": 58,
 
 "selection": "LINESTRING(37.621577 55.773566, 37.621840 55.773568, 37.621936 55.773570, 37.622107 55.773569, 37.622523 55.773569)",
 
@@ -38778,9 +39977,35 @@ Document: routingapi
 
 "length": 93,
 
---- CHUNK 356 (714 tokens / 1965 chars) ---
+--- CHUNK 356 (799 tokens / 2204 chars) ---
 Document: routingapi
 
+
+"style": "archway"
+
+},
+
+{
+
+"color": "ignore",
+
+"length": 3,
+
+"selection": "LINESTRING(37.656014 55.764887, 37.656064 55.764909)",
+
+"style": "living_zone"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "40 м прямо",
+
+"turn_angle": 89,
 
 "turn_direction": "right",
 
@@ -39407,9 +40632,29 @@ Document: routingapi
 
 "length": 45,
 
---- CHUNK 361 (548 tokens / 1353 chars) ---
+--- CHUNK 361 (603 tokens / 1513 chars) ---
 Document: routingapi
 
+
+"style": "normal"
+
+}
+
+],
+
+"names": [
+
+"Новинский бульвар"
+
+]
+
+},
+
+"outcoming_path_comment": "300 м прямо",
+
+"turn_angle": 10,
+
+"turn_direction": "keep_right",
 
 "type": "crossroad"
 
@@ -39733,9 +40978,21 @@ Document: routingapi
 
 "length": 614,
 
---- CHUNK 365 (592 tokens / 1386 chars) ---
+--- CHUNK 365 (729 tokens / 1686 chars) ---
 Document: routingapi
 
+
+"length": 325,
+
+"selection": "LINESTRING(37.627213 55.773398, 37.627407 55.773378, 37.627898 55.773317, 37.628220 55.773274, 37.629057 55.773153, 37.630300 55.772978, 37.630537 55.772946, 37.631810 55.772768, 37.631859 55.772761, 37.632302 55.772699)",
+
+"style": "normal"
+
+},
+
+{
+
+"color": "normal",
 
 "length": 61,
 
@@ -39822,9 +41079,23 @@ Document: routingapi
 
 "length": 746,
 
---- CHUNK 366 (722 tokens / 1718 chars) ---
+--- CHUNK 366 (788 tokens / 1887 chars) ---
 Document: routingapi
 
+
+"style": "normal"
+
+},
+
+{
+
+"color": "fast",
+
+"length": 32,
+
+"selection": "LINESTRING(37.645657 55.769580, 37.645818 55.769531, 37.646121 55.769442)",
+
+"style": "normal"
 
 },
 
@@ -41083,9 +42354,13 @@ Document: routingapi
 
 "length": 607,
 
---- CHUNK 376 (661 tokens / 1537 chars) ---
+--- CHUNK 376 (806 tokens / 1833 chars) ---
 Document: routingapi
 
+
+"length": 801,
+
+"selection": "LINESTRING(37.585154 55.776303, 37.585445 55.776157, 37.585492 55.776131, 37.585658 55.776039, 37.586214 55.775714, 37.588010 55.774663, 37.588280 55.774505, 37.590369 55.773281, 37.590635 55.773126, 37.592026 55.772311, 37.592333 55.772132, 37.594081 55.771108)",
 
 "style": "normal"
 
@@ -41301,9 +42576,21 @@ Document: routingapi
 
 "length": 300,
 
---- CHUNK 378 (555 tokens / 1379 chars) ---
+--- CHUNK 378 (615 tokens / 1529 chars) ---
 Document: routingapi
 
+
+"style": "normal"
+
+},
+
+{
+
+"color": "fast",
+
+"length": 24,
+
+"selection": "LINESTRING(37.605693 55.764675, 37.605494 55.764790, 37.605415 55.764833)",
 
 "style": "normal"
 
@@ -41596,9 +42883,19 @@ Document: routingapi
 
 "length": 350,
 
---- CHUNK 381 (684 tokens / 1562 chars) ---
+--- CHUNK 381 (804 tokens / 1822 chars) ---
 Document: routingapi
 
+
+},
+
+{
+
+"color": "normal",
+
+"length": 311,
+
+"selection": "LINESTRING(37.632528 55.772668, 37.633038 55.772597, 37.633286 55.772569, 37.633809 55.772511, 37.635934 55.772276, 37.636482 55.772197, 37.636863 55.772130, 37.637246 55.772053, 37.637383 55.772024)",
 
 "style": "normal"
 
@@ -43933,9 +45230,29 @@ Document: routingapi
 
 {
 
---- CHUNK 400 (762 tokens / 1678 chars) ---
+--- CHUNK 400 (806 tokens / 1814 chars) ---
 Document: routingapi
 
+
+"names": [
+
+"25"
+
+],
+
+"subtype": "tram",
+
+"subtype_name": "трамвай"
+
+}
+
+],
+
+"type": "passage",
+
+"waiting_duration": 42,
+
+"waypoint": {
 
 "combined": false,
 
@@ -44520,9 +45837,14 @@ fetchRoute();
 **Пример запроса:**  
 ```curl
 
---- CHUNK 405 (682 tokens / 1906 chars) ---
+--- CHUNK 405 (802 tokens / 2183 chars) ---
 Document: routingapi
 
+* `transport` — способ передвижения.  
+* `output` — формат выдачи результата:  
+* `summary` — упрощённая выдача, в ответе только время и длина маршрута.  
+* `detailed` — полная выдача с геометрией маршрута.  
+* `locale` — язык текстовых описаний элементов маршрута: русский.  
 * `utc` — дата и время в формате Unix.  
 * `traffic_mode: statistics` — построение маршрута с учётом статистических данных о пробках на указанное время.  
 **Пример запроса:**  
@@ -45657,9 +46979,25 @@ Document: routingapi
 
 "length": 76,
 
---- CHUNK 414 (712 tokens / 1686 chars) ---
+--- CHUNK 414 (756 tokens / 1800 chars) ---
 Document: routingapi
 
+
+"style": "normal"
+
+}
+
+],
+
+"names": [
+
+"площадь Тверская Застава"
+
+]
+
+},
+
+"outcoming_path_comment": "30 м прямо",
 
 "type": "begin"
 
@@ -46006,9 +47344,21 @@ Document: routingapi
 
 "length": 1296,
 
---- CHUNK 417 (568 tokens / 1178 chars) ---
+--- CHUNK 417 (663 tokens / 1398 chars) ---
 Document: routingapi
 
+
+"style": "normal"
+
+},
+
+{
+
+"color": "no-traffic",
+
+"length": 196,
+
+"selection": "LINESTRING(37.595486 55.769004, 37.596007 55.769269, 37.596454 55.769495, 37.596797 55.769669, 37.597193 55.769869, 37.597838 55.770195)",
 
 "style": "tunnel"
 
@@ -46043,9 +47393,11 @@ Document: routingapi
 
 "length": 2363,
 
---- CHUNK 418 (721 tokens / 1421 chars) ---
+--- CHUNK 418 (805 tokens / 1596 chars) ---
 Document: routingapi
 
+
+"selection": "LINESTRING(37.617345 55.773557, 37.619000 55.773621, 37.619209 55.773628, 37.621035 55.773684, 37.621922 55.773690, 37.623161 55.773671, 37.623250 55.773668)",
 
 "style": "bridge"
 
@@ -47196,9 +48548,19 @@ Document: routingapi
 
 "length": 1077,
 
---- CHUNK 427 (691 tokens / 1486 chars) ---
+--- CHUNK 427 (802 tokens / 1728 chars) ---
 Document: routingapi
 
+
+},
+
+{
+
+"color": "slow-jams",
+
+"length": 212,
+
+"selection": "LINESTRING(37.598008 55.770158, 37.598076 55.770192, 37.598210 55.770249, 37.599275 55.770728, 37.599882 55.770936, 37.600050 55.770989, 37.600407 55.771103, 37.600831 55.771230)",
 
 "style": "normal"
 
@@ -47823,9 +49185,45 @@ Document: routingapi
 
 "length": 479,
 
---- CHUNK 432 (707 tokens / 1602 chars) ---
+--- CHUNK 432 (798 tokens / 1876 chars) ---
 Document: routingapi
 
+
+}
+
+},
+
+"filter_road_types": [
+
+"highway"
+
+],
+
+"id": "9068282125901496701",
+
+"maneuvers": [
+
+{
+
+"comment": "start",
+
+"icon": "start",
+
+"id": "10815760082894142119",
+
+"outcoming_path": {
+
+"distance": 1018,
+
+"duration": 524,
+
+"geometry": [
+
+{
+
+"color": "fast",
+
+"length": 30,
 
 "selection": "LINESTRING(37.583086 55.775486, 37.583150 55.775405, 37.583231 55.775307, 37.583253 55.775281, 37.583307 55.775231)",
 
@@ -48916,9 +50314,41 @@ Document: routingapi
 </details>  
 <br />
 
---- CHUNK 443 (714 tokens / 1877 chars) ---
+--- CHUNK 443 (812 tokens / 2142 chars) ---
 Document: routingapi
 
+
+"unit": "км",
+
+"value": "9.4"
+
+},
+
+"ui_total_duration": "33 мин",
+
+"waypoints": [
+
+{
+
+"original_point": {
+
+"lat": 55.77548691400483,
+
+"lon": 37.58308675494588
+
+},
+
+"projected_point": {
+
+"lat": 55.77548691400483,
+
+"lon": 37.58308675494588
+
+},
+
+"transit": false
+
+},
 
 {
 
@@ -49562,9 +50992,27 @@ Document: routingapi
 
 {
 
---- CHUNK 451 (733 tokens / 1678 chars) ---
+--- CHUNK 451 (794 tokens / 1801 chars) ---
 Document: routingapi
 
+
+"Бориса Галушкина д.17",
+
+"Ярославская",
+
+"Проспект Мира",
+
+"ВДНХ (Северная)"
+
+]
+
+},
+
+"routes": [
+
+{
+
+"color": "#eb5a2b",
 
 "names": [
 
@@ -50005,9 +51453,11 @@ Document: routingapi
 
 {
 
---- CHUNK 454 (737 tokens / 1503 chars) ---
+--- CHUNK 454 (810 tokens / 1657 chars) ---
 Document: routingapi
 
+
+"selection": "LINESTRING(37.697758 55.799602, 37.697797 55.799705, 37.697797 55.799785, 37.697792 55.800052, 37.697707 55.800163, 37.697603 55.800241)",
 
 "z_first": 0,
 
@@ -50903,9 +52353,13 @@ fetchRoute();
 **Пример запроса:**  
 ```curl
 
---- CHUNK 464 (675 tokens / 1861 chars) ---
+--- CHUNK 464 (794 tokens / 2153 chars) ---
 Document: routingapi
 
+Добавьте к начальной или конечной точке маршрута параметр `azimuth` со значением от 0 до 360 (градусов), где 0 — направление на север.  
+* `transport` — способ передвижения.  
+* `output` — формат выдачи результата:  
+* `summary` — упрощённая выдача, в ответе только время и длина маршрута.  
 * `detailed` — полная выдача с геометрией маршрута.  
 * `locale` — язык текстовых описаний элементов маршрута: русский.  
 **Пример запроса:**  
@@ -51332,9 +52786,37 @@ Document: routingapi
 
 "length": 165,
 
---- CHUNK 467 (639 tokens / 1610 chars) ---
+--- CHUNK 467 (733 tokens / 1859 chars) ---
 Document: routingapi
 
+
+"style": "normal"
+
+}
+
+],
+
+"names": [
+
+"Благовещенский переулок"
+
+]
+
+},
+
+"outcoming_path_comment": "300 м прямо",
+
+"turn_angle": 91,
+
+"turn_direction": "right",
+
+"type": "crossroad"
+
+},
+
+{
+
+"comment": "Поворот направо на ул. Ермолаевский переулок",
 
 "icon": "crossroad_right",
 
@@ -51461,9 +52943,29 @@ Document: routingapi
 
 "length": 319,
 
---- CHUNK 468 (746 tokens / 1727 chars) ---
+--- CHUNK 468 (806 tokens / 1890 chars) ---
 Document: routingapi
 
+
+"style": "normal"
+
+}
+
+],
+
+"names": [
+
+"аллея Архитектора Шехтеля"
+
+]
+
+},
+
+"outcoming_path_comment": "150 м прямо",
+
+"turn_angle": 83,
+
+"turn_direction": "right",
 
 "type": "crossroad"
 
@@ -52838,9 +54340,23 @@ Document: routingapi
 
 "length": 370,
 
---- CHUNK 479 (628 tokens / 1477 chars) ---
+--- CHUNK 479 (783 tokens / 1824 chars) ---
 Document: routingapi
 
+
+"selection": "LINESTRING(37.608986 55.773080, 37.609121 55.773096, 37.609234 55.773109, 37.610156 55.773194, 37.610728 55.773247)",
+
+"style": "normal"
+
+},
+
+{
+
+"color": "slow",
+
+"length": 172,
+
+"selection": "LINESTRING(37.610728 55.773247, 37.611026 55.773277, 37.611498 55.773310, 37.612248 55.773363, 37.612442 55.773370, 37.613457 55.773408)",
 
 "style": "normal"
 
@@ -52935,9 +54451,21 @@ Document: routingapi
 
 "length": 688,
 
---- CHUNK 480 (681 tokens / 1536 chars) ---
+--- CHUNK 480 (774 tokens / 1750 chars) ---
 Document: routingapi
 
+
+"style": "normal"
+
+},
+
+{
+
+"color": "fast",
+
+"length": 231,
+
+"selection": "LINESTRING(37.633809 55.772511, 37.635934 55.772276, 37.636482 55.772197, 37.636863 55.772130, 37.637246 55.772053, 37.637383 55.772024)",
 
 "style": "normal"
 
@@ -53179,9 +54707,35 @@ Document: routingapi
 
 "length": 93,
 
---- CHUNK 482 (715 tokens / 1968 chars) ---
+--- CHUNK 482 (800 tokens / 2207 chars) ---
 Document: routingapi
 
+
+"style": "archway"
+
+},
+
+{
+
+"color": "ignore",
+
+"length": 3,
+
+"selection": "LINESTRING(37.656014 55.764887, 37.656064 55.764909)",
+
+"style": "living_zone"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "40 м прямо",
+
+"turn_angle": 89,
 
 "turn_direction": "right",
 
@@ -53922,9 +55476,27 @@ floorId: maneuver.outcoming_path.floor_to,
 data.features.push({  
 type: 'Feature',
 
---- CHUNK 489 (682 tokens / 2123 chars) ---
+--- CHUNK 489 (804 tokens / 2555 chars) ---
 Document: routingapi
 
+properties: {  
+type: 'path',  
+index: -1,  
+floorId: maneuver.outcoming_path.floor_from,  
+},  
+geometry: {  
+type: 'LineString',  
+coordinates: [[points[0].lon, points[0].lat], firstCoord],  
+},  
+});  
+}  
+maneuver.outcoming_path.geometry.forEach((geometry) => {  
+const coordinates = parserLineStringWKT(geometry.selection);  
+data.features.push({  
+type: 'Feature',  
+properties: {  
+type: 'path',  
+index: colorIndex++ % 3,  
 floorId: maneuver.outcoming_path.floor_to,  
 },  
 geometry: {  
@@ -54004,9 +55576,11 @@ return wkt
 * `object_id` — идентификатор здания или организации, к которой будет привязана точка. Вы можете получить это значение из справочника <Brand /> с помощью [Places API](/api/search/places/overview).  
 * `floor_id` — идентификатор этажа здания. Вы можете получить это значение из справочника <Brand /> с помощью [Places API](/api/search/places/overview).
 
---- CHUNK 490 (332 tokens / 833 chars) ---
+--- CHUNK 490 (461 tokens / 1195 chars) ---
 Document: routingapi
 
+* `points` (обязательный параметр) — массив координат [точек маршрута](#point-types). Укажите минимум две точки: начальную и конечную. Для каждой точки укажите:  
+* `object_id` — идентификатор здания или организации, к которой будет привязана точка. Вы можете получить это значение из справочника <Brand /> с помощью [Places API](/api/search/places/overview).  
 * `floor_id` — идентификатор этажа здания. Вы можете получить это значение из справочника <Brand /> с помощью [Places API](/api/search/places/overview).
 Хотя бы одна из точек маршрута должна находиться внутри здания или быть привязана к организации с помощью параметра `object_id`.  
 * `transport: walking` — способ передвижения: пешком.  
@@ -54208,9 +55782,29 @@ curl --request POST \
 
 "length": 17,
 
---- CHUNK 492 (701 tokens / 1997 chars) ---
+--- CHUNK 492 (799 tokens / 2256 chars) ---
 Document: routingapi
 
+
+"geometry": {
+
+"selection": "LINESTRING(37.624835 55.759832, 37.624836 55.759832)"
+
+}
+
+},
+
+"end_pedestrian_path": {
+
+"geometry": {
+
+"selection": "LINESTRING(37.624947 55.760096, 37.624947 55.760096, 37.624984 55.760218)"
+
+}
+
+},
+
+"id": "8340396212096927774",
 
 "maneuvers": [
 
@@ -55129,9 +56723,33 @@ Document: routingapi
 
 "length": 243,
 
---- CHUNK 498 (724 tokens / 1646 chars) ---
+--- CHUNK 498 (803 tokens / 1873 chars) ---
 Document: routingapi
 
+
+"type": "begin"
+
+},
+
+{
+
+"comment": "Поворот налево на ул. Васильевская",
+
+"icon": "crossroad_left",
+
+"id": "15466729535558919037",
+
+"outcoming_path": {
+
+"distance": 634,
+
+"duration": 271,
+
+"geometry": [
+
+{
+
+"color": "normal",
 
 "length": 75,
 
@@ -55339,9 +56957,43 @@ Document: routingapi
 
 "length": 80,
 
---- CHUNK 500 (701 tokens / 1700 chars) ---
+--- CHUNK 500 (804 tokens / 2008 chars) ---
 Document: routingapi
 
+
+"style": "normal"
+
+}
+
+],
+
+"names": [
+
+"Оружейный переулок"
+
+]
+
+},
+
+"outcoming_path_comment": "350 м прямо",
+
+"turn_angle": 109,
+
+"turn_direction": "sharply_right",
+
+"type": "crossroad"
+
+},
+
+{
+
+"comment": "Держитесь левее",
+
+"icon": "crossroad_keep_left",
+
+"id": "17942704015494476934",
+
+"outcoming_path": {
 
 "distance": 112,
 
@@ -55543,9 +57195,21 @@ Document: routingapi
 
 "length": 294,
 
---- CHUNK 502 (672 tokens / 1558 chars) ---
+--- CHUNK 502 (765 tokens / 1774 chars) ---
 Document: routingapi
 
+
+"style": "bridge"
+
+},
+
+{
+
+"color": "normal",
+
+"length": 250,
+
+"selection": "LINESTRING(37.623250 55.773668, 37.624510 55.773622, 37.625672 55.773548, 37.625906 55.773531, 37.626549 55.773483, 37.627213 55.773398)",
 
 "style": "normal"
 
@@ -56125,9 +57789,41 @@ Document: routingapi
 
 "geometry": {
 
---- CHUNK 506 (717 tokens / 1887 chars) ---
+--- CHUNK 506 (807 tokens / 2145 chars) ---
 Document: routingapi
 
+
+},
+
+"ui_total_duration": "24 мин",
+
+"waypoints": [
+
+{
+
+"original_point": {
+
+"lat": 55.77548691400483,
+
+"lon": 37.58308675494588
+
+},
+
+"projected_point": {
+
+"lat": 55.77548691400483,
+
+"lon": 37.58308675494588
+
+},
+
+"transit": false
+
+},
+
+{
+
+"original_point": {
 
 "lat": 55.76508099601444,
 
@@ -56439,9 +58135,21 @@ Document: routingapi
 
 "length": 363,
 
---- CHUNK 508 (679 tokens / 1601 chars) ---
+--- CHUNK 508 (794 tokens / 1859 chars) ---
 Document: routingapi
 
+
+"style": "normal"
+
+},
+
+{
+
+"color": "normal",
+
+"length": 244,
+
+"selection": "LINESTRING(37.594081 55.771108, 37.594993 55.770574, 37.595598 55.770219, 37.595740 55.770136, 37.595903 55.770019, 37.596125 55.769859, 37.596682 55.769461, 37.596711 55.769445)",
 
 "style": "normal"
 
@@ -56780,9 +58488,21 @@ Document: routingapi
 
 "length": 443,
 
---- CHUNK 511 (667 tokens / 1517 chars) ---
+--- CHUNK 511 (738 tokens / 1690 chars) ---
 Document: routingapi
 
+
+"style": "normal"
+
+},
+
+{
+
+"color": "normal",
+
+"length": 40,
+
+"selection": "LINESTRING(37.600831 55.771230, 37.600914 55.771254, 37.600957 55.771272, 37.601329 55.771460)",
 
 "style": "normal"
 
@@ -56865,9 +58585,21 @@ Document: routingapi
 
 "length": 294,
 
---- CHUNK 512 (672 tokens / 1558 chars) ---
+--- CHUNK 512 (765 tokens / 1774 chars) ---
 Document: routingapi
 
+
+"style": "bridge"
+
+},
+
+{
+
+"color": "normal",
+
+"length": 250,
+
+"selection": "LINESTRING(37.623250 55.773668, 37.624510 55.773622, 37.625672 55.773548, 37.625906 55.773531, 37.626549 55.773483, 37.627213 55.773398)",
 
 "style": "normal"
 
@@ -57451,9 +59183,21 @@ Document: routingapi
 </details>  
 <br />
 
---- CHUNK 516 (776 tokens / 2025 chars) ---
+--- CHUNK 516 (809 tokens / 2107 chars) ---
 Document: routingapi
 
+
+"lat": 55.77548691400483,
+
+"lon": 37.58308675494588
+
+},
+
+"transit": false
+
+},
+
+{
 
 "original_point": {
 
@@ -58465,9 +60209,21 @@ Document: routingapi
 
 "length": 563,
 
---- CHUNK 524 (671 tokens / 1543 chars) ---
+--- CHUNK 524 (786 tokens / 1801 chars) ---
 Document: routingapi
 
+
+"style": "normal"
+
+},
+
+{
+
+"color": "normal",
+
+"length": 207,
+
+"selection": "LINESTRING(37.642720 55.770474, 37.642942 55.770406, 37.643525 55.770234, 37.643708 55.770178, 37.643975 55.770092, 37.644348 55.769976, 37.644647 55.769882, 37.645657 55.769580)",
 
 "style": "normal"
 
@@ -58942,9 +60698,31 @@ Document: routingapi
 
 "geometry": {
 
---- CHUNK 527 (742 tokens / 1724 chars) ---
+--- CHUNK 527 (811 tokens / 1906 chars) ---
 Document: routingapi
 
+
+"lon": 37.58308675494588
+
+},
+
+"transit": false
+
+},
+
+{
+
+"original_point": {
+
+"lat": 55.76508099601444,
+
+"lon": 37.65655367382703
+
+},
+
+"projected_point": {
+
+"lat": 55.76508099601444,
 
 "lon": 37.65655367382703
 
@@ -60520,9 +62298,29 @@ Document: routingapi
 
 "length": 1057,
 
---- CHUNK 543 (661 tokens / 1625 chars) ---
+--- CHUNK 543 (724 tokens / 1790 chars) ---
 Document: routingapi
 
+
+"style": "normal"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "4.2 км прямо",
+
+"type": "begin"
+
+},
+
+{
+
+"comment": "Держитесь левее на ул. Пулковское шоссе",
 
 "icon": "crossroad_keep_left",
 
@@ -61387,9 +63185,37 @@ Document: routingapi
 
 "length": 276,
 
---- CHUNK 560 (686 tokens / 1828 chars) ---
+--- CHUNK 560 (781 tokens / 2078 chars) ---
 Document: routingapi
 
+
+"style": "normal"
+
+}
+
+],
+
+"names": [
+
+"переулок Никифорова"
+
+]
+
+},
+
+"outcoming_path_comment": "20 м прямо",
+
+"turn_angle": 49,
+
+"turn_direction": "right",
+
+"type": "crossroad"
+
+},
+
+{
+
+"comment": "Плавный поворот направо на ул. переулок Никифорова",
 
 "icon": "crossroad_slightly_right",
 
@@ -62005,9 +63831,29 @@ Document: routingapi
 
 "length": 1057,
 
---- CHUNK 566 (661 tokens / 1628 chars) ---
+--- CHUNK 566 (724 tokens / 1793 chars) ---
 Document: routingapi
 
+
+"style": "normal"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "4.2 км прямо",
+
+"type": "begin"
+
+},
+
+{
+
+"comment": "Держитесь левее на ул. Пулковское шоссе",
 
 "icon": "crossroad_keep_left",
 
@@ -62261,9 +64107,21 @@ Document: routingapi
 
 "length": 1419,
 
---- CHUNK 570 (346 tokens / 792 chars) ---
+--- CHUNK 570 (461 tokens / 1048 chars) ---
 Document: routingapi
 
+
+"style": "normal"
+
+},
+
+{
+
+"color": "slow",
+
+"length": 285,
+
+"selection": "LINESTRING(30.430980 59.824470, 30.431741 59.824658, 30.432502 59.824859, 30.433152 59.825051, 30.433242 59.825077, 30.433946 59.825322, 30.434631 59.825572, 30.435286 59.825838)",
 
 "style": "normal"
 
@@ -62911,7 +64769,7 @@ Document: routingapi
 
 60.088599, 30.232835 60.087309, 30.230548 60.086662, 30.227798 60.085994, 30.223422 60.085144, 30.221455 60.084819, 30.221235 60.084783, 30.219610 60.084543, 30.218394 60.084398, 30.217855 60.084333, 30.217365 60.084275, 30.215136 60.084048, 30.212899 60.083876, 30.209731 60.083705, 30.207240 60.083534, 30.205563 60.083368, 30.203779 60.083151, 30.201907 60.082883, 30.200006 60.082553, 30.198932 60.082352, 30.197324 60.082012, 30.195462 60.081561, 30.193945 60.081144, 30.192404 60.080706, 30.191174 60.080317, 30.189528 60.079767, 30.189402 60.079718, 30.189086 60.079594, 30.188319 60.079292, 30.187655 60.079016, 30.187145 60.078788)",
 
---- CHUNK 586 (596 tokens / 1315 chars) ---
+--- CHUNK 586 (723 tokens / 1592 chars) ---
 Document: routingapi
 
 "style": "normal"
@@ -62971,20 +64829,6 @@ Document: routingapi
 "color": "fast",
 
 "length": 242,
-
---- CHUNK 587 (148 tokens / 336 chars) ---
-Document: routingapi
-
-
-"style": "normal"
-
-},
-
-{
-
-"color": "fast",
-
-"length": 242,
 "selection": "LINESTRING(30.179156 60.076189, 30.179154 60.076141, 30.179180 60.076008, 30.179253 60.075837, 30.179345 60.075697, 30.179650 60.075404, 30.180120 60.075057, 30.180606 60.074666, 30.181066 60.074263)",
 
 "style": "bridge"
@@ -62997,7 +64841,7 @@ Document: routingapi
 
 "length": 4016,
 
---- CHUNK 588 (709 tokens / 1408 chars) ---
+--- CHUNK 587 (709 tokens / 1408 chars) ---
 Document: routingapi
 
 
@@ -63022,7 +64866,7 @@ Document: routingapi
 
 "length": 14,
 
---- CHUNK 589 (671 tokens / 1619 chars) ---
+--- CHUNK 588 (671 tokens / 1619 chars) ---
 Document: routingapi
 
 
@@ -63139,7 +64983,7 @@ Document: routingapi
 
 {
 
---- CHUNK 590 (727 tokens / 1779 chars) ---
+--- CHUNK 589 (727 tokens / 1779 chars) ---
 Document: routingapi
 
 
@@ -63270,7 +65114,7 @@ Document: routingapi
 
 "id": "4795414868967001326",
 
---- CHUNK 591 (798 tokens / 2038 chars) ---
+--- CHUNK 590 (798 tokens / 2038 chars) ---
 Document: routingapi
 
 
@@ -63434,7 +65278,7 @@ Document: routingapi
 
 "length": 2607,
 
---- CHUNK 592 (805 tokens / 1646 chars) ---
+--- CHUNK 591 (805 tokens / 1646 chars) ---
 Document: routingapi
 
 
@@ -63468,12 +65312,12 @@ Document: routingapi
 "length": 2607,
 "selection": "LINESTRING(30.235662 60.027545, 30.234905 60.027324, 30.234272 60.027399, 30.233701 60.027232, 30.233520 60.027178, 30.232411 60.026851, 30.232132 60.026758, 30.232015 60.026712, 30.231368 60.026449, 30.230832 60.026229, 30.229215 60.025565, 30.229112 60.025523, 30.228803 60.025395, 30.228615 60.025318, 30.228267 60.025176, 30.227976 60.025057, 30.227834 60.024999, 30.227246 60.024759, 30.225542 60.024062, 30.224794 60.023757, 30.224754 60.023741, 30.223114 60.023071, 30.222459 60.022803, 30.222291 60.022735, 30.222126 60.022672, 30.222014 60.022635, 30.221841 60.022588, 30.221527 60.022514, 30.221375 60.022478, 30.220222 60.022295, 30.220011 60.022265, 30.219806 60.022211, 30.219248 60.022040, 30.218738 60.021869, 30.218452 60.021770, 30.218282 60.021706, 30.218028 60.021597, 30.217844 60.021502, 30.217522 60.021308, 30.216701 60.020712, 30.216512 60.020595, 30.216270 60.020471, 30.216046 60.020376, 30.215907 60.020318, 30.213975 60.019517, 30.213539 60.019329, 30.213254 60.019208, 30.212581 60.018918, 30.212209 60.018758, 30.211811 60.018562, 30.211465 60.018373, 30.209586 60.017438, 30.209074 60.017177, 30.208589 60.016939, 30.205546 60.015483, 30.204631 60.015029, 30.204624 60.015025, 30.204088 60.014739, 30.204081 60.014734, 30.203618 60.014465, 30.203602 60.014454, 30.203249 60.014204, 30.203240 60.014198,
 
---- CHUNK 593 (186 tokens / 358 chars) ---
+--- CHUNK 592 (186 tokens / 358 chars) ---
 Document: routingapi
 
 30.202984 60.013988, 30.202968 60.013973, 30.202818 60.013809, 30.202646 60.013626, 30.202635 60.013613, 30.202513 60.013440, 30.202510 60.013436, 30.202404 60.013268, 30.202302 60.013106, 30.202294 60.013090, 30.202180 60.012790, 30.202177 60.012778, 30.202111 60.012398, 30.202110 60.012391, 30.202091 60.012152, 30.202091 60.012146, 30.202091 60.012081)",
 
---- CHUNK 594 (653 tokens / 1488 chars) ---
+--- CHUNK 593 (653 tokens / 1488 chars) ---
 Document: routingapi
 
 "style": "normal"
@@ -63562,7 +65406,7 @@ Document: routingapi
 
 {
 
---- CHUNK 595 (616 tokens / 1634 chars) ---
+--- CHUNK 594 (616 tokens / 1634 chars) ---
 Document: routingapi
 
 
@@ -63719,9 +65563,37 @@ Document: routingapi
 
 "length": 276,
 
---- CHUNK 596 (687 tokens / 1830 chars) ---
+--- CHUNK 595 (782 tokens / 2080 chars) ---
 Document: routingapi
 
+
+"style": "normal"
+
+}
+
+],
+
+"names": [
+
+"переулок Никифорова"
+
+]
+
+},
+
+"outcoming_path_comment": "20 м прямо",
+
+"turn_angle": 49,
+
+"turn_direction": "right",
+
+"type": "crossroad"
+
+},
+
+{
+
+"comment": "Плавный поворот направо на ул. переулок Никифорова",
 
 "icon": "crossroad_slightly_right",
 
@@ -63880,7 +65752,7 @@ Document: routingapi
 
 "length": 104,
 
---- CHUNK 597 (728 tokens / 1958 chars) ---
+--- CHUNK 596 (728 tokens / 1958 chars) ---
 Document: routingapi
 
 
@@ -64045,7 +65917,7 @@ Document: routingapi
 
 "original_point": {
 
---- CHUNK 598 (242 tokens / 676 chars) ---
+--- CHUNK 597 (242 tokens / 676 chars) ---
 Document: routingapi
 
 
