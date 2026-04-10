@@ -1,14 +1,14 @@
 Source file: c:\Users\ar.kartavtsev\Desktop\Chunking\my-git-repo\input_docs\Places API\troubleshooting.docx
 Document: placesAPI
-Total chunks: 4
+Total chunks: 3
 Chunk size before overlap: 500-700 tokens (LangChain: MarkdownHeaderTextSplitter + RecursiveCharacterTextSplitter)
 Overlap: 15% (or 40% if previous chunk < 500 tokens), target max with overlap: 805 tokens
 ================================================================================
 
-Statistics: Min=540 tokens, Max=804 tokens, Avg=639 tokens
+Statistics: Min=374 tokens, Max=994 tokens, Avg=779 tokens
 ================================================================================
 
---- CHUNK 1 (549 tokens / 1472 chars) ---
+--- CHUNK 1 (970 tokens / 2804 chars) ---
 Document: placesAPI
 
 ---  
@@ -19,14 +19,14 @@ Document: placesAPI
 Возможные причины:
 ### Ошибки в параметрах запроса  
 Убедитесь, что имена параметров написаны в нужном регистре и без опечаток: см. [Справочник API](/api/search/places/reference/3.0/items).  
-Пример ошибочного запроса (неверный регистр параметра `q`):  
+Пример ошибочного запроса (неверный регистр параметра `q`):
 ```http
 
 https://catalog.api.2gis.com/3.0/items?Q=Москва Доватора, 9&key=YOUR_KEY
 
-```  
+```
 <details>  
-<summary><i>Ответ</i></summary>  
+<summary><i>Ответ</i></summary>
 ```json
 
 {
@@ -51,17 +51,17 @@ https://catalog.api.2gis.com/3.0/items?Q=Москва Доватора, 9&key=YO
 
 }
 
-```  
+```
 </details>  
 <br/>  
-Пример исправленного запроса:  
+Пример исправленного запроса:
 ```http
 
 https://catalog.api.2gis.com/3.0/items?q=Москва Доватора, 9&key=YOUR_KEY
 
-```  
+```
 <details>  
-<summary><i>Ответ</i></summary>  
+<summary><i>Ответ</i></summary>
 ```json
 
 {
@@ -104,47 +104,19 @@ https://catalog.api.2gis.com/3.0/items?q=Москва Доватора, 9&key=YO
 
 }
 
-```  
-</details>  
-<br/>
-
---- CHUNK 2 (540 tokens / 1631 chars) ---
-Document: placesAPI
-
-
-"full_name": "Москва, улица Доватора, 9",
-
-"id": "4504235282737147",
-
-"name": "улица Доватора, 9",
-
-"purpose_name": "Жилой дом",
-
-"type": "building"
-
-}
-
-],
-
-"total": 1
-
-}
-
-}
-
-```  
+```
 </details>  
 <br/>
 ### Несуществующие параметры или значения  
 Проверьте список доступных параметров и значений в [Справочнике API](/api/search/places/reference/3.0/items).  
-Пример ошибочного запроса (у параметра `type` не существует значения `entrance`):  
+Пример ошибочного запроса (у параметра `type` не существует значения `entrance`):
 ```http
 
 https://catalog.api.2gis.com/3.0/items?q=Москва Доватора, 9&type=entrance&key=YOUR_KEY
 
-```  
+```
 <details>  
-<summary><i>Ответ</i></summary>  
+<summary><i>Ответ</i></summary>
 ```json
 
 {
@@ -169,31 +141,15 @@ https://catalog.api.2gis.com/3.0/items?q=Москва Доватора, 9&type=e
 
 }
 
-```  
+```
 </details>  
 <br/>
 ### Нет данных в <Brand />  
 Чтобы убедиться, что данные действительно отсутствуют в <Brand />, попробуйте найти необходимый объект вручную на карте: откройте сайт {<a href="https://2gis.ru/">https://2gis.ru/</a>} и введите адрес, имя или координаты объекта в строку поиска. Если вы нашли нужный объект, скорректируйте запрос и отправьте снова.
-## Поиск даёт неточные или слишком широкие результаты  
-Возможные причины:
 
---- CHUNK 3 (804 tokens / 2108 chars) ---
+--- CHUNK 2 (994 tokens / 2592 chars) ---
 Document: placesAPI
 
-
-},
-
-"issue_date": "20240524"
-
-}
-
-}
-
-```  
-</details>  
-<br/>
-### Нет данных в <Brand />  
-Чтобы убедиться, что данные действительно отсутствуют в <Brand />, попробуйте найти необходимый объект вручную на карте: откройте сайт {<a href="https://2gis.ru/">https://2gis.ru/</a>} и введите адрес, имя или координаты объекта в строку поиска. Если вы нашли нужный объект, скорректируйте запрос и отправьте снова.
 ## Поиск даёт неточные или слишком широкие результаты  
 Возможные причины:
 ### Не используются ключевые параметры  
@@ -202,14 +158,14 @@ Document: placesAPI
 * `viewpoint1` и `viewpoint2`: координаты левой верхней и правой нижней вершины прямоугольной области видимости. Эта область используются как один из критериев для выбора и ранжирования результатов, но не ограничивает жёстко область поиска.  
 * `radius`: радиус поиска в метрах для фильтрации результатов.  
 * `type`: типы объектов, среди которых выполняется поиск. Если передаётся несколько типов, более релевантные результаты одних типов могут вытеснить менее релевантные результаты других типов.  
-Пример эффективного запроса, который содержит все ключевые параметры:  
+Пример эффективного запроса, который содержит все ключевые параметры:
 ```http
 
 https://catalog.api.2gis.com/3.0/items?q=Москва Доватора, 9&type=building&location=55.723, 37.568&radius=300&viewpoint2=55.7250522, 37.565250&viewpoint1=55.7220, 37.5712&key=YOUR_KEY
 
-```  
+```
 <details>  
-<summary><i>Ответ</i></summary>  
+<summary><i>Ответ</i></summary>
 ```json
 
 {
@@ -252,45 +208,20 @@ https://catalog.api.2gis.com/3.0/items?q=Москва Доватора, 9&type=b
 
 }
 
-```  
-</details>  
-<br/>  
-Формат, доступные значения и ограничения параметров описаны в [Справочнике API](/api/search/places/reference/3.0/items).
-
---- CHUNK 4 (663 tokens / 1757 chars) ---
-Document: placesAPI
-
-
-"name": "улица Доватора, 9",
-
-"purpose_name": "Жилой дом",
-
-"type": "building"
-
-}
-
-],
-
-"total": 1
-
-}
-
-}
-
-```  
+```
 </details>  
 <br/>  
 Формат, доступные значения и ограничения параметров описаны в [Справочнике API](/api/search/places/reference/3.0/items).
 ### Недостаточно параметров для сужения поиска  
 Используйте [геоограничения](/api/search/places/overview#geo-restrictions) и задайте больше фильтрующих параметров.  
-Например, можно указать рубрику. Пример запроса без указания рубрики:  
+Например, можно указать рубрику. Пример запроса без указания рубрики:
 ```http
 
 https://catalog.api.2gis.com/3.0/items?q=1913 год&location=30.3079,59.9289&key=YOUR_KEY
 
-```  
+```
 <details>  
-<summary><i>Ответ (возвращаются 2 объекта)</i></summary>  
+<summary><i>Ответ (возвращаются 2 объекта)</i></summary>
 ```json
 
 {
@@ -345,17 +276,61 @@ https://catalog.api.2gis.com/3.0/items?q=1913 год&location=30.3079,59.9289&ke
 
 }
 
-```  
+```
+
+--- CHUNK 3 (374 tokens / 971 chars) ---
+Document: placesAPI
+
+
+"items": [
+
+{
+
+"address_comment": "1-4 этаж",
+
+"address_name": "Вознесенский проспект, 13",
+
+"id": "5348553838538209",
+
+"name": "1913 год, гостиница",
+
+"type": "branch"
+
+},
+
+{
+
+"address_comment": "1-2 этаж",
+
+"address_name": "Вознесенский проспект, 13",
+
+"id": "5348552838519391",
+
+"name": "1913 год, ресторан в историческом центре",
+
+"type": "branch"
+
+}
+
+],
+
+"total": 2
+
+}
+
+}
+
+```
 </details>  
 <br/>  
-Пример запроса с указанием рубрики:  
+Пример запроса с указанием рубрики:
 ```http
 
 https://catalog.api.2gis.com/3.0/items?q=1913 год&location=30.3079,59.9289&key=YOUR_KEY&rubric_id=164
 
-```  
+```
 <details>  
-<summary><i>Ответ (возвращается 1 объект)</i></summary>  
+<summary><i>Ответ (возвращается 1 объект)</i></summary>
 ```json
 
 {
@@ -396,7 +371,7 @@ https://catalog.api.2gis.com/3.0/items?q=1913 год&location=30.3079,59.9289&ke
 
 }
 
-```  
+```
 </details>  
 <br/>
 

@@ -16,10 +16,11 @@ Chunking flow:
 """
 
 import re
+import json
 from pathlib import Path
 
 
-CODE_BLOCK_RE = re.compile(r"'''[\s\S]*?'''")
+CODE_BLOCK_RE = re.compile(r"```[\s\S]*?```")
 
 
 def get_token_counter():
@@ -372,6 +373,28 @@ def save_chunks(
             file_obj.write(f"{chunk}\n\n")
 
 
+def save_chunks_jsonl(
+    output_path,
+    document_label,
+    source_file,
+    chunks_with_overlap,
+    token_counter,
+):
+    """Save chunks to JSONL (one JSON object per chunk line)."""
+    with open(output_path, "w", encoding="utf-8") as file_obj:
+        for index, chunk in enumerate(chunks_with_overlap, 1):
+            payload = {
+                "chunk_index": index,
+                "document": document_label,
+                "source_file": source_file,
+                "tokens": token_counter(chunk),
+                "chars": len(chunk),
+                "contains_code": bool(CODE_BLOCK_RE.search(chunk)),
+                "text": chunk,
+            }
+            file_obj.write(json.dumps(payload, ensure_ascii=False) + "\n")
+
+
 def process_document(file_path, output_dir, token_counter, min_chunk_tokens, max_chunk_tokens, re_module, document_factory):
     """Process one document and save chunking result."""
     print(f"Reading: {file_path}")
@@ -420,7 +443,17 @@ def process_document(file_path, output_dir, token_counter, min_chunk_tokens, max
         max_chunk_tokens + 105,
     )
 
+    jsonl_output_path = output_path.with_suffix(".jsonl")
+    save_chunks_jsonl(
+        jsonl_output_path,
+        document_label,
+        str(file_path),
+        chunks_with_overlap,
+        token_counter,
+    )
+
     print(f"Saved to: {output_path}")
+    print(f"Saved to: {jsonl_output_path}")
     if chunks_with_overlap:
         chunk_token_counts = [token_counter(chunk) for chunk in chunks_with_overlap]
         print(
