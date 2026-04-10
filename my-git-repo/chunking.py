@@ -8,6 +8,7 @@
 2. Все .docx из папки input_dir
 """
 
+import re
 from pathlib import Path
 
 def get_token_counter():
@@ -242,40 +243,90 @@ def prepare_units_for_chunking(cleaned_paragraphs, token_counter, max_chunk_toke
     )
 
 
-def build_chunks(cleaned_paragraphs, token_counter, min_chunk_tokens, max_chunk_tokens):
+def merge_small_chunks(chunk_info, token_counter, min_merge_tokens, max_chunk_tokens):
+    """Сливает слишком короткие чанки с соседями, если объединение помещается в лимит."""
+    items = [{"text": text, "tokens": tokens} for text, tokens in chunk_info]
+    index = 0
+
+    while index < len(items):
+        current = items[index]
+        if current["tokens"] >= min_merge_tokens:
+            index += 1
+            continue
+
+        merged = False
+
+        if index + 1 < len(items):
+            merged_text = current["text"] + "\n" + items[index + 1]["text"]
+            merged_tokens = token_counter(merged_text)
+            if merged_tokens <= max_chunk_tokens:
+                items[index + 1] = {"text": merged_text, "tokens": merged_tokens}
+                del items[index]
+                merged = True
+
+        if not merged and index > 0:
+            merged_text = items[index - 1]["text"] + "\n" + current["text"]
+            merged_tokens = token_counter(merged_text)
+            if merged_tokens <= max_chunk_tokens:
+                items[index - 1] = {"text": merged_text, "tokens": merged_tokens}
+                del items[index]
+                index -= 1
+                merged = True
+
+        if not merged:
+            index += 1
+
+    return [(item["text"], item["tokens"]) for item in items]
+
+
+def build_chunks(
+    cleaned_paragraphs,
+    token_counter,
+    min_chunk_tokens,
+    max_chunk_tokens,
+    max_chunk_tokens_with_overlap,
+    min_merge_tokens,
+):
     """Строит чанки с адаптивным перекрытием."""
     chunks = []
     current_chunk = []
     current_tokens = 0
     chunk_info = []
 
+    def chunk_text_and_tokens(parts):
+        text = "\n".join(parts)
+        return text, token_counter(text)
+
     for para in cleaned_paragraphs:
         para_tokens = token_counter(para)
+        prospective_text, prospective_tokens = chunk_text_and_tokens(current_chunk + [para])
 
-        if current_tokens + para_tokens > max_chunk_tokens:
+        if prospective_tokens > max_chunk_tokens:
             if current_chunk and current_tokens >= min_chunk_tokens:
-                chunk_text = "\n".join(current_chunk)
+                chunk_text, chunk_tokens = chunk_text_and_tokens(current_chunk)
                 chunks.append(chunk_text)
-                chunk_info.append((chunk_text, current_tokens))
+                chunk_info.append((chunk_text, chunk_tokens))
                 current_chunk = [para]
                 current_tokens = para_tokens
             elif (not current_chunk) or (current_tokens < min_chunk_tokens and para_tokens <= 200):
                 current_chunk.append(para)
-                current_tokens += para_tokens
+                _, current_tokens = chunk_text_and_tokens(current_chunk)
             elif current_chunk:
-                chunk_text = "\n".join(current_chunk)
+                chunk_text, chunk_tokens = chunk_text_and_tokens(current_chunk)
                 chunks.append(chunk_text)
-                chunk_info.append((chunk_text, current_tokens))
+                chunk_info.append((chunk_text, chunk_tokens))
                 current_chunk = [para]
                 current_tokens = para_tokens
         else:
             current_chunk.append(para)
-            current_tokens += para_tokens
+            current_tokens = prospective_tokens
 
     if current_chunk:
-        chunk_text = "\n".join(current_chunk)
+        chunk_text, chunk_tokens = chunk_text_and_tokens(current_chunk)
         chunks.append(chunk_text)
-        chunk_info.append((chunk_text, current_tokens))
+        chunk_info.append((chunk_text, chunk_tokens))
+
+    chunk_info = merge_small_chunks(chunk_info, token_counter, min_merge_tokens, max_chunk_tokens)
 
     chunks_with_overlap = []
     for i, (chunk_text, tokens) in enumerate(chunk_info):
@@ -283,7 +334,7 @@ def build_chunks(cleaned_paragraphs, token_counter, min_chunk_tokens, max_chunk_
             prev_tokens = chunk_info[i - 1][1]
             overlap_percent = 0.40 if prev_tokens < min_chunk_tokens else 0.15
             ideal_overlap_tokens = int(prev_tokens * overlap_percent)
-            max_possible_overlap = max(0, max_chunk_tokens - tokens)
+            max_possible_overlap = max(0, max_chunk_tokens_with_overlap - tokens)
             overlap_tokens = min(ideal_overlap_tokens, max_possible_overlap)
 
             prev_chunk_paragraphs = chunk_info[i - 1][0].split("\n")
@@ -336,7 +387,30 @@ def collect_input_files(input_files, input_dir):
     return unique_files
 
 
-def save_chunks(output_path, document_label, source_file, chunks_with_overlap, token_counter, min_chunk_tokens, max_chunk_tokens):
+def sanitize_filename_part(value):
+    """Подготавливает часть имени файла для Windows-совместимого имени."""
+    sanitized = re.sub(r'[<>:"/\\|?*]+', '_', value).strip()
+    sanitized = re.sub(r'\s+', '_', sanitized)
+    return sanitized or "unknown"
+
+
+def build_output_filename(file_path):
+    """Формирует имя выходного файла с префиксом из родительской папки исходного документа."""
+    parent_name = sanitize_filename_part(file_path.parent.name)
+    stem_name = sanitize_filename_part(file_path.stem)
+    return f"{parent_name}_{stem_name}_chunks.txt"
+
+
+def save_chunks(
+    output_path,
+    document_label,
+    source_file,
+    chunks_with_overlap,
+    token_counter,
+    min_chunk_tokens,
+    max_chunk_tokens,
+    max_chunk_tokens_with_overlap,
+):
     """Сохраняет чанки одного документа в отдельный txt файл."""
     chunk_token_counts = [token_counter(chunk) for chunk in chunks_with_overlap]
     avg_tokens = sum(chunk_token_counts) / len(chunks_with_overlap) if chunks_with_overlap else 0
@@ -346,12 +420,12 @@ def save_chunks(output_path, document_label, source_file, chunks_with_overlap, t
         file_obj.write(f"Document: {document_label}\n")
         file_obj.write(f"Total chunks: {len(chunks_with_overlap)}\n")
         file_obj.write(
-            f"Chunk size: {min_chunk_tokens}-{max_chunk_tokens} tokens "
+            f"Chunk size before overlap: {min_chunk_tokens}-{max_chunk_tokens} tokens "
             "(hierarchical split: H2 -> H3 -> paragraph -> sentence -> char)\n"
         )
         file_obj.write(
             f"Overlap: 15% (or 40% if previous chunk < {min_chunk_tokens} tokens), "
-            f"but never exceeds {max_chunk_tokens} tokens total\n"
+            f"target max with overlap: {max_chunk_tokens_with_overlap} tokens\n"
         )
         file_obj.write("=" * 80 + "\n\n")
 
@@ -397,10 +471,12 @@ def process_document(file_path, output_dir, token_counter, min_chunk_tokens, max
         token_counter,
         min_chunk_tokens,
         max_chunk_tokens,
+        max_chunk_tokens + 105,
+        350,
     )
     print(f"Created {len(chunks_with_overlap)} chunks with adaptive overlap")
 
-    output_path = output_dir / f"{file_path.stem}_chunks.txt"
+    output_path = output_dir / build_output_filename(file_path)
     save_chunks(
         output_path,
         document_label,
@@ -409,6 +485,7 @@ def process_document(file_path, output_dir, token_counter, min_chunk_tokens, max
         token_counter,
         min_chunk_tokens,
         max_chunk_tokens,
+        max_chunk_tokens + 105,
     )
 
     print(f"Saved to: {output_path}")
@@ -436,7 +513,7 @@ def main():
     
     # Параметры
     min_chunk_tokens = 600
-    max_chunk_tokens = 800
+    max_chunk_tokens = 700
     input_files = [
         # r"c:\Users\ar.kartavtsev\Desktop\Chunking\Test2.docx",
         # r"c:\Users\ar.kartavtsev\Desktop\Chunking\Test3.docx",

@@ -1,14 +1,14 @@
 Source file: c:\Users\ar.kartavtsev\Desktop\Chunking\my-git-repo\input_docs\Places API\troubleshooting.docx
 Document: placesAPI
-Total chunks: 3
-Chunk size: 600-800 tokens (hierarchical split: H2 -> H3 -> paragraph -> sentence -> char)
-Overlap: 15% (or 40% if previous chunk < 600 tokens), but never exceeds 800 tokens total
+Total chunks: 4
+Chunk size before overlap: 600-700 tokens (hierarchical split: H2 -> H3 -> paragraph -> sentence -> char)
+Overlap: 15% (or 40% if previous chunk < 600 tokens), target max with overlap: 805 tokens
 ================================================================================
 
-Statistics: Min=660 tokens, Max=812 tokens, Avg=760 tokens
+Statistics: Min=237 tokens, Max=718 tokens, Avg=590 tokens
 ================================================================================
 
---- CHUNK 1 (812 tokens / 2330 chars) ---
+--- CHUNK 1 (692 tokens / 1846 chars) ---
 Document: placesAPI
 
 ---
@@ -84,13 +84,23 @@ https://catalog.api.2gis.com/3.0/items?q=Москва Доватора, 9&type=e
 "api_version": "3.0.17799",
 "code": 400,
 "error": {
-"message": "Param 'type' is invalid. Value 'entrance' is outside of allowed values: 'coordinates','station_entrance','street','adm_div.country','route','branch','adm_div.district','attraction','adm_div.region','adm_div.place','adm_div','parking','adm_div.city','adm_div.district_area','station_platform','crossroad','kilometer_road_sign','adm_div.settlement','station','gate','building','station.metro','road','adm_div.division','adm_div.living_area'",
-"type": "paramIsOutsideSet"
-},
 
---- CHUNK 2 (807 tokens / 2093 chars) ---
+--- CHUNK 2 (718 tokens / 2053 chars) ---
 Document: placesAPI
 
+```http
+https://catalog.api.2gis.com/3.0/items?q=Москва Доватора, 9&type=entrance&key=YOUR_KEY
+```
+<details>
+<summary><i>Ответ</i></summary>
+```json
+{
+"meta": {
+"api_version": "3.0.17799",
+"code": 400,
+"error": {
+"message": "Param 'type' is invalid. Value 'entrance' is outside of allowed values: 'coordinates','station_entrance','street','adm_div.country','route','branch','adm_div.district','attraction','adm_div.region','adm_div.place','adm_div','parking','adm_div.city','adm_div.district_area','station_platform','crossroad','kilometer_road_sign','adm_div.settlement','station','gate','building','station.metro','road','adm_div.division','adm_div.living_area'",
+"type": "paramIsOutsideSet"
 },
 "issue_date": "20240524"
 }
@@ -110,6 +120,12 @@ Document: placesAPI
 * `type`: типы объектов, среди которых выполняется поиск. Если передаётся несколько типов, более релевантные результаты одних типов могут вытеснить менее релевантные результаты других типов.
 Пример эффективного запроса, который содержит все ключевые параметры:
 ```http
+
+--- CHUNK 3 (711 tokens / 1805 chars) ---
+Document: placesAPI
+
+Пример эффективного запроса, который содержит все ключевые параметры:
+```http
 https://catalog.api.2gis.com/3.0/items?q=Москва Доватора, 9&type=building&location=55.723, 37.568&radius=300&viewpoint2=55.7250522, 37.565250&viewpoint1=55.7220, 37.5712&key=YOUR_KEY
 ```
 <details>
@@ -126,24 +142,6 @@ https://catalog.api.2gis.com/3.0/items?q=Москва Доватора, 9&type=b
 {
 "address_name": "улица Доватора, 9",
 "full_name": "Москва, улица Доватора, 9",
-"id": "4504235282737147",
-"name": "улица Доватора, 9",
-"purpose_name": "Жилой дом",
-"type": "building"
-}
-],
-"total": 1
-}
-}
-```
-</details>
-<br/>
-Формат, доступные значения и ограничения параметров описаны в [Справочнике API](/api/search/places/reference/3.0/items).
-### Недостаточно параметров для сужения поиска
-
---- CHUNK 3 (660 tokens / 1687 chars) ---
-Document: placesAPI
-
 "id": "4504235282737147",
 "name": "улица Доватора, 9",
 "purpose_name": "Жилой дом",
@@ -186,6 +184,24 @@ https://catalog.api.2gis.com/3.0/items?q=1913 год&location=30.3079,59.9289&ke
 "address_name": "Вознесенский проспект, 13",
 "id": "5348552838519391",
 "name": "1913 год, ресторан в историческом центре",
+"type": "branch"
+}
+],
+"total": 2
+}
+}
+```
+</details>
+<br/>
+Пример запроса с указанием рубрики:
+```http
+https://catalog.api.2gis.com/3.0/items?q=1913 год&location=30.3079,59.9289&key=YOUR_KEY&rubric_id=164
+```
+<details>
+
+--- CHUNK 4 (237 tokens / 599 chars) ---
+Document: placesAPI
+
 "type": "branch"
 }
 ],

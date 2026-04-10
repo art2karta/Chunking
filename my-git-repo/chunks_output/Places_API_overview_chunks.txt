@@ -1,14 +1,14 @@
 Source file: c:\Users\ar.kartavtsev\Desktop\Chunking\my-git-repo\input_docs\Places API\overview.docx
 Document: placesAPI
-Total chunks: 8
-Chunk size: 600-800 tokens (hierarchical split: H2 -> H3 -> paragraph -> sentence -> char)
-Overlap: 15% (or 40% if previous chunk < 600 tokens), but never exceeds 800 tokens total
+Total chunks: 9
+Chunk size before overlap: 600-700 tokens (hierarchical split: H2 -> H3 -> paragraph -> sentence -> char)
+Overlap: 15% (or 40% if previous chunk < 600 tokens), target max with overlap: 805 tokens
 ================================================================================
 
-Statistics: Min=575 tokens, Max=802 tokens, Avg=760 tokens
+Statistics: Min=575 tokens, Max=773 tokens, Avg=714 tokens
 ================================================================================
 
---- CHUNK 1 (765 tokens / 1984 chars) ---
+--- CHUNK 1 (698 tokens / 1794 chars) ---
 Document: placesAPI
 
 ---
@@ -37,12 +37,14 @@ Places API выполняет поиск организаций, зданий и
 Для получения некоторой информации об объектах требуется дополнительное согласование. Изучите список методов и полей для получения [дополнительной информации по запросу](#info-on-demand).
 :::
 Работать с ключами можно в Менеджере Платформы: подробнее см. в документации [личного кабинета](/platform-manager/overview).
-2. Изучите формат [запроса](#request) и [ответа](#response).
-3. Изучите [примеры запросов к Places API](/api/search/places/examples) и полный [справочник API](/api/search/places/reference).
 
---- CHUNK 2 (787 tokens / 2118 chars) ---
+--- CHUNK 2 (743 tokens / 1987 chars) ---
 Document: placesAPI
 
+:::
+Работать с ключами можно в Менеджере Платформы: подробнее см. в документации [личного кабинета](/platform-manager/overview).
+2. Изучите формат [запроса](#request) и [ответа](#response).
+3. Изучите [примеры запросов к Places API](/api/search/places/examples) и полный [справочник API](/api/search/places/reference).
 Если вы хотите создать поисковый виджет на карте, изучите готовый пример [интеграции поисковых API в веб-приложение](./tutorial).
 ### Дополнительная информация по запросу {#info-on-demand}
 Получение некоторой информации об объектах доступно только по запросу и за дополнительную плату. Чтобы приобрести доступ к методам и полям ниже, свяжитесь с [отделом продаж <Brand />](https://dev.2gis.ru/api#form).
@@ -65,6 +67,14 @@ Document: placesAPI
 * `items.fns_code` — код ФНС административных территорий;
 * `items.okato` — код ОКАТО улиц и административных территорий;
 * `items.address.components.okato` — код ОКАТО зданий;
+
+--- CHUNK 3 (722 tokens / 1968 chars) ---
+Document: placesAPI
+
+* `items.address.components.fias_code` — код ФИАС зданий;
+* `items.fns_code` — код ФНС административных территорий;
+* `items.okato` — код ОКАТО улиц и административных территорий;
+* `items.address.components.okato` — код ОКАТО зданий;
 * `items.oktmo` — код ОКТМО улиц и административных территорий;
 * `items.address.components.oktmo` — код ОКТМО зданий;
 * `items.structure_info.material` — данные о материале здания;
@@ -72,10 +82,6 @@ Document: placesAPI
 * `items.structure_info.porch_count` — данные о количестве подъездов;
 * `items.structure_info.floor_type` — тип перекрытий в здании;
 * `items.structure_info.gas_type` — тип газоснабжения здания;
-
---- CHUNK 3 (790 tokens / 2092 chars) ---
-Document: placesAPI
-
 * `items.structure_info.year_of_construction` — год постройки здания;
 * `items.structure_info.elevators_count` — количество лифтов в здании;
 * `items.structure_info.is_in_emergency_state` — факт признания дома аварийным;
@@ -91,14 +97,15 @@ Document: placesAPI
 * с интересующим вас критерием (`рестораны с итальянской кухней`) и т. д.
 * В виде фильтра по желаемому атрибуту (например, [по времени работы](/api/search/places/examples#filter-by-time)). Подробнее об атрибутах см. [ниже](#filter-by-attributes).
 * С указанием ID конкретного [объекта](/api/search/places/examples#house-id) или [категории](/api/search/places/examples#companies-in-category).
+
+--- CHUNK 4 (723 tokens / 1977 chars) ---
+Document: placesAPI
+
+* С указанием ID конкретного [объекта](/api/search/places/examples#house-id) или [категории](/api/search/places/examples#companies-in-category).
 * С указанием известного атрибута конкретного объекта: [номера телефона](/api/search/places/examples#by-phone), [адреса веб-сайта](/api/search/places/examples#by-site), [ИНН](/api/search/places/examples#by-itin) или [торговой лицензии](/api/search/places/examples#by-trade-license).
 2. Геоограничение поиска (где нужно искать?). Этот параметр обязателен при поиске списка объектов по определённым критериям (например, поиск всех круглосуточных магазинов цветов в Москве). Вы можете задать ограничение:
 * В [текстовом запросе](/api/search/places/examples#text-query) (параметр `q`): например, указать регион, город, район, улицу, станцию метро и т. д.
 Вы можете объединить запрос для поиска объекта и геоограничение в одной формулировке (`кафе в Тверском районе Москвы`). Параметр `q` должен быть только один.
-
---- CHUNK 4 (787 tokens / 2157 chars) ---
-Document: placesAPI
-
 * С указанием ID [города](/api/search/places/examples#within-city), [здания](/api/search/places/examples#within-building), [станции метро](/api/search/places/examples#near-metro) и т. д.
 * С определением области поиска:
 * в [радиусе вокруг точки](/api/search/places/examples#within-radius),
@@ -109,6 +116,13 @@ Document: placesAPI
 * [`/3.0/items/byid`](/api/search/places/reference/3.0/items/byid),
 * [`/3.0/items/bysite`](/api/search/places/reference/3.0/items/bysite),
 * [`/3.0/items/byphone`](/api/search/places/reference/3.0/items/byphone),
+* [`/3.0/items/byservicing`](/api/search/places/reference/3.0/items/byservicing),
+* [`/3.0/items/byitin`](/api/search/places/reference/3.0/items/byitin),
+* [`/3.0/items/bytradelicense`](/api/search/places/reference/3.0/items/bytradelicense),
+
+--- CHUNK 5 (751 tokens / 2094 chars) ---
+Document: placesAPI
+
 * [`/3.0/items/byservicing`](/api/search/places/reference/3.0/items/byservicing),
 * [`/3.0/items/byitin`](/api/search/places/reference/3.0/items/byitin),
 * [`/3.0/items/bytradelicense`](/api/search/places/reference/3.0/items/bytradelicense),
@@ -152,25 +166,6 @@ https://catalog.api.2gis.com/3.0/items?q=кафе&location=37.630866,55.752256&k
 В ответе на запрос по умолчанию передаются параметры:
 * `id` — идентификатор объекта.
 * `name` — название объекта.
-
---- CHUNK 5 (776 tokens / 2095 chars) ---
-Document: placesAPI
-
-{
-"address_comment": "3, 5 этаж",
-"address_name": "Никольская, 25",
-"id": "70000001031668425",
-"name": "МСК, сеть лаундж-баров",
-"type": "branch"
-}
-],
-"total": 5926
-}
-}
-```
-В ответе на запрос по умолчанию передаются параметры:
-* `id` — идентификатор объекта.
-* `name` — название объекта.
 * `type` — тип объекта. Полный список типов см. в [справочнике API](/api/search/places/reference/3.0/items).
 ***
 ## Дополнительные настройки {#additional-config}
@@ -179,6 +174,13 @@ Document: placesAPI
 * настроить [тип поиска](#search-type);
 * [отсортировать результаты поиска](#sorting);
 * отфильтровать результаты поиска по [дополнительным атрибутам](#filter-by-attributes).
+### Дополнительная информация {#additional-info}
+Чтобы получить дополнительную информацию в ответе, используйте параметр `fields`. Например, вы можете получить следующие данные об объекте:
+* точка, к которой привязан объект;
+
+--- CHUNK 6 (707 tokens / 1872 chars) ---
+Document: placesAPI
+
 ### Дополнительная информация {#additional-info}
 Чтобы получить дополнительную информацию в ответе, используйте параметр `fields`. Например, вы можете получить следующие данные об объекте:
 * точка, к которой привязан объект;
@@ -196,11 +198,13 @@ Document: placesAPI
 Параметр `search_type` отвечает за тип поиска: алгоритм и настройки, оптимизированные под цель поиска, а также логику формирования результатов.
 Ниже описаны самые используемые типы поиска. Полный список см. в [описании параметра `search_type`](/api/search/places/reference/3.0/items).
 #### Поиск с раскрытием
+В результатах поиска категории и организации будут раскрыты до компаний (филиалов организации). Например, при поиске «почта России» в ответе будут все почтовые отделения. Аналогично работает раскрытие категории — при поиске «кафе» в результате будут компании в категории «Кафе / Кондитерские», а не сама категория, которая также является объектом справочника.
+Этот алгоритм формирования результатов поиска используется по умолчанию и соответствует параметру `search_type=discovery` в запросе.
+#### Поиск с единственным филиалом одной организации в результате
 
---- CHUNK 6 (797 tokens / 2121 chars) ---
+--- CHUNK 7 (736 tokens / 1942 chars) ---
 Document: placesAPI
 
-В результатах поиска категории и организации будут раскрыты до компаний (филиалов организации). Например, при поиске «почта России» в ответе будут все почтовые отделения. Аналогично работает раскрытие категории — при поиске «кафе» в результате будут компании в категории «Кафе / Кондитерские», а не сама категория, которая также является объектом справочника.
 Этот алгоритм формирования результатов поиска используется по умолчанию и соответствует параметру `search_type=discovery` в запросе.
 #### Поиск с единственным филиалом одной организации в результате
 Аналогичен поиску с раскрытием, но для каждой организации в результат выводится только один филиал. Например, пользователь хочет найти интернет-магазин и посмотреть его сайт, и ему не нужны все пункты выдачи, которые будут в результате.
@@ -221,11 +225,12 @@ Document: placesAPI
 * по категории — например, только кафе или только продуктовые магазины;
 * по организации — можно получить список всех филиалов одной организации;
 * по времени работы — например, только круглосуточно работающие филиалы;
+* по наличию или отсутствию данных — например, фотографий, отзывов, рейтинга, сайта, ИНН;
+* по дополнительным атрибутам — например, наличию Wi-Fi, возможности оплаты картой и т. д.
 
---- CHUNK 7 (802 tokens / 2402 chars) ---
+--- CHUNK 8 (773 tokens / 2329 chars) ---
 Document: placesAPI
 
-* по времени работы — например, только круглосуточно работающие филиалы;
 * по наличию или отсутствию данных — например, фотографий, отзывов, рейтинга, сайта, ИНН;
 * по дополнительным атрибутам — например, наличию Wi-Fi, возможности оплаты картой и т. д.
 Полный список фильтров и соответствующие им параметры см. в [справочнике API](/api/search/places/reference/3.0/items).
@@ -250,7 +255,7 @@ Document: placesAPI
 | Тег атрибута | Назначение | Тип значения | Пример |
 | ------------ | ------------------------ | -------------------------------------------------------------------------------------------------------- | ----------------------------- |
 
---- CHUNK 8 (575 tokens / 1640 chars) ---
+--- CHUNK 9 (575 tokens / 1640 chars) ---
 Document: placesAPI
 
 Фильтрация по остальным атрибутам:
