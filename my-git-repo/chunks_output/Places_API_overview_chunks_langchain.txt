@@ -1,18 +1,21 @@
 Source file: c:\Users\ar.kartavtsev\Desktop\Chunking\my-git-repo\input_docs\Places API\overview.docx
 Document: placesAPI
-Total chunks: 12
-Chunk size before overlap: 500-700 tokens (LangChain: MarkdownHeaderTextSplitter + RecursiveCharacterTextSplitter)
+Total chunks: 14
+Chunk size before overlap: 500-700 tokens (hierarchy: H2 -> H3; code chunks are kept whole)
 Overlap: 15% (or 40% if previous chunk < 500 tokens), target max with overlap: 805 tokens
 ================================================================================
 
-Statistics: Min=165 tokens, Max=984 tokens, Avg=574 tokens
+Statistics: Min=130 tokens, Max=1347 tokens, Avg=492 tokens
 ================================================================================
 
---- CHUNK 1 (440 tokens / 1057 chars) ---
+--- CHUNK 1 (433 tokens / 1047 chars) ---
 Document: placesAPI
 
----  
----
+H1: Places API
+H2: 
+
+H3: 
+
 # Places API  
 Places API выполняет поиск организаций, зданий и мест.  
 <Video src="/video/Search_ru.mp4" width="900px" />  
@@ -30,8 +33,13 @@ Places API выполняет поиск организаций, зданий и
 Изучите также [возможности других API поиска](/api/search/overview) и дополните ваши сценарии работы с объектами на карте.  
 :::
 
---- CHUNK 2 (542 tokens / 1503 chars) ---
+--- CHUNK 2 (529 tokens / 1503 chars) ---
 Document: placesAPI
+
+H1: Places API
+H2: Начало работы {#getting-started}
+
+H3: 
 
 Запросы осуществляются методом GET, все необходимые параметры передаются в строке запроса. Ответы формируются в формате JSON. Для формирования подсказок при поиске объектов используйте [Suggest API](/api/search/suggest/overview).  
 :::tip[Расширенные возможности]  
@@ -49,8 +57,13 @@ Document: placesAPI
 3. Изучите [примеры запросов к Places API](/api/search/places/examples) и полный [справочник API](/api/search/places/reference).  
 Если вы хотите создать поисковый виджет на карте, изучите готовый пример [интеграции поисковых API в веб-приложение](./tutorial).
 
---- CHUNK 3 (791 tokens / 2090 chars) ---
+--- CHUNK 3 (773 tokens / 2090 chars) ---
 Document: placesAPI
+
+H1: Places API
+H2: Начало работы {#getting-started}
+
+H3: Дополнительная информация по запросу {#info-on-demand}
 
 2. Изучите формат [запроса](#request) и [ответа](#response).  
 3. Изучите [примеры запросов к Places API](/api/search/places/examples) и полный [справочник API](/api/search/places/reference).  
@@ -83,6 +96,11 @@ Document: placesAPI
 --- CHUNK 4 (330 tokens / 979 chars) ---
 Document: placesAPI
 
+H1: Places API
+H2: Начало работы {#getting-started}
+
+H3: Дополнительная информация по запросу {#info-on-demand}
+
 * `items.address.components.okato` — код ОКАТО зданий;  
 * `items.oktmo` — код ОКТМО улиц и административных территорий;  
 * `items.address.components.oktmo` — код ОКТМО зданий;  
@@ -98,8 +116,13 @@ Document: placesAPI
 * `items.structure_info.chs_name` — название объекта культурного наследия;  
 * `items.structure_info.chs_category` — категория объекта культурного наследия.
 
---- CHUNK 5 (736 tokens / 1899 chars) ---
+--- CHUNK 5 (1347 tokens / 3633 chars) ---
 Document: placesAPI
+
+H1: Places API
+H2: Формат запроса {#request}
+
+H3: 
 
 * `items.structure_info.project_type` — серия или проект постройки здания;  
 * `items.structure_info.chs_name` — название объекта культурного наследия;  
@@ -116,11 +139,7 @@ Document: placesAPI
 * С указанием известного атрибута конкретного объекта: [номера телефона](/api/search/places/examples#by-phone), [адреса веб-сайта](/api/search/places/examples#by-site), [ИНН](/api/search/places/examples#by-itin) или [торговой лицензии](/api/search/places/examples#by-trade-license).  
 2. Геоограничение поиска (где нужно искать?). Этот параметр обязателен при поиске списка объектов по определённым критериям (например, поиск всех круглосуточных магазинов цветов в Москве). Вы можете задать ограничение:  
 * В [текстовом запросе](/api/search/places/examples#text-query) (параметр `q`): например, указать регион, город, район, улицу, станцию метро и т. д.  
-Вы можете объединить запрос для поиска объекта и геоограничение в одной формулировке (`кафе в Тверском районе Москвы`). Параметр `q` должен быть только один.
-
---- CHUNK 6 (984 tokens / 2735 chars) ---
-Document: placesAPI
-
+Вы можете объединить запрос для поиска объекта и геоограничение в одной формулировке (`кафе в Тверском районе Москвы`). Параметр `q` должен быть только один.  
 * С указанием ID [города](/api/search/places/examples#within-city), [здания](/api/search/places/examples#within-building), [станции метро](/api/search/places/examples#near-metro) и т. д.  
 * С определением области поиска:  
 * в [радиусе вокруг точки](/api/search/places/examples#within-radius),  
@@ -139,19 +158,41 @@ Document: placesAPI
 3. Ваш [ключ API](#getting-started).  
 <br/>  
 Также вы можете применить [дополнительные настройки поиска](#additional-config).
-### Пример запроса
+
+### Пример запроса  
 ```http
 
 https://catalog.api.2gis.com/3.0/items?q=кафе&location=37.630866,55.752256&key=YOUR_KEY
 
-```
+```  
+В запросе используются следующие параметры:  
+* `q=кафе` — поиск выполняется по текстовому запросу «кафе».  
+* `location=37.630866,55.752256` — геоограничение: координаты точки, в окрестности которой выполняется поиск кафе.  
+* `key=YOUR_KEY` — ваш ключ API.  
+Также см. [примеры запросов](/api/search/places/examples) для решения различных задач.
+
+--- CHUNK 6 (402 tokens / 1095 chars) ---
+Document: placesAPI
+
+H1: Places API
+H2: Формат ответа {#response}
+
+H3: 
+
+
+### Пример запроса  
+```http
+
+https://catalog.api.2gis.com/3.0/items?q=кафе&location=37.630866,55.752256&key=YOUR_KEY
+
+```  
 В запросе используются следующие параметры:  
 * `q=кафе` — поиск выполняется по текстовому запросу «кафе».  
 * `location=37.630866,55.752256` — геоограничение: координаты точки, в окрестности которой выполняется поиск кафе.  
 * `key=YOUR_KEY` — ваш ключ API.  
 Также см. [примеры запросов](/api/search/places/examples) для решения различных задач.
 ## Формат ответа {#response}  
-Ответ на запрос возвращается в формате JSON:
+Ответ на запрос возвращается в формате JSON:  
 ```json
 
 {
@@ -192,7 +233,23 @@ https://catalog.api.2gis.com/3.0/items?q=кафе&location=37.630866,55.752256&k
 
 }
 
-```
+```  
+В ответе на запрос по умолчанию передаются параметры:  
+* `id` — идентификатор объекта.  
+* `name` — название объекта.  
+* `type` — тип объекта. Полный список типов см. в [справочнике API](/api/search/places/reference/3.0/items).  
+***
+
+--- CHUNK 7 (206 tokens / 633 chars) ---
+Document: placesAPI
+
+H1: Places API
+H2: Дополнительные настройки {#additional-config}
+
+H3: 
+
+
+```  
 В ответе на запрос по умолчанию передаются параметры:  
 * `id` — идентификатор объекта.  
 * `name` — название объекта.  
@@ -205,15 +262,14 @@ https://catalog.api.2gis.com/3.0/items?q=кафе&location=37.630866,55.752256&k
 * [отсортировать результаты поиска](#sorting);  
 * отфильтровать результаты поиска по [дополнительным атрибутам](#filter-by-attributes).
 
---- CHUNK 7 (511 tokens / 1393 chars) ---
+--- CHUNK 8 (396 tokens / 1086 chars) ---
 Document: placesAPI
 
-***
-## Дополнительные настройки {#additional-config}  
-Вы можете дополнительно настроить поиск, чтобы получить данные в нужном виде, например:  
-* получить [дополнительную информацию об объекте](#additional-info);  
-* настроить [тип поиска](#search-type);  
-* [отсортировать результаты поиска](#sorting);  
+H1: Places API
+H2: Дополнительные настройки {#additional-config}
+
+H3: Дополнительная информация {#additional-info}
+
 * отфильтровать результаты поиска по [дополнительным атрибутам](#filter-by-attributes).
 ### Дополнительная информация {#additional-info}  
 Чтобы получить дополнительную информацию в ответе, используйте параметр `fields`. Например, вы можете получить следующие данные об объекте:  
@@ -229,8 +285,13 @@ Document: placesAPI
 Перечень дополнительной информации см. в [справочнике API](/api/search/places/reference/3.0/items).  
 <br />
 
---- CHUNK 8 (716 tokens / 1882 chars) ---
+--- CHUNK 9 (704 tokens / 1882 chars) ---
 Document: placesAPI
+
+H1: Places API
+H2: Дополнительные настройки {#additional-config}
+
+H3: Тип поиска {#search-type}
 
 * подробная информация о парковках: вместимость, стоимость, тип доступа, количество уровней;  
 * подробная информация о здании: этажность, материал здания.  
@@ -250,8 +311,13 @@ Document: placesAPI
 Чтобы изменить алгоритм формирования результатов поиска, передайте параметр `search_type=indoor` в запросе и укажите ID здания в поле `building_id`.  
 <br />
 
---- CHUNK 9 (165 tokens / 478 chars) ---
+--- CHUNK 10 (149 tokens / 478 chars) ---
 Document: placesAPI
+
+H1: Places API
+H2: Дополнительные настройки {#additional-config}
+
+H3: Сортировка результата поиска {#sorting}
 
 Чтобы изменить алгоритм формирования результатов поиска, передайте параметр `search_type=indoor` в запросе и укажите ID здания в поле `building_id`.  
 <br />
@@ -260,8 +326,13 @@ Document: placesAPI
 Результат поиска сортируется по удалённости от пользователя, рейтингу объекта и другим параметрам. Виды сортировки см. в [справочнике API](/api/search/places/reference/3.0/items).  
 <br />
 
---- CHUNK 10 (669 tokens / 1786 chars) ---
+--- CHUNK 11 (650 tokens / 1786 chars) ---
 Document: placesAPI
+
+H1: Places API
+H2: Дополнительные настройки {#additional-config}
+
+H3: Фильтрация результатов поиска {#filter-by-attributes}
 
 <br />
 ### Фильтрация результатов поиска {#filter-by-attributes}  
@@ -285,8 +356,13 @@ Document: placesAPI
 | Тип атрибута | Тип значения | Пример |  
 | ------------ | --------------------------------------------------------- | ---------------------------------------- |
 
---- CHUNK 11 (697 tokens / 2158 chars) ---
+--- CHUNK 12 (697 tokens / 2158 chars) ---
 Document: placesAPI
+
+H1: Places API
+H2: Дополнительные настройки {#additional-config}
+
+H3: Фильтрация результатов поиска {#filter-by-attributes}
 
 Здесь:  
 * `<code>` — код дополнительного атрибута.  
@@ -310,13 +386,27 @@ Document: placesAPI
 Если вы укажете несколько дополнительных атрибутов, в ответ попадут только те объекты, которые удовлетворяют всем условиям.  
 Атрибуты с типом `sort` в выдаче блока `filters` используются для [сортировки результатов поиска](#sorting).
 
---- CHUNK 12 (302 tokens / 807 chars) ---
+--- CHUNK 13 (130 tokens / 366 chars) ---
 Document: placesAPI
+
+H1: Places API
+H2: Тарифы {#tariffs}
+
+H3: 
 
 Атрибуты с типом `sort` в выдаче блока `filters` используются для [сортировки результатов поиска](#sorting).
 ## Тарифы {#tariffs}  
 * Стоимость сервиса рассчитывается исходя из количества запросов в месяц.  
 * Актуальные тарифы можно посмотреть в [Менеджере Платформы](https://platform.2gis.ru/ru/tariffs?utm_source=docs&utm_medium=referral&utm_campaign=api_places).
+
+--- CHUNK 14 (146 tokens / 440 chars) ---
+Document: placesAPI
+
+H1: Places API
+H2: Варианты размещения {#distribution}
+
+H3: 
+
 ## Варианты размещения {#distribution}  
 - **Облако**: все актуальные методы Places API доступны через публичные endpoint-ы <Brand />.  
 - **On-Premise**: все актуальные методы Places API доступны при установке API-платформы <Brand /> в закрытом контуре. Подробнее см. в разделе [API-платформа для сервера](/on-premise/api-platform/overview).  

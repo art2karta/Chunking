@@ -1,18 +1,21 @@
 Source file: c:\Users\ar.kartavtsev\Desktop\Chunking\my-git-repo\input_docs\Routing API\examples.docx
 Document: routingapi
-Total chunks: 77
-Chunk size before overlap: 500-700 tokens (LangChain: MarkdownHeaderTextSplitter + RecursiveCharacterTextSplitter)
+Total chunks: 6
+Chunk size before overlap: 500-700 tokens (hierarchy: H2 -> H3; code chunks are kept whole)
 Overlap: 15% (or 40% if previous chunk < 500 tokens), target max with overlap: 805 tokens
 ================================================================================
 
-Statistics: Min=471 tokens, Max=30984 tokens, Avg=4549 tokens
+Statistics: Min=461 tokens, Max=161154 tokens, Avg=64111 tokens
 ================================================================================
 
---- CHUNK 1 (911 tokens / 2431 chars) ---
+--- CHUNK 1 (461 tokens / 1236 chars) ---
 Document: routingapi
 
----  
----
+H1: Примеры
+H2: 
+
+H3: 
+
 # Примеры  
 Здесь приведены основные сценарии работы и примеры запросов к Routing API. Подробную информацию о параметрах запросов см. в [Справочнике API](/api/navigation/routing/reference).  
 Обязательные параметры для построения маршрута:  
@@ -32,9 +35,26 @@ Document: routingapi
 * Кратчайший по времени.  
 * С учётом пробок и дорожных перекрытий, актуальных на момент отправки запроса.  
 Вы можете изменить эти параметры или добавить дополнительные. Примеры запросов ниже приведены с использованием [cURL](https://curl.se/).
+
+--- CHUNK 2 (19963 tokens / 47569 chars) ---
+Document: routingapi
+
+H1: Примеры
+H2: Точки маршрута {#points}
+
+H3: 
+
+* Кратчайший по времени.  
+* C текущим временем отправления по местному времени.  
+* С учётом расписания движения общественного транспорта.  
+* Для остальных способов передвижения:  
+* Маршрут на автомобиле.  
+* Кратчайший по времени.  
+* С учётом пробок и дорожных перекрытий, актуальных на момент отправки запроса.  
+Вы можете изменить эти параметры или добавить дополнительные. Примеры запросов ниже приведены с использованием [cURL](https://curl.se/).
 ## Точки маршрута {#points}  
 ### Начальные и конечные точки {#start-end-points}  
-Для общественного транспорта начальная и конечная точки маршрута указываются в отдельных параметрах `source` и `target`:
+Для общественного транспорта начальная и конечная точки маршрута указываются в отдельных параметрах `source` и `target`:  
 ```json
 
 {
@@ -73,9 +93,9 @@ Document: routingapi
 
 }
 
-```
+```  
 Для остальных способов передвижения начальная и конечная точки указываются в массиве `points`. Вы можете указать несколько начальных и конечных точек. Это может быть удобно в случаях, когда у здания есть несколько входов и выходов. В этом случае будет построен оптимальный маршрут от одной из начальных точек до одной из конечных.  
-По умолчанию первая точка в массиве считается начальной. Вы также можете явно обозначить начальную точку с помощью параметра `start`:
+По умолчанию первая точка в массиве считается начальной. Вы также можете явно обозначить начальную точку с помощью параметра `start`:  
 ```json
 
 {
@@ -108,46 +128,9 @@ Document: routingapi
 
 }
 
-```
+```  
 Также вы можете указать передать несколько пар начальных и конечных точек в массиве `points`, чтобы [построить маршруты для нескольких пар точек](#multiple-routes) в одном запросе.
 
---- CHUNK 2 (510 tokens / 1302 chars) ---
-Document: routingapi
-
-```json
-
-{
-
-"points": [
-
-{
-
-"lon": 37.582591,
-
-"lat": 55.775364,
-
-"type": "stop",
-
-"start": true
-
-},
-
-{
-
-"lon": 37.656625,
-
-"lat": 55.765036,
-
-"type": "stop"
-
-}
-
-]
-
-}
-
-```
-Также вы можете указать передать несколько пар начальных и конечных точек в массиве `points`, чтобы [построить маршруты для нескольких пар точек](#multiple-routes) в одном запросе.
 ### Типы точек {#point-types}  
 Для каждой точки рекомендуется явно указать её тип с помощью параметра `type`:  
 * `walking` — начальная или конечная точка маршрута.  
@@ -155,9 +138,6 @@ Document: routingapi
 * Для маршрутов на транспорте: если точка расположена не на дороге, в маршрут будет добавлен пешеходный путь с обходом препятствий (например, зданий).  
 * `stop` — начальная или конечная точка маршрута. Если в маршруте на транспорте точка расположена не на дороге, в маршрут будет добавлен прямой путь, игнорирующий препятствия.  
 * `pref` — промежуточная точка маршрута. Этот тип можно использовать для всех способов передвижений, кроме общественного транспорта: в этом случае промежуточные точки указываются в [отдельном массиве `intermediate_points`](#intermediate-public). Если вы указываете несколько пар начальных и конечных точек, построение маршрута с промежуточными точками не поддерживается.
-
---- CHUNK 3 (747 tokens / 2064 chars) ---
-Document: routingapi
 
 ### Промежуточные точки {#intermediate-points}  
 В зависимости от способа передвижения вы можете указать следующее количество промежуточных точек:  
@@ -171,7 +151,7 @@ Document: routingapi
 * `transport` (обязательный параметр) — массив видов общественного транспорта. Например, `tram` — трамвай. Полный список видов общественного транспорта см. в описании параметра `transport` в [Справочнике API](/api/navigation/routing/reference/public_transport) или в разделе [Способы передвижения](#public-transport).  
 * `intermediate_points` — массив с координатами промежуточных точек (широта и долгота).  
 * `locale` — язык текстовых описаний элементов маршрута: русский.  
-**Пример запроса:**
+**Пример запроса:**  
 ```curl
 
 curl --request POST \
@@ -238,8 +218,8 @@ curl --request POST \
 
 }'
 
-```
-В ответе для промежуточной точки будет добавлен комментарий `Вы достигли промежуточной точки.`:
+```  
+В ответе для промежуточной точки будет добавлен комментарий `Вы достигли промежуточной точки.`:  
 ```json
 
 ...
@@ -270,14 +250,10 @@ curl --request POST \
 
 ...
 
-```
+```  
 **Пример ответа:**  
 <details>  
-<summary><code>response.json</code></summary>
-
---- CHUNK 4 (11067 tokens / 25294 chars) ---
-Document: routingapi
-
+<summary><code>response.json</code></summary>  
 ```json
 
 [
@@ -2148,137 +2124,7 @@ Document: routingapi
 
 ]
 
-```
-
---- CHUNK 5 (799 tokens / 2235 chars) ---
-Document: routingapi
-
-
-"type": "precise"
-
-},
-
-{
-
-"precise_time": "16:25",
-
-"start_time": 59100,
-
-"start_time_utc": 1772717100,
-
-"type": "precise"
-
-},
-
-{
-
-"precise_time": "16:35",
-
-"start_time": 59700,
-
-"start_time_utc": 1772717700,
-
-"type": "precise"
-
-},
-
-{
-
-"precise_time": "16:27",
-
-"start_time": 59220,
-
-"start_time_utc": 1772717220,
-
-"type": "precise"
-
-},
-
-{
-
-"precise_time": "16:35",
-
-"start_time": 59700,
-
-"start_time_utc": 1772717700,
-
-"type": "precise"
-
-},
-
-{
-
-"precise_time": "16:39",
-
-"start_time": 59940,
-
-"start_time_utc": 1772717940,
-
-"type": "precise"
-
-},
-
-{
-
-"precise_time": "16:45",
-
-"start_time": 60300,
-
-"start_time_utc": 1772718300,
-
-"type": "precise"
-
-}
-
-],
-
-"total_distance": 7715,
-
-"total_duration": 3825,
-
-"total_walkway_distance": "пешком 31 мин",
-
-"transfer_count": 1,
-
-"waypoints": [
-
-{
-
-"combined": false,
-
-"routes_names": [
-
-"25"
-
-],
-
-"subtype": "tram"
-
-},
-
-{
-
-"combined": false,
-
-"routes_names": [
-
-"11",
-
-"25"
-
-],
-
-"subtype": "tram"
-
-}
-
-]
-
-}
-
-]
-
-```
+```  
 </details>  
 <br />  
 #### Другие способы передвижения {#intermediate-other}  
@@ -2289,7 +2135,7 @@ Document: routingapi
 * `summary` — упрощённая выдача, в ответе только время и длина маршрута.  
 * `detailed` — полная выдача с геометрией маршрута.  
 * `locale` — язык текстовых описаний элементов маршрута: русский.  
-**Пример запроса:**
+**Пример запроса:**  
 ```curl
 
 curl --request POST \
@@ -2344,14 +2190,10 @@ curl --request POST \
 
 }'
 
-```
+```  
 **Пример ответа:**  
 <details>  
-<summary><code>response.json</code></summary>
-
---- CHUNK 6 (6679 tokens / 16290 chars) ---
-Document: routingapi
-
+<summary><code>response.json</code></summary>  
 ```json
 
 {
@@ -3516,11 +3358,432 @@ Document: routingapi
 
 }
 
-```
+```  
+</details>  
+<br />
 
---- CHUNK 7 (807 tokens / 2274 chars) ---
+--- CHUNK 3 (161154 tokens / 381379 chars) ---
 Document: routingapi
 
+H1: Примеры
+H2: Способы передвижения {#transportation-types}
+
+H3: 
+
+
+"outcoming_path": {
+
+"distance": 1861,
+
+"duration": 557,
+
+"geometry": [
+
+{
+
+"color": "normal",
+
+"length": 572,
+
+"selection": "LINESTRING(37.629895 55.756632, 37.629978 55.756619, 37.630038 55.756617, 37.630106 55.756623, 37.630198 55.756645, 37.630971 55.756953, 37.631358 55.757108, 37.631510 55.757168, 37.631622 55.757199, 37.631670 55.757213, 37.631827 55.757252, 37.631923 55.757272, 37.632087 55.757308, 37.632317 55.757358, 37.632359 55.757366, 37.632614 55.757414, 37.632704 55.757432, 37.633055 55.757485, 37.633207 55.757503, 37.633488 55.757537, 37.633724 55.757566, 37.633783 55.757573, 37.634140 55.757600, 37.634746 55.757634, 37.635261 55.757663, 37.635590 55.757681, 37.635743 55.757690, 37.636312 55.757722, 37.636337 55.757724, 37.636550 55.757739, 37.636752 55.757770, 37.636968 55.757820, 37.637080 55.757845, 37.637735 55.757996, 37.638128 55.758086, 37.638437 55.758157, 37.638642 55.758204)",
+
+"style": "normal"
+
+},
+
+{
+
+"color": "slow",
+
+"length": 297,
+
+"selection": "LINESTRING(37.638642 55.758204, 37.639772 55.758464, 37.639913 55.758496, 37.640505 55.758599, 37.640845 55.758658, 37.641213 55.758722, 37.641348 55.758745, 37.641594 55.758788, 37.641693 55.758805, 37.642116 55.758876, 37.643212 55.759058)",
+
+"style": "normal"
+
+},
+
+{
+
+"color": "normal",
+
+"length": 134,
+
+"selection": "LINESTRING(37.643212 55.759058, 37.643303 55.759069, 37.643928 55.759139, 37.643976 55.759145, 37.644427 55.759197, 37.645136 55.759277, 37.645355 55.759302)",
+
+"style": "normal"
+
+},
+
+{
+
+"color": "slow",
+
+"length": 72,
+
+"selection": "LINESTRING(37.645355 55.759302, 37.646107 55.759386, 37.646278 55.759405, 37.646352 55.759417, 37.646405 55.759425, 37.646523 55.759444)",
+
+"style": "normal"
+
+},
+
+{
+
+"color": "normal",
+
+"length": 519,
+
+"selection": "LINESTRING(37.646523 55.759444, 37.646640 55.759462, 37.647064 55.759528, 37.647326 55.759581, 37.647435 55.759604, 37.647605 55.759639, 37.647686 55.759656, 37.647877 55.759695, 37.648082 55.759738, 37.648147 55.759758, 37.648266 55.759794, 37.648531 55.759893, 37.648620 55.759926, 37.648975 55.760098, 37.649122 55.760169, 37.649457 55.760331, 37.649506 55.760360, 37.649573 55.760399, 37.649617 55.760428, 37.649720 55.760498, 37.649886 55.760610, 37.649948 55.760653, 37.650400 55.760959, 37.650498 55.761026, 37.650552 55.761063, 37.650625 55.761112, 37.650686 55.761152, 37.650723 55.761176, 37.651595 55.761747, 37.651709 55.761822, 37.651900 55.761947, 37.651980 55.761999, 37.652258 55.762182, 37.652370 55.762250, 37.652487 55.762314, 37.652695 55.762420, 37.652816 55.762482)",
+
+"style": "normal"
+
+},
+
+{
+
+"color": "slow",
+
+"length": 267,
+
+"selection": "LINESTRING(37.652816 55.762482, 37.652856 55.762503, 37.653203 55.762681, 37.653603 55.762887, 37.653911 55.763044, 37.654023 55.763099, 37.654131 55.763152, 37.654208 55.763189, 37.654436 55.763298, 37.654489 55.763323, 37.654911 55.763513, 37.655096 55.763596, 37.655188 55.763638, 37.655250 55.763663, 37.655523 55.763774, 37.655742 55.763856, 37.655887 55.763910, 37.655978 55.763942, 37.656208 55.764020)",
+
+"style": "normal"
+
+}
+
+],
+
+"names": [
+
+"площадь Ильинские Ворота"
+
+]
+
+},
+
+"outcoming_path_comment": "1.9 км прямо",
+
+"turn_angle": -84,
+
+"turn_direction": "left",
+
+"type": "crossroad"
+
+},
+
+{
+
+"comment": "Поворот налево на ул. Садовая-Черногрязская",
+
+"icon": "crossroad_left",
+
+"id": "6149755175139977841",
+
+"outcoming_path": {
+
+"distance": 98,
+
+"duration": 69,
+
+"geometry": [
+
+{
+
+"color": "normal",
+
+"length": 15,
+
+"selection": "LINESTRING(37.656208 55.764020, 37.656416 55.764092)",
+
+"style": "normal"
+
+},
+
+{
+
+"color": "slow-jams",
+
+"length": 83,
+
+"selection": "LINESTRING(37.656416 55.764092, 37.656235 55.764223, 37.656076 55.764339, 37.655591 55.764691)",
+
+"style": "normal"
+
+}
+
+],
+
+"names": [
+
+"Садовая-Черногрязская"
+
+]
+
+},
+
+"outcoming_path_comment": "100 м прямо",
+
+"turn_angle": -97,
+
+"turn_direction": "left",
+
+"type": "crossroad"
+
+},
+
+{
+
+"comment": "Поворот направо",
+
+"icon": "crossroad_right",
+
+"id": "15667144735363679746",
+
+"outcoming_path": {
+
+"distance": 36,
+
+"duration": 10,
+
+"geometry": [
+
+{
+
+"color": "ignore",
+
+"length": 21,
+
+"selection": "LINESTRING(37.655591 55.764691, 37.655782 55.764778, 37.655867 55.764818)",
+
+"style": "living_zone"
+
+},
+
+{
+
+"color": "ignore",
+
+"length": 12,
+
+"selection": "LINESTRING(37.655867 55.764818, 37.656014 55.764887)",
+
+"style": "archway"
+
+},
+
+{
+
+"color": "ignore",
+
+"length": 3,
+
+"selection": "LINESTRING(37.656014 55.764887, 37.656064 55.764909)",
+
+"style": "living_zone"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "40 м прямо",
+
+"turn_angle": 89,
+
+"turn_direction": "right",
+
+"type": "crossroad"
+
+},
+
+{
+
+"comment": "Поворот направо",
+
+"icon": "crossroad_right",
+
+"id": "14542726908924596478",
+
+"outcoming_path": {
+
+"distance": 93,
+
+"duration": 25,
+
+"geometry": [
+
+{
+
+"color": "ignore",
+
+"length": 93,
+
+"selection": "LINESTRING(37.656064 55.764909, 37.656554 55.764570, 37.656591 55.764558, 37.656635 55.764560, 37.656674 55.764578, 37.656728 55.764601, 37.656741 55.764609, 37.656749 55.764617, 37.656755 55.764630, 37.656755 55.764641, 37.656749 55.764655, 37.656538 55.764857)",
+
+"style": "living_zone"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "90 м прямо",
+
+"turn_angle": 90,
+
+"turn_direction": "right",
+
+"type": "crossroad"
+
+},
+
+{
+
+"comment": "Поворот налево",
+
+"icon": "crossroad_left",
+
+"id": "11008284284218689129",
+
+"outcoming_path": {
+
+"distance": 21,
+
+"duration": 6,
+
+"geometry": [
+
+{
+
+"color": "ignore",
+
+"length": 21,
+
+"selection": "LINESTRING(37.656538 55.764857, 37.656510 55.764857, 37.656485 55.764865, 37.656303 55.764992)",
+
+"style": "living_zone"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "20 м прямо",
+
+"turn_angle": -46,
+
+"turn_direction": "left",
+
+"type": "crossroad"
+
+},
+
+{
+
+"comment": "Поворот направо",
+
+"icon": "crossroad_right",
+
+"id": "15296099717473006539",
+
+"outcoming_path": {
+
+"distance": 18,
+
+"duration": 5,
+
+"geometry": [
+
+{
+
+"color": "ignore",
+
+"length": 18,
+
+"selection": "LINESTRING(37.656303 55.764992, 37.656543 55.765075, 37.656553 55.765080)",
+
+"style": "living_zone"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "20 м прямо",
+
+"turn_angle": 91,
+
+"turn_direction": "right",
+
+"type": "crossroad"
+
+},
+
+{
+
+"comment": "finish",
+
+"icon": "finish",
+
+"id": "16377021944685554640",
+
+"outcoming_path_comment": "Вы на месте!",
+
+"type": "end"
+
+}
+
+],
+
+"reliability": 1.0,
+
+"route_id": "moscow-cr-back.m9/carrouting/1772714417.929613",
+
+"total_distance": 6509,
+
+"total_duration": 2154,
+
+"type": "carrouting",
+
+"ui_total_distance": {
+
+"unit": "км",
+
+"value": "6.5"
+
+},
+
+"ui_total_duration": "35 мин",
+
+"waypoints": [
+
+{
+
+"original_point": {
+
+"lat": 55.77548691400483,
+
+"lon": 37.58308675494588
+
+},
+
+"projected_point": {
+
+"lat": 55.77548691400483,
+
+"lon": 37.58308675494588
 
 },
 
@@ -3584,7 +3847,7 @@ Document: routingapi
 
 }
 
-```
+```  
 </details>  
 <br />
 ## Способы передвижения {#transportation-types}  
@@ -3643,19 +3906,7 @@ const controlsHtml = \`<div class="controls">
 <select name="transport">  
 <option value="driving" selected>На автомобиле</option>  
 <option value="taxi">На такси</option>  
-<option value="bicycle">На велосипеде</option>
-
---- CHUNK 8 (716 tokens / 2140 chars) ---
-Document: routingapi
-
-zoom: 13,  
-key: 'Your API access key',  
-});  
-const controlsHtml = \`<div class="controls">  
-<select name="transport">  
-<option value="driving" selected>На автомобиле</option>  
-<option value="taxi">На такси</option>  
-<option value="bicycle">На велосипеде</option>
+<option value="bicycle">На велосипеде</option>  
 <option value="scooter">На самокате</option>  
 <option value="motorcycle">На мотоцикле</option>  
 <option value="truck">На грузовом транспорте</option>  
@@ -3718,27 +3969,7 @@ body: JSON.stringify({
 points,  
 locale: "ru",  
 transport,  
-filters,
-
---- CHUNK 9 (471 tokens / 1650 chars) ---
-Document: routingapi
-
-points = points.map(point => ({ ...point, type: "walking" }));  
-break;  
-default:  
-points = points.map(point => ({ ...point, type: "stop" }));  
-break;  
-}  
-fetch(reqUrl, {  
-method: "POST",  
-headers: {  
-"Content-Type": "application/json"  
-},  
-body: JSON.stringify({  
-points,  
-locale: "ru",  
-transport,  
-filters,
+filters,  
 output: "detailed"  
 })  
 })  
@@ -3798,33 +4029,6 @@ fetchRoute();
 </HtmlExampleWithSrcCode>  
 <br />
 
---- CHUNK 10 (644 tokens / 1799 chars) ---
-Document: routingapi
-
-}  
-} else {  
-console.error("Маршрут не найден в ответе");  
-}  
-})  
-.catch((err) => console.error("Ошибка при получении данных маршрута:", err.message || err));  
-}  
-function renderRoute(coordinates) {  
-if (routeLine) {  
-routeLine.destroy();  
-}  
-routeLine = new mapgl.Polyline(map, {  
-coordinates,  
-width: 6,  
-color: "#0078FF",  
-});  
-}  
-transportSelectEl.addEventListener("change", fetchRoute);  
-fetchRoute();  
-</script>  
-</body>  
-</html>`}  
-</HtmlExampleWithSrcCode>  
-<br />
 ### На автомобиле {#car-route}  
 Чтобы построить маршрут на автомобиле, отправьте POST-запрос на [/routing/7.0.0/global](/api/navigation/routing/reference/routing) со следующими параметрами:  
 * `points` (обязательный параметр) — массив координат [точек маршрута](#point-types). Укажите минимум две точки: начальную и конечную.  
@@ -3837,7 +4041,7 @@ fetchRoute();
 * `summary` — упрощённая выдача, в ответе только время и длина маршрута.  
 * `detailed` — полная выдача с геометрией маршрута.  
 * `locale` — язык текстовых описаний элементов маршрута: русский.  
-**Пример запроса:**
+**Пример запроса:**  
 ```curl
 
 curl --request POST \
@@ -3890,14 +4094,10 @@ curl --request POST \
 
 }'
 
-```
+```  
 **Пример ответа:**  
 <details>  
-<summary><code>response.json</code></summary>
-
---- CHUNK 11 (12919 tokens / 30980 chars) ---
-Document: routingapi
-
+<summary><code>response.json</code></summary>  
 ```json
 
 {
@@ -5946,99 +6146,10 @@ Document: routingapi
 
 }
 
-```
-
---- CHUNK 12 (809 tokens / 2143 chars) ---
-Document: routingapi
-
-
-"dirt_road",
-
-"toll_road",
-
-"ferry"
-
-],
-
-"route_id": "moscow-cr-back.m9/carrouting/1772714887.500813",
-
-"total_distance": 6333,
-
-"total_duration": 2229,
-
-"type": "carrouting",
-
-"ui_total_distance": {
-
-"unit": "км",
-
-"value": "6.3"
-
-},
-
-"ui_total_duration": "37 мин",
-
-"waypoints": [
-
-{
-
-"original_point": {
-
-"lat": 55.77548691400483,
-
-"lon": 37.58308675494588
-
-},
-
-"projected_point": {
-
-"lat": 55.77548691400483,
-
-"lon": 37.58308675494588
-
-},
-
-"transit": false
-
-},
-
-{
-
-"original_point": {
-
-"lat": 55.76508099601444,
-
-"lon": 37.65655367382703
-
-},
-
-"projected_point": {
-
-"lat": 55.76508099601444,
-
-"lon": 37.65655367382703
-
-},
-
-"transit": false
-
-}
-
-]
-
-}
-
-],
-
-"status": "OK",
-
-"type": "result"
-
-}
-
-```
+```  
 </details>  
 <br />
+
 ### На такси {#taxi-route}  
 При построении маршрута на такси учитываются параметры обычного автомобильного маршрута и выделенные полосы для общественного транспорта.  
 Чтобы построить маршрут на такси, отправьте POST-запрос на [/routing/7.0.0/global](/api/navigation/routing/reference/routing) со следующими параметрами:  
@@ -6052,7 +6163,7 @@ Document: routingapi
 * `summary` — упрощённая выдача, в ответе только время и длина маршрута.  
 * `detailed` — полная выдача с геометрией маршрута.  
 * `locale` — язык текстовых описаний элементов маршрута: русский.  
-**Пример запроса:**
+**Пример запроса:**  
 ```curl
 
 curl --request POST \
@@ -6105,14 +6216,10 @@ curl --request POST \
 
 }'
 
-```
+```  
 **Пример ответа:**  
 <details>  
-<summary><code>response.json</code></summary>
-
---- CHUNK 13 (12133 tokens / 29749 chars) ---
-Document: routingapi
-
+<summary><code>response.json</code></summary>  
 ```json
 
 {
@@ -8237,43 +8344,10 @@ Document: routingapi
 
 }
 
-```
-
---- CHUNK 14 (809 tokens / 2062 chars) ---
-Document: routingapi
-
-
-"lon": 37.65655367382703
-
-},
-
-"projected_point": {
-
-"lat": 55.76508099601444,
-
-"lon": 37.65655367382703
-
-},
-
-"transit": false
-
-}
-
-]
-
-}
-
-],
-
-"status": "OK",
-
-"type": "result"
-
-}
-
-```
+```  
 </details>  
 <br />
+
 ### На велосипеде {#bicycle-route}  
 При построении маршрута для проезда на велосипеде учитываются автомобильные дороги, велосипедные дорожки и тротуары. Вы можете настроить избегание автомобильных дорог и лестниц без пандусов, а также включить в ответ информацию о перепадах высот на маршруте.  
 Чтобы построить маршрут на велосипеде, отправьте POST-запрос на [/routing/7.0.0/global](/api/navigation/routing/reference/routing) со следующими параметрами:  
@@ -8290,7 +8364,7 @@ Document: routingapi
 * `detailed` — полная выдача с геометрией маршрута.  
 * `locale` — язык текстовых описаний элементов маршрута: русский.  
 * `need_altitudes: true` — информация о высотах на маршруте.  
-**Пример запроса:**
+**Пример запроса:**  
 ```curl
 
 curl --request POST \
@@ -8349,14 +8423,10 @@ curl --request POST \
 
 }'
 
-```
+```  
 **Пример ответа:**  
 <details>  
-<summary><code>response.json</code></summary>
-
---- CHUNK 15 (15768 tokens / 32485 chars) ---
-Document: routingapi
-
+<summary><code>response.json</code></summary>  
 ```json
 
 {
@@ -9509,43 +9579,10 @@ Document: routingapi
 
 }
 
-```
-
---- CHUNK 16 (803 tokens / 2054 chars) ---
-Document: routingapi
-
-
-"lon": 37.65655367382703
-
-},
-
-"projected_point": {
-
-"lat": 55.76508099601444,
-
-"lon": 37.65655367382703
-
-},
-
-"transit": false
-
-}
-
-]
-
-}
-
-],
-
-"status": "OK",
-
-"type": "result"
-
-}
-
-```
+```  
 </details>  
 <br />
+
 ### На самокате {#scooter-route}  
 При построении маршрута для проезда на самокате учитываются автомобильные дороги, велосипедные дорожки и тротуары. Вы можете настроить избегание автомобильных дорог и лестниц без пандусов, а также включить в ответ информацию о перепадах высот на маршруте.  
 Чтобы построить маршрут на самокате, отправьте POST-запрос на [/routing/7.0.0/global](/api/navigation/routing/reference/routing) со следующими параметрами:  
@@ -9562,7 +9599,7 @@ Document: routingapi
 * `detailed` — полная выдача с геометрией маршрута.  
 * `locale` — язык текстовых описаний элементов маршрута: русский.  
 * `need_altitudes: true` — информация о высотах на маршруте.  
-**Пример запроса:**
+**Пример запроса:**  
 ```curl
 
 curl --request POST \
@@ -9621,14 +9658,10 @@ curl --request POST \
 
 }'
 
-```
+```  
 **Пример ответа:**  
 <details>  
-<summary><code>response.json</code></summary>
-
---- CHUNK 17 (15769 tokens / 32485 chars) ---
-Document: routingapi
-
+<summary><code>response.json</code></summary>  
 ```json
 
 {
@@ -10781,89 +10814,10 @@ Document: routingapi
 
 }
 
-```
-
---- CHUNK 18 (813 tokens / 2123 chars) ---
-Document: routingapi
-
-
-"total_distance": 6687,
-
-"total_duration": 2003,
-
-"type": "scooterrouting",
-
-"ui_total_distance": {
-
-"unit": "км",
-
-"value": "6.7"
-
-},
-
-"ui_total_duration": "33 мин",
-
-"waypoints": [
-
-{
-
-"original_point": {
-
-"lat": 55.77542749703997,
-
-"lon": 37.58273299838699
-
-},
-
-"projected_point": {
-
-"lat": 55.77542749703997,
-
-"lon": 37.58273299838699
-
-},
-
-"transit": false
-
-},
-
-{
-
-"original_point": {
-
-"lat": 55.76508099601444,
-
-"lon": 37.65655367382703
-
-},
-
-"projected_point": {
-
-"lat": 55.76508099601444,
-
-"lon": 37.65655367382703
-
-},
-
-"transit": false
-
-}
-
-]
-
-}
-
-],
-
-"status": "OK",
-
-"type": "result"
-
-}
-
-```
+```  
 </details>  
 <br />
+
 ### На мотоцикле {#motorcycle-route}  
 При построении маршрута для проезда на мотоцикле используются параметры обычного автомобильного маршрута, но учитывается, что в пробках мотоциклы обычно двигаются быстрее, чем автомобили.  
 Чтобы построить маршрут на мотоцикле, отправьте POST-запрос на [/routing/7.0.0/global](/api/navigation/routing/reference/routing) со следующими параметрами:  
@@ -10877,7 +10831,7 @@ Document: routingapi
 * `summary` — упрощённая выдача, в ответе только время и длина маршрута.  
 * `detailed` — полная выдача с геометрией маршрута.  
 * `locale` — язык текстовых описаний элементов маршрута: русский.  
-**Пример запроса:**
+**Пример запроса:**  
 ```curl
 
 curl --request POST \
@@ -10930,14 +10884,10 @@ curl --request POST \
 
 }'
 
-```
+```  
 **Пример ответа:**  
 <details>  
-<summary><code>response.json</code></summary>
-
---- CHUNK 19 (11478 tokens / 28289 chars) ---
-Document: routingapi
-
+<summary><code>response.json</code></summary>  
 ```json
 
 {
@@ -13006,65 +12956,16 @@ Document: routingapi
 
 }
 
-```
-
---- CHUNK 20 (810 tokens / 2162 chars) ---
-Document: routingapi
-
-
-"lat": 55.77548691400483,
-
-"lon": 37.58308675494588
-
-},
-
-"transit": false
-
-},
-
-{
-
-"original_point": {
-
-"lat": 55.76508099601444,
-
-"lon": 37.65655367382703
-
-},
-
-"projected_point": {
-
-"lat": 55.76508099601444,
-
-"lon": 37.65655367382703
-
-},
-
-"transit": false
-
-}
-
-]
-
-}
-
-],
-
-"status": "OK",
-
-"type": "result"
-
-}
-
-```
+```  
 </details>  
 <br />
+
 ### На грузовом транспорте {#truck-route}  
 При построении маршрута для проезда на грузовом транспорте учитываются параметры автомобильного маршрута и ограничения на передвижение грузовиков. Вы можете дополнительно указать габариты грузовика, тип перевозимого груза, а также наличие пропусков для въезда на определённые территории.  
 #### Нужен пропуск  
 Для въезда в город или его части может потребоваться пропуск.  
 1. Чтобы получить список всех действующих пропусков для грузового транспорта, отправьте GET-запрос к [Truck Directions API](/api/navigation/truck-directions/overview) на [/truck_passes/1.0.0/global](/api/navigation/truck-directions/reference/truck_passes):  
-**Пример запроса:**
+**Пример запроса:**  
 ```curl
 
 curl --request GET \
@@ -13073,10 +12974,10 @@ curl --request GET \
 
 --header 'Content-Type: application/json'
 
-```
+```  
 **Пример ответа:**  
 <details>  
-<summary><code>response.json</code></summary>
+<summary><code>response.json</code></summary>  
 ```json
 
 [
@@ -13263,11 +13164,7 @@ curl --request GET \
 
 ]
 
-```
-
---- CHUNK 21 (831 tokens / 2079 chars) ---
-Document: routingapi
-
+```  
 </details>  
 2. Чтобы построить маршрут на грузовом транспорте, отправьте POST-запрос на [/routing/7.0.0/global](/api/navigation/routing/reference/routing) со следующими параметрами:  
 * `points` (обязательный параметр) — массив координат [точек маршрута](#point-types). Укажите минимум две точки: начальную и конечную.  
@@ -13292,7 +13189,7 @@ Document: routingapi
 * `dangerous_cargo` — опасный груз;  
 * `explosive_cargo` — взрывчатый груз;  
 * `pass_zone_pass_ids` — идентификаторы пропусков.  
-**Пример запроса:**
+**Пример запроса:**  
 ```curl
 
 curl --request POST \
@@ -13373,14 +13270,10 @@ curl --request POST \
 
 }'
 
-```
+```  
 **Пример ответа:**  
 <details>  
-<summary><code>response.json</code></summary>
-
---- CHUNK 22 (19126 tokens / 44230 chars) ---
-Document: routingapi
-
+<summary><code>response.json</code></summary>  
 ```json
 
 {
@@ -16103,15 +15996,7 @@ Document: routingapi
 
 }
 
-```
-
---- CHUNK 23 (806 tokens / 2021 chars) ---
-Document: routingapi
-
-
-}
-
-```
+```  
 </details>  
 #### Не нужен пропуск  
 Чтобы построить маршрут на грузовом транспорте, отправьте POST-запрос на [/routing/7.0.0/global](/api/navigation/routing/reference/routing) со следующими параметрами:  
@@ -16136,7 +16021,7 @@ Document: routingapi
 * `length` — длина (в метрах);  
 * `dangerous_cargo` — опасный груз;  
 * `explosive_cargo` — взрывчатый груз.  
-**Пример запроса:**
+**Пример запроса:**  
 ```curl
 
 curl --request POST \
@@ -16215,14 +16100,10 @@ curl --request POST \
 
 }'
 
-```
+```  
 **Пример ответа:**  
 <details>  
-<summary><code>response.json</code></summary>
-
---- CHUNK 24 (19552 tokens / 45241 chars) ---
-Document: routingapi
-
+<summary><code>response.json</code></summary>  
 ```json
 
 {
@@ -19011,182 +18892,16 @@ Document: routingapi
 
 }
 
-```
-
---- CHUNK 25 (817 tokens / 2147 chars) ---
-Document: routingapi
-
-
-"selection": "LINESTRING(37.655867 55.764818 16820, 37.656014 55.764887 16940)",
-
-"style": "archway"
-
-},
-
-{
-
-"angles": "LINESTRING(2, 0, -1, 1, 0)",
-
-"color": "ignore",
-
-"length": 38,
-
-"selection": "LINESTRING(37.656014 55.764887 16940, 37.656064 55.764909 16960, 37.656228 55.764957 16970, 37.656303 55.764992 16960, 37.656543 55.765075 17010, 37.656553 55.765080 17010)",
-
-"style": "living_zone"
-
-}
-
-],
-
-"names": []
-
-},
-
-"outcoming_path_comment": "70 м прямо",
-
-"turn_angle": 89,
-
-"turn_direction": "right",
-
-"type": "crossroad"
-
-},
-
-{
-
-"comment": "finish",
-
-"icon": "finish",
-
-"id": "16377021944685554640",
-
-"outcoming_path_comment": "Вы на месте!",
-
-"type": "end"
-
-}
-
-],
-
-"reliability": 1.0,
-
-"requested_filters": [
-
-"dirt_road",
-
-"toll_road",
-
-"ferry"
-
-],
-
-"result_filters": [
-
-"dirt_road",
-
-"toll_road",
-
-"ferry"
-
-],
-
-"route_id": "moscow-tr-back.m1/truckrouting/1772717486.139243",
-
-"total_distance": 12661,
-
-"total_duration": 2604,
-
-"type": "truckrouting",
-
-"ui_total_distance": {
-
-"unit": "км",
-
-"value": "13"
-
-},
-
-"ui_total_duration": "43 мин",
-
-"visited_pass_zone_ids": [
-
-3,
-
-4
-
-],
-
-"waypoints": [
-
-{
-
-"original_point": {
-
-"lat": 55.77548691400483,
-
-"lon": 37.58308675494588
-
-},
-
-"projected_point": {
-
-"lat": 55.77548691400483,
-
-"lon": 37.58308675494588
-
-},
-
-"transit": false
-
-},
-
-{
-
-"original_point": {
-
-"lat": 55.76508099601444,
-
-"lon": 37.65655367382703
-
-},
-
-"projected_point": {
-
-"lat": 55.76508099601444,
-
-"lon": 37.65655367382703
-
-},
-
-"transit": false
-
-}
-
-]
-
-}
-
-],
-
-"status": "OK",
-
-"type": "result"
-
-}
-
-```
+```  
 </details>  
 <br />
+
 ### Для экстренных служб {#emergency-route}  
 При построении маршрута для проезда экстренных служб учитываются параметры автомобильного маршрута, но игнорируются правила дорожного движения для наиболее быстрого поезда (допускается проезд по полосе встречного движения, манёвры при запрещающих знаках и т. д.).  
 :::note[Доступность на территориях]  
 Построение маршрутов для экстренных служб доступно по дополнительному запросу и только на определённых территориях. Чтобы начать строить маршруты для экстренных служб, обратитесь в [отдел продаж <Brand />](https://dev.2gis.ru/api#form).  
 :::  
 <br />
-
---- CHUNK 26 (848 tokens / 2184 chars) ---
-Document: routingapi
 
 ### Пешком {#pedestrian-route}  
 При построении пешеходного маршрута учитываются тротуары, пешеходные переходы (в том числе, подземные и наземные), пешеходные зоны и другое. Вы можете дополнительно настроить избегание лестниц без пандусов, грунтовых дорог, магистральных дорог и переправ, а также включить в ответ инструкции по навигации и информацию о перепадах высот на маршруте. Также вы можете построить [маршрут внутри здания](#indoor-route).  
@@ -19206,7 +18921,7 @@ Document: routingapi
 * `params` — дополнительные параметры:  
 * `pedestrian` — параметры пешеходного маршрута:  
 * `use_instructions: true` — выдача инструкций по навигации для пешеходных маршрутов.  
-**Пример запроса:**
+**Пример запроса:**  
 ```curl
 
 curl --request POST \
@@ -19273,14 +18988,10 @@ curl --request POST \
 
 }'
 
-```
+```  
 **Пример ответа:**  
 <details>  
-<summary><code>response.json</code></summary>
-
---- CHUNK 27 (29764 tokens / 77753 chars) ---
-Document: routingapi
-
+<summary><code>response.json</code></summary>  
 ```json
 
 {
@@ -24967,29 +24678,10 @@ Document: routingapi
 
 }
 
-```
-
---- CHUNK 28 (805 tokens / 1995 chars) ---
-Document: routingapi
-
-
-}
-
-]
-
-}
-
-],
-
-"status": "OK",
-
-"type": "result"
-
-}
-
-```
+```  
 </details>  
 <br />
+
 ### На общественном транспорте {#public-transport}  
 Вы можете строить маршруты для одного или нескольких видов общественного транспорта в одном запросе:  
 * `metro` — метро;  
@@ -25014,7 +24706,7 @@ Document: routingapi
 * `target` (обязательный параметр) — координаты конечной точки (широта и долгота).  
 * `transport` (обязательный параметр) — массив видов общественного транспорта. Например, `tram` — трамвай и `metro` — метро.  
 * `locale` — язык текстовых описаний элементов маршрута: русский.  
-**Пример запроса:**
+**Пример запроса:**  
 ```curl
 
 curl --request POST \
@@ -25063,14 +24755,10 @@ curl --request POST \
 
 }'
 
-```
+```  
 **Пример ответа:**  
 <details>  
-<summary><code>response.json</code></summary>
-
---- CHUNK 29 (12472 tokens / 28688 chars) ---
-Document: routingapi
-
+<summary><code>response.json</code></summary>  
 ```json
 
 [
@@ -27191,11 +26879,4297 @@ Document: routingapi
 
 ]
 
-```
+```  
+</details>  
+Если вы выберете вид транспорта, не представленный на территории между точками маршрута, Routing API попытается построить пешеходный маршрут. Подробнее см. в разделе [Транспорт и пересадки](/api/navigation/routing/start#route-transport).  
+Например, если для координат из примера выше вы укажете способ передвижения `"transport": ["cable_car"]` (канатная дорога), вернётся пустой ответ, т. к. расстояние между точками превышает 3,5 км.  
+<br />
 
---- CHUNK 30 (862 tokens / 2168 chars) ---
+--- CHUNK 4 (58923 tokens / 144918 chars) ---
 Document: routingapi
 
+H1: Примеры
+H2: Варианты маршрута {#route-options}
+
+H3: 
+
+
+"style": "normal",
+
+"zlevel": "zlevel-normal"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "100 м прямо",
+
+"turn_angle": 0,
+
+"turn_direction": "straight",
+
+"type": "pedestrian_crossroad"
+
+},
+
+{
+
+"attribute": "onto_crosswalk",
+
+"comment": "Движение прямо",
+
+"icon": "crossroad_straight",
+
+"id": "13620006973703907281",
+
+"outcoming_path": {
+
+"distance": 155,
+
+"duration": 103,
+
+"geometry": [
+
+{
+
+"length": 155,
+
+"selection": "LINESTRING(37.600889 55.767426, 37.600935 55.767398, 37.600962 55.767382, 37.601486 55.767094, 37.601850 55.766917, 37.602633 55.766487, 37.602686 55.766458)",
+
+"style": "normal",
+
+"zlevel": "zlevel-normal"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "150 м прямо",
+
+"turn_angle": 0,
+
+"turn_direction": "straight",
+
+"type": "pedestrian_crossroad"
+
+},
+
+{
+
+"attribute": "onto_crosswalk",
+
+"comment": "Движение прямо",
+
+"icon": "crossroad_straight",
+
+"id": "11129637022046215893",
+
+"outcoming_path": {
+
+"distance": 126,
+
+"duration": 82,
+
+"geometry": [
+
+{
+
+"angles": "LINESTRING(-1, 2, -6, 3, -2)",
+
+"length": 126,
+
+"selection": "LINESTRING(37.602686 55.766458 17970, 37.602795 55.766399 17940, 37.603396 55.766071 18250, 37.603509 55.766009 18080, 37.603611 55.765952 18150, 37.604137 55.765664 17860)",
+
+"style": "normal",
+
+"zlevel": "zlevel-normal"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "100 м прямо",
+
+"turn_angle": 0,
+
+"turn_direction": "straight",
+
+"type": "pedestrian_crossroad"
+
+},
+
+{
+
+"attribute": "empty",
+
+"comment": "Поворот налево",
+
+"icon": "crossroad_left",
+
+"id": "1166797660918439088",
+
+"outcoming_path": {
+
+"distance": 13,
+
+"duration": 9,
+
+"geometry": [
+
+{
+
+"angles": "LINESTRING(3)",
+
+"length": 13,
+
+"selection": "LINESTRING(37.604137 55.765664 17860, 37.604285 55.765750 17980)",
+
+"style": "normal",
+
+"zlevel": "zlevel-normal"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "10 м прямо",
+
+"turn_angle": -90,
+
+"turn_direction": "left",
+
+"type": "pedestrian_crossroad"
+
+},
+
+{
+
+"attribute": "empty",
+
+"comment": "Поворот направо",
+
+"icon": "crossroad_right",
+
+"id": "542666413667215001",
+
+"outcoming_path": {
+
+"distance": 23,
+
+"duration": 15,
+
+"geometry": [
+
+{
+
+"angles": "LINESTRING(-2)",
+
+"length": 23,
+
+"selection": "LINESTRING(37.604285 55.765750 17980, 37.604543 55.765602 17860)",
+
+"style": "normal",
+
+"zlevel": "zlevel-normal"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "20 м прямо",
+
+"turn_angle": 96,
+
+"turn_direction": "right",
+
+"type": "pedestrian_crossroad"
+
+},
+
+{
+
+"attribute": "empty",
+
+"comment": "Поворот налево",
+
+"icon": "crossroad_left",
+
+"id": "6464612463983448870",
+
+"outcoming_path": {
+
+"distance": 167,
+
+"duration": 111,
+
+"geometry": [
+
+{
+
+"angles": "LINESTRING(-2, -1, -2, 2)",
+
+"length": 167,
+
+"selection": "LINESTRING(37.604543 55.765602 17860, 37.604809 55.765719 17760, 37.606463 55.766449 17510, 37.606515 55.766472 17490, 37.606650 55.766531 17550)",
+
+"style": "normal",
+
+"zlevel": "zlevel-normal"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "150 м прямо",
+
+"turn_angle": -84,
+
+"turn_direction": "left",
+
+"type": "pedestrian_crossroad"
+
+},
+
+{
+
+"attribute": "onto_crosswalk",
+
+"comment": "Движение прямо",
+
+"icon": "crossroad_straight",
+
+"id": "5970407802820512635",
+
+"outcoming_path": {
+
+"distance": 166,
+
+"duration": 108,
+
+"geometry": [
+
+{
+
+"angles": "LINESTRING(2, -2, 0, 0, -1, 0, -2, -4, 1, -2)",
+
+"length": 166,
+
+"selection": "LINESTRING(37.606650 55.766531 17550, 37.606763 55.766553 17600, 37.607040 55.766621 17490, 37.607143 55.766657 17490, 37.607567 55.766800 17500, 37.607642 55.766824 17480, 37.608278 55.767043 17480, 37.608641 55.767162 17310, 37.608748 55.767197 17220, 37.608850 55.767231 17240, 37.608914 55.767169 17200)",
+
+"style": "normal",
+
+"zlevel": "zlevel-normal"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "150 м прямо",
+
+"turn_angle_first": 0,
+
+"turn_angle_second": -45,
+
+"turn_direction_first": "straight",
+
+"turn_direction_second": "keep_left",
+
+"type": "pedestrian_road_crossing"
+
+},
+
+{
+
+"attribute": "onto_crosswalk",
+
+"comment": "Поворот направо",
+
+"icon": "crossroad_right",
+
+"id": "1303560656874649120",
+
+"outcoming_path": {
+
+"distance": 299,
+
+"duration": 198,
+
+"geometry": [
+
+{
+
+"angles": "LINESTRING(5)",
+
+"length": 7,
+
+"selection": "LINESTRING(37.608914 55.767169 17200, 37.608974 55.767110 17310)",
+
+"style": "normal",
+
+"zlevel": "zlevel-normal"
+
+},
+
+{
+
+"angles": "LINESTRING(-7, 0, 0, -1, 0, -1, -1, -2, 1)",
+
+"length": 292,
+
+"selection": "LINESTRING(37.608974 55.767110 17310, 37.609228 55.767079 16980, 37.609291 55.767128 16980, 37.610092 55.767392 17020, 37.611102 55.767711 16880, 37.611954 55.767986 16950, 37.612392 55.768118 16900, 37.612498 55.768149 16880, 37.612819 55.768190 16770, 37.613089 55.768133 16820)",
+
+"style": "park_path",
+
+"zlevel": "zlevel-normal"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "300 м прямо",
+
+"turn_angle_first": 90,
+
+"turn_angle_second": -90,
+
+"turn_direction_first": "right",
+
+"turn_direction_second": "left",
+
+"type": "pedestrian_road_crossing"
+
+},
+
+{
+
+"attribute": "empty",
+
+"comment": "Держитесь правее",
+
+"icon": "crossroad_keep_right",
+
+"id": "17020996055302418170",
+
+"outcoming_path": {
+
+"distance": 33,
+
+"duration": 21,
+
+"geometry": [
+
+{
+
+"angles": "LINESTRING(0, 1)",
+
+"length": 33,
+
+"selection": "LINESTRING(37.613089 55.768133 16820, 37.613322 55.768084 16810, 37.613469 55.767950 16890)",
+
+"style": "park_path",
+
+"zlevel": "zlevel-normal"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "30 м прямо",
+
+"turn_angle": 18,
+
+"turn_direction": "keep_right",
+
+"type": "pedestrian_crossroad"
+
+},
+
+{
+
+"attribute": "onto_crosswalk",
+
+"comment": "Движение прямо",
+
+"icon": "crossroad_straight",
+
+"id": "11238183946676551772",
+
+"outcoming_path": {
+
+"distance": 19,
+
+"duration": 12,
+
+"geometry": [
+
+{
+
+"angles": "LINESTRING(-8, -4, 9)",
+
+"length": 19,
+
+"selection": "LINESTRING(37.613469 55.767950 16890, 37.613547 55.767895 16690, 37.613591 55.767879 16650, 37.613717 55.767915 16910)",
+
+"style": "normal",
+
+"zlevel": "zlevel-normal"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "20 м прямо",
+
+"turn_angle_first": 0,
+
+"turn_angle_second": -90,
+
+"turn_direction_first": "straight",
+
+"turn_direction_second": "left",
+
+"type": "pedestrian_road_crossing"
+
+},
+
+{
+
+"attribute": "onto_crosswalk",
+
+"comment": "Движение прямо",
+
+"icon": "crossroad_straight",
+
+"id": "5020413747473025934",
+
+"outcoming_path": {
+
+"distance": 280,
+
+"duration": 184,
+
+"geometry": [
+
+{
+
+"angles": "LINESTRING(-7, 0, -2, -1, 0, -1, -1, -1, 0, 0, 0)",
+
+"length": 280,
+
+"selection": "LINESTRING(37.613717 55.767915 16910, 37.613829 55.767929 16760, 37.614695 55.767880 16780, 37.615626 55.767807 16450, 37.615801 55.767787 16420, 37.616180 55.767730 16430, 37.616582 55.767670 16330, 37.616764 55.767642 16280, 37.617857 55.767477 16070, 37.617923 55.767460 16070, 37.617973 55.767444 16070, 37.618088 55.767427 16060)",
+
+"style": "normal",
+
+"zlevel": "zlevel-normal"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "300 м прямо",
+
+"turn_angle_first": 0,
+
+"turn_angle_second": 45,
+
+"turn_direction_first": "straight",
+
+"turn_direction_second": "keep_right",
+
+"type": "pedestrian_road_crossing"
+
+},
+
+{
+
+"attribute": "onto_crosswalk",
+
+"comment": "Движение прямо",
+
+"icon": "crossroad_straight",
+
+"id": "15157195455790245932",
+
+"outcoming_path": {
+
+"distance": 219,
+
+"duration": 145,
+
+"geometry": [
+
+{
+
+"angles": "LINESTRING(0, 0, 0, 0, 0, 0, -2)",
+
+"length": 219,
+
+"selection": "LINESTRING(37.618088 55.767427 16060, 37.618173 55.767408 16060, 37.618311 55.767383 16050, 37.618791 55.767311 16040, 37.620101 55.767114 15930, 37.620906 55.766993 15900, 37.621374 55.766914 15860, 37.621467 55.766896 15820)",
+
+"style": "normal",
+
+"zlevel": "zlevel-normal"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "200 м прямо",
+
+"turn_angle": 0,
+
+"turn_direction": "straight",
+
+"type": "pedestrian_crossroad"
+
+},
+
+{
+
+"attribute": "onto_crosswalk",
+
+"comment": "Движение прямо",
+
+"icon": "crossroad_straight",
+
+"id": "17057463247682401393",
+
+"outcoming_path": {
+
+"distance": 23,
+
+"duration": 15,
+
+"geometry": [
+
+{
+
+"angles": "LINESTRING(-1, 2)",
+
+"length": 23,
+
+"selection": "LINESTRING(37.621467 55.766896 15820, 37.621645 55.766864 15780, 37.621819 55.766831 15840)",
+
+"style": "normal",
+
+"zlevel": "zlevel-normal"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "20 м прямо",
+
+"turn_angle": 0,
+
+"turn_direction": "straight",
+
+"type": "pedestrian_crossroad"
+
+},
+
+{
+
+"attribute": "onto_crosswalk",
+
+"comment": "Движение прямо",
+
+"icon": "crossroad_straight",
+
+"id": "6301794246179566435",
+
+"outcoming_path": {
+
+"distance": 127,
+
+"duration": 81,
+
+"geometry": [
+
+{
+
+"angles": "LINESTRING(-1, 0, 2, -3, 3, 4, 2, 4, 7)",
+
+"length": 127,
+
+"selection": "LINESTRING(37.621819 55.766831 15840, 37.621909 55.766815 15820, 37.622755 55.766658 15880, 37.622919 55.766628 15950, 37.623083 55.766598 15840, 37.623355 55.766548 16020, 37.623491 55.766523 16130, 37.623584 55.766505 16170, 37.623680 55.766489 16250, 37.623751 55.766484 16350)",
+
+"style": "normal",
+
+"zlevel": "zlevel-normal"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "100 м прямо",
+
+"turn_angle": 0,
+
+"turn_direction": "straight",
+
+"type": "pedestrian_crossroad"
+
+},
+
+{
+
+"attribute": "onto_crosswalk",
+
+"comment": "Движение прямо",
+
+"icon": "crossroad_straight",
+
+"id": "664897464967174363",
+
+"outcoming_path": {
+
+"distance": 191,
+
+"duration": 127,
+
+"geometry": [
+
+{
+
+"angles": "LINESTRING(-5, 3, 1, 3, 4)",
+
+"length": 191,
+
+"selection": "LINESTRING(37.623751 55.766484 16350, 37.623859 55.766477 16240, 37.624863 55.766413 16780, 37.625616 55.766365 17000, 37.626724 55.766313 17570, 37.626794 55.766313 17620)",
+
+"style": "normal",
+
+"zlevel": "zlevel-normal"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "200 м прямо",
+
+"turn_angle": 0,
+
+"turn_direction": "straight",
+
+"type": "pedestrian_crossroad"
+
+},
+
+{
+
+"attribute": "onto_crosswalk",
+
+"comment": "Движение прямо",
+
+"icon": "crossroad_straight",
+
+"id": "13420019764379456289",
+
+"outcoming_path": {
+
+"distance": 291,
+
+"duration": 192,
+
+"geometry": [
+
+{
+
+"angles": "LINESTRING(2, 0, -1, 1, 0, 1, 0, 1, 0, 0, 0, 5, 0, 0, 1, 1)",
+
+"length": 291,
+
+"selection": "LINESTRING(37.626794 55.766313 17620, 37.626894 55.766312 17660, 37.627683 55.766320 17610, 37.627974 55.766323 17570, 37.628521 55.766329 17640, 37.629634 55.766342 17730, 37.630210 55.766350 17840, 37.631134 55.766363 17890, 37.631206 55.766362 17910, 37.631215 55.766362 17910, 37.631226 55.766361 17910, 37.631236 55.766358 17910, 37.631242 55.766353 17920, 37.631243 55.766349 17920, 37.631239 55.766340 17920, 37.631219 55.766301 17930, 37.631321 55.766284 17960)",
+
+"style": "normal",
+
+"zlevel": "zlevel-normal"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "300 м прямо",
+
+"turn_angle": 0,
+
+"turn_direction": "straight",
+
+"type": "pedestrian_crossroad"
+
+},
+
+{
+
+"attribute": "onto_crosswalk",
+
+"comment": "Движение прямо",
+
+"icon": "crossroad_straight",
+
+"id": "17131661115168239383",
+
+"outcoming_path": {
+
+"distance": 80,
+
+"duration": 53,
+
+"geometry": [
+
+{
+
+"angles": "LINESTRING(-1)",
+
+"length": 3,
+
+"selection": "LINESTRING(37.631321 55.766284 17960, 37.631367 55.766277 17950)",
+
+"style": "crosswalk",
+
+"zlevel": "zlevel-normal"
+
+},
+
+{
+
+"angles": "LINESTRING(-12, 8, 8, 9, 8, 1, 0, 2)",
+
+"length": 77,
+
+"selection": "LINESTRING(37.631367 55.766277 17950, 37.631462 55.766262 17720, 37.631482 55.766279 17780, 37.631498 55.766287 17810, 37.631515 55.766290 17840, 37.631539 55.766292 17880, 37.631831 55.766282 17960, 37.632415 55.766262 18010, 37.632581 55.766254 18090)",
+
+"style": "normal",
+
+"zlevel": "zlevel-normal"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "80 м прямо",
+
+"turn_angle_first": 0,
+
+"turn_angle_second": -45,
+
+"turn_direction_first": "straight",
+
+"turn_direction_second": "keep_left",
+
+"type": "pedestrian_road_crossing"
+
+},
+
+{
+
+"attribute": "onto_crosswalk",
+
+"comment": "Движение прямо",
+
+"icon": "crossroad_straight",
+
+"id": "14387868979142579399",
+
+"outcoming_path": {
+
+"distance": 195,
+
+"duration": 128,
+
+"geometry": [
+
+{
+
+"angles": "LINESTRING(-14, 1, -1, 0, 0, 0, 0, 0, 2, 2, 2, 2, 1, 1, 0)",
+
+"length": 195,
+
+"selection": "LINESTRING(37.632581 55.766254 18090, 37.632675 55.766243 17820, 37.633106 55.766215 17910, 37.633622 55.766197 17800, 37.633837 55.766185 17800, 37.633959 55.766172 17800, 37.634502 55.766114 17810, 37.634593 55.766102 17810, 37.635036 55.766043 17770, 37.635111 55.766033 17800, 37.635233 55.766014 17850, 37.635324 55.765989 17880, 37.635372 55.765970 17900, 37.635411 55.765946 17910, 37.635445 55.765917 17920, 37.635571 55.765879 17910)",
+
+"style": "normal",
+
+"zlevel": "zlevel-normal"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "200 м прямо",
+
+"turn_angle": 0,
+
+"turn_direction": "straight",
+
+"type": "pedestrian_crossroad"
+
+},
+
+{
+
+"attribute": "onto_crosswalk",
+
+"comment": "Движение прямо",
+
+"icon": "crossroad_straight",
+
+"id": "13369512195745326069",
+
+"outcoming_path": {
+
+"distance": 29,
+
+"duration": 19,
+
+"geometry": [
+
+{
+
+"angles": "LINESTRING(-10, -2, 1)",
+
+"length": 29,
+
+"selection": "LINESTRING(37.635571 55.765879 17910, 37.635642 55.765857 17750, 37.635804 55.765788 17660, 37.635920 55.765874 17700)",
+
+"style": "normal",
+
+"zlevel": "zlevel-normal"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "30 м прямо",
+
+"turn_angle_first": 0,
+
+"turn_angle_second": -90,
+
+"turn_direction_first": "straight",
+
+"turn_direction_second": "left",
+
+"type": "pedestrian_road_crossing"
+
+},
+
+{
+
+"attribute": "onto_crosswalk",
+
+"comment": "Движение прямо",
+
+"icon": "crossroad_straight",
+
+"id": "2605292740608384106",
+
+"outcoming_path": {
+
+"distance": 32,
+
+"duration": 20,
+
+"geometry": [
+
+{
+
+"angles": "LINESTRING(-6, -1)",
+
+"length": 17,
+
+"selection": "LINESTRING(37.635920 55.765874 17700, 37.635961 55.765909 17620, 37.636090 55.765994 17580)",
+
+"style": "normal",
+
+"zlevel": "zlevel-normal"
+
+},
+
+{
+
+"angles": "LINESTRING(-1, -3, 3)",
+
+"length": 15,
+
+"selection": "LINESTRING(37.636090 55.765994 17580, 37.636117 55.766012 17570, 37.636126 55.766020 17560, 37.636248 55.765937 17680)",
+
+"style": "park_path",
+
+"zlevel": "zlevel-normal"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "30 м прямо",
+
+"turn_angle_first": 0,
+
+"turn_angle_second": 90,
+
+"turn_direction_first": "straight",
+
+"turn_direction_second": "right",
+
+"type": "pedestrian_road_crossing"
+
+},
+
+{
+
+"attribute": "onto_crosswalk",
+
+"comment": "Движение прямо",
+
+"icon": "crossroad_straight",
+
+"id": "16852006073498246311",
+
+"outcoming_path": {
+
+"distance": 35,
+
+"duration": 23,
+
+"geometry": [
+
+{
+
+"angles": "LINESTRING(0)",
+
+"length": 35,
+
+"selection": "LINESTRING(37.636248 55.765937 17680, 37.636710 55.765749 17660)",
+
+"style": "park_path",
+
+"zlevel": "zlevel-normal"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "40 м прямо",
+
+"turn_angle": 0,
+
+"turn_direction": "straight",
+
+"type": "pedestrian_crossroad"
+
+},
+
+{
+
+"attribute": "empty",
+
+"comment": "Поворот налево",
+
+"icon": "crossroad_left",
+
+"id": "220916382907940014",
+
+"outcoming_path": {
+
+"distance": 21,
+
+"duration": 14,
+
+"geometry": [
+
+{
+
+"angles": "LINESTRING(-1)",
+
+"length": 21,
+
+"selection": "LINESTRING(37.636710 55.765749 17660, 37.636914 55.765904 17570)",
+
+"style": "park_path",
+
+"zlevel": "zlevel-normal"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "20 м прямо",
+
+"turn_angle": -90,
+
+"turn_direction": "left",
+
+"type": "pedestrian_crossroad"
+
+},
+
+{
+
+"attribute": "on_traffic_light",
+
+"comment": "Движение прямо",
+
+"icon": "crossroad_straight",
+
+"id": "6270099343971473906",
+
+"outcoming_path": {
+
+"distance": 99,
+
+"duration": 65,
+
+"geometry": [
+
+{
+
+"angles": "LINESTRING(0, 0, -1, 0)",
+
+"length": 99,
+
+"selection": "LINESTRING(37.636914 55.765904 17570, 37.637042 55.765972 17560, 37.637898 55.765599 17540, 37.638133 55.765484 17460, 37.638141 55.765478 17460)",
+
+"style": "normal",
+
+"zlevel": "zlevel-normal"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "100 м прямо",
+
+"turn_angle_first": 0,
+
+"turn_angle_second": 90,
+
+"turn_direction_first": "straight",
+
+"turn_direction_second": "right",
+
+"type": "pedestrian_road_crossing"
+
+},
+
+{
+
+"attribute": "empty",
+
+"comment": "Поворот налево",
+
+"icon": "crossroad_left",
+
+"id": "7546055343041830373",
+
+"outcoming_path": {
+
+"distance": 655,
+
+"duration": 433,
+
+"geometry": [
+
+{
+
+"angles": "LINESTRING(0, 0, 0, -1, 0, 1, 0, 0, -1, 0, -1, 0, 1, -1, 0, 1, 0, -1)",
+
+"length": 655,
+
+"selection": "LINESTRING(37.638141 55.765478 17460, 37.638500 55.765672 17480, 37.639018 55.765943 17500, 37.639381 55.766117 17510, 37.639576 55.766215 17470, 37.640942 55.766898 17570, 37.641083 55.766969 17590, 37.641282 55.767069 17580, 37.641519 55.767173 17570, 37.641816 55.767292 17510, 37.642186 55.767439 17480, 37.642806 55.767686 17380, 37.643259 55.767867 17360, 37.643362 55.767908 17380, 37.644244 55.768296 17180, 37.644437 55.768416 17200, 37.644666 55.768559 17260, 37.645101 55.768841 17260, 37.645933 55.769383 17110)",
+
+"style": "normal",
+
+"zlevel": "zlevel-normal"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "600 м прямо",
+
+"turn_angle": -84,
+
+"turn_direction": "left",
+
+"type": "pedestrian_crossroad"
+
+},
+
+{
+
+"attribute": "empty",
+
+"comment": "Поворот налево",
+
+"icon": "crossroad_left",
+
+"id": "2958702367767016587",
+
+"outcoming_path": {
+
+"distance": 24,
+
+"duration": 16,
+
+"geometry": [
+
+{
+
+"angles": "LINESTRING(-1, 1)",
+
+"length": 24,
+
+"selection": "LINESTRING(37.645933 55.769383 17110, 37.645740 55.769443 17050, 37.645819 55.769532 17090)",
+
+"style": "normal",
+
+"zlevel": "zlevel-normal"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "20 м прямо",
+
+"turn_angle": -102,
+
+"turn_direction": "left",
+
+"type": "pedestrian_crossroad"
+
+},
+
+{
+
+"attribute": "onto_crosswalk",
+
+"comment": "Поворот направо",
+
+"icon": "crossroad_right",
+
+"id": "17915681839960915548",
+
+"outcoming_path": {
+
+"distance": 46,
+
+"duration": 30,
+
+"geometry": [
+
+{
+
+"angles": "LINESTRING(0)",
+
+"length": 20,
+
+"selection": "LINESTRING(37.645819 55.769532 17090, 37.645978 55.769695 17070)",
+
+"style": "crosswalk",
+
+"zlevel": "zlevel-normal"
+
+},
+
+{
+
+"angles": "LINESTRING(0, 0)",
+
+"length": 26,
+
+"selection": "LINESTRING(37.645978 55.769695 17070, 37.646065 55.769786 17070, 37.646278 55.769734 17080)",
+
+"style": "normal",
+
+"zlevel": "zlevel-normal"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "50 м прямо",
+
+"turn_angle_first": 90,
+
+"turn_angle_second": 90,
+
+"turn_direction_first": "right",
+
+"turn_direction_second": "right",
+
+"type": "pedestrian_road_crossing"
+
+},
+
+{
+
+"attribute": "onto_crosswalk",
+
+"comment": "Движение прямо",
+
+"icon": "crossroad_straight",
+
+"id": "1633516042896138645",
+
+"outcoming_path": {
+
+"distance": 126,
+
+"duration": 83,
+
+"geometry": [
+
+{
+
+"angles": "LINESTRING(1, 0, 1, 1)",
+
+"length": 126,
+
+"selection": "LINESTRING(37.646278 55.769734 17080, 37.646453 55.769688 17110, 37.646860 55.769583 17140, 37.648035 55.769289 17350, 37.648118 55.769268 17370)",
+
+"style": "normal",
+
+"zlevel": "zlevel-normal"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "150 м прямо",
+
+"turn_angle": 0,
+
+"turn_direction": "straight",
+
+"type": "pedestrian_crossroad"
+
+},
+
+{
+
+"attribute": "onto_crosswalk",
+
+"comment": "Движение прямо",
+
+"icon": "crossroad_straight",
+
+"id": "14384577922348420577",
+
+"outcoming_path": {
+
+"distance": 283,
+
+"duration": 186,
+
+"geometry": [
+
+{
+
+"angles": "LINESTRING(1, 1, 0, 1, 0, -2, -5, -5, -1, -1, -1, -2, 1)",
+
+"length": 283,
+
+"selection": "LINESTRING(37.648118 55.769268 17370, 37.648259 55.769233 17410, 37.648549 55.769161 17470, 37.648974 55.769056 17470, 37.649386 55.768954 17520, 37.649612 55.768898 17520, 37.649694 55.768902 17490, 37.649743 55.768916 17440, 37.649783 55.768937 17390, 37.650192 55.769402 17280, 37.650588 55.769850 17150, 37.650786 55.770081 17020, 37.650843 55.770146 16980, 37.651120 55.770077 17010)",
+
+"style": "normal",
+
+"zlevel": "zlevel-normal"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "300 м прямо",
+
+"turn_angle": 0,
+
+"turn_direction": "straight",
+
+"type": "pedestrian_crossroad"
+
+},
+
+{
+
+"attribute": "onto_crosswalk",
+
+"comment": "Поворот направо",
+
+"icon": "crossroad_right",
+
+"id": "12580297544114701113",
+
+"outcoming_path": {
+
+"distance": 18,
+
+"duration": 12,
+
+"geometry": [
+
+{
+
+"angles": "LINESTRING(-1)",
+
+"length": 12,
+
+"selection": "LINESTRING(37.651120 55.770077 17010, 37.651305 55.770031 16980)",
+
+"style": "normal",
+
+"zlevel": "zlevel-normal"
+
+},
+
+{
+
+"angles": "LINESTRING(2)",
+
+"length": 6,
+
+"selection": "LINESTRING(37.651305 55.770031 16980, 37.651334 55.769979 17010)",
+
+"style": "park_path",
+
+"zlevel": "zlevel-normal"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "20 м прямо",
+
+"turn_angle_first": 90,
+
+"turn_angle_second": 90,
+
+"turn_direction_first": "right",
+
+"turn_direction_second": "right",
+
+"type": "pedestrian_road_crossing"
+
+},
+
+{
+
+"attribute": "empty",
+
+"comment": "Держитесь левее",
+
+"icon": "crossroad_keep_left",
+
+"id": "3563189374970100161",
+
+"outcoming_path": {
+
+"distance": 12,
+
+"duration": 8,
+
+"geometry": [
+
+{
+
+"angles": "LINESTRING(4)",
+
+"length": 12,
+
+"selection": "LINESTRING(37.651334 55.769979 17010, 37.651471 55.769896 17170)",
+
+"style": "park_path",
+
+"zlevel": "zlevel-normal"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "10 м прямо",
+
+"turn_angle": -24,
+
+"turn_direction": "keep_left",
+
+"type": "pedestrian_crossroad"
+
+},
+
+{
+
+"attribute": "empty",
+
+"comment": "Поворот направо",
+
+"icon": "crossroad_right",
+
+"id": "3986744822557510970",
+
+"outcoming_path": {
+
+"distance": 94,
+
+"duration": 63,
+
+"geometry": [
+
+{
+
+"angles": "LINESTRING(-1, -1, -1, 0, 1, 1, 1, 1)",
+
+"length": 87,
+
+"selection": "LINESTRING(37.651471 55.769896 17170, 37.651413 55.769874 17150, 37.651365 55.769844 17140, 37.651328 55.769765 17120, 37.651300 55.769667 17130, 37.651298 55.769557 17180, 37.651424 55.769241 17320, 37.651442 55.769197 17340, 37.651473 55.769154 17350)",
+
+"style": "park_path",
+
+"zlevel": "zlevel-normal"
+
+},
+
+{
+
+"angles": "LINESTRING(1)",
+
+"length": 7,
+
+"selection": "LINESTRING(37.651473 55.769154 17350, 37.651517 55.769090 17370)",
+
+"style": "normal",
+
+"zlevel": "zlevel-normal"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "90 м прямо",
+
+"turn_angle": 72,
+
+"turn_direction": "right",
+
+"type": "pedestrian_crossroad"
+
+},
+
+{
+
+"attribute": "onto_crosswalk",
+
+"comment": "Движение прямо",
+
+"icon": "crossroad_straight",
+
+"id": "3074426991296331652",
+
+"outcoming_path": {
+
+"distance": 101,
+
+"duration": 67,
+
+"geometry": [
+
+{
+
+"angles": "LINESTRING(-7, 1)",
+
+"length": 101,
+
+"selection": "LINESTRING(37.651517 55.769090 17370, 37.651590 55.768986 17110, 37.650268 55.768695 17520)",
+
+"style": "normal",
+
+"zlevel": "zlevel-normal"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "100 м прямо",
+
+"turn_angle_first": 0,
+
+"turn_angle_second": 90,
+
+"turn_direction_first": "straight",
+
+"turn_direction_second": "right",
+
+"type": "pedestrian_road_crossing"
+
+},
+
+{
+
+"attribute": "empty",
+
+"comment": "Поворот налево",
+
+"icon": "crossroad_left",
+
+"id": "317344325571583612",
+
+"outcoming_path": {
+
+"distance": 49,
+
+"duration": 32,
+
+"geometry": [
+
+{
+
+"angles": "LINESTRING(1, 0, -1, 0, 0)",
+
+"length": 49,
+
+"selection": "LINESTRING(37.650268 55.768695 17520, 37.650364 55.768614 17540, 37.650400 55.768585 17540, 37.650708 55.768367 17400, 37.650706 55.768352 17400, 37.650695 55.768338 17400)",
+
+"style": "normal",
+
+"zlevel": "zlevel-normal"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "50 м прямо",
+
+"turn_angle": -108,
+
+"turn_direction": "left",
+
+"type": "pedestrian_crossroad"
+
+},
+
+{
+
+"attribute": "empty",
+
+"comment": "Поворот налево",
+
+"icon": "crossroad_left",
+
+"id": "17576060847157724814",
+
+"outcoming_path": {
+
+"distance": 292,
+
+"duration": 194,
+
+"geometry": [
+
+{
+
+"angles": "LINESTRING(0, -2, 0, -1)",
+
+"length": 292,
+
+"selection": "LINESTRING(37.650695 55.768338 17400, 37.652150 55.767277 17220, 37.652525 55.767027 17020, 37.653523 55.766300 17100, 37.653572 55.766264 17090)",
+
+"style": "normal",
+
+"zlevel": "zlevel-normal"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "300 м прямо",
+
+"turn_angle": -54,
+
+"turn_direction": "left",
+
+"type": "pedestrian_crossroad"
+
+},
+
+{
+
+"attribute": "onto_crosswalk",
+
+"comment": "Движение прямо",
+
+"icon": "crossroad_straight",
+
+"id": "2051106878854404102",
+
+"outcoming_path": {
+
+"distance": 28,
+
+"duration": 18,
+
+"geometry": [
+
+{
+
+"angles": "LINESTRING(-4, 3)",
+
+"length": 28,
+
+"selection": "LINESTRING(37.653572 55.766264 17090, 37.653644 55.766219 17000, 37.653957 55.766294 17230)",
+
+"style": "normal",
+
+"zlevel": "zlevel-normal"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "30 м прямо",
+
+"turn_angle_first": 0,
+
+"turn_angle_second": -90,
+
+"turn_direction_first": "straight",
+
+"turn_direction_second": "left",
+
+"type": "pedestrian_road_crossing"
+
+},
+
+{
+
+"attribute": "empty",
+
+"comment": "Поворот направо",
+
+"icon": "crossroad_right",
+
+"id": "13755480940167401403",
+
+"outcoming_path": {
+
+"distance": 21,
+
+"duration": 14,
+
+"geometry": [
+
+{
+
+"angles": "LINESTRING(0)",
+
+"length": 1,
+
+"selection": "LINESTRING(37.653957 55.766294 17230, 37.653975 55.766281 17230)",
+
+"style": "normal",
+
+"zlevel": "zlevel-normal"
+
+},
+
+{
+
+"angles": "LINESTRING(-1)",
+
+"length": 12,
+
+"selection": "LINESTRING(37.653975 55.766281 17230, 37.654102 55.766194 17210)",
+
+"style": "archway",
+
+"zlevel": "zlevel-normal"
+
+},
+
+{
+
+"angles": "LINESTRING(-1, 0, 0, -1, -1)",
+
+"length": 8,
+
+"selection": "LINESTRING(37.654102 55.766194 17210, 37.654128 55.766176 17200, 37.654137 55.766173 17200, 37.654148 55.766171 17200, 37.654182 55.766173 17190, 37.654219 55.766182 17180)",
+
+"style": "normal",
+
+"zlevel": "zlevel-normal"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "20 м прямо",
+
+"turn_angle": 78,
+
+"turn_direction": "right",
+
+"type": "pedestrian_crossroad"
+
+},
+
+{
+
+"attribute": "empty",
+
+"comment": "Поворот направо",
+
+"icon": "crossroad_right",
+
+"id": "2646321240261148556",
+
+"outcoming_path": {
+
+"distance": 182,
+
+"duration": 121,
+
+"geometry": [
+
+{
+
+"angles": "LINESTRING(-1, 2, 0, 0, 0, 0)",
+
+"length": 182,
+
+"selection": "LINESTRING(37.654219 55.766182 17180, 37.654694 55.765853 17030, 37.654808 55.765775 17110, 37.655060 55.765600 17080, 37.655206 55.765500 17070, 37.655929 55.765000 16980, 37.656064 55.764909 16960)",
+
+"style": "living_zone",
+
+"zlevel": "zlevel-normal"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "200 м прямо",
+
+"turn_angle": 66,
+
+"turn_direction": "right",
+
+"type": "pedestrian_crossroad"
+
+},
+
+{
+
+"attribute": "empty",
+
+"comment": "Поворот налево",
+
+"icon": "crossroad_left",
+
+"id": "17031989960397790172",
+
+"outcoming_path": {
+
+"distance": 36,
+
+"duration": 24,
+
+"geometry": [
+
+{
+
+"angles": "LINESTRING(0, -1, 1, 0)",
+
+"length": 36,
+
+"selection": "LINESTRING(37.656064 55.764909 16960, 37.656228 55.764957 16970, 37.656303 55.764992 16960, 37.656543 55.765075 17010, 37.656554 55.765081 17010)",
+
+"style": "living_zone",
+
+"zlevel": "zlevel-normal"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "40 м прямо",
+
+"turn_angle": -84,
+
+"turn_direction": "left",
+
+"type": "pedestrian_crossroad"
+
+},
+
+{
+
+"comment": "finish",
+
+"icon": "finish",
+
+"id": "16825497307322922222",
+
+"outcoming_path_comment": "Вы на месте!",
+
+"type": "pedestrian_end"
+
+}
+
+],
+
+"reliability": 1.0,
+
+"requested_filters": [
+
+"dirt_road",
+
+"ferry",
+
+"highway",
+
+"ban_stairway"
+
+],
+
+"result_filters": [
+
+"dirt_road",
+
+"ferry",
+
+"highway",
+
+"ban_stairway"
+
+],
+
+"route_id": "moscow-pd-back.m1/pedestrianrouting/1772717973.799271",
+
+"total_distance": 6466,
+
+"total_duration": 4310,
+
+"type": "pedestrianrouting",
+
+"ui_total_distance": {
+
+"unit": "км",
+
+"value": "6.5"
+
+},
+
+"ui_total_duration": "1 час 11 мин",
+
+"waypoints": [
+
+{
+
+"original_point": {
+
+"lat": 55.77542749703997,
+
+"lon": 37.58273299838699
+
+},
+
+"projected_point": {
+
+"lat": 55.77542749703997,
+
+"lon": 37.58273299838699
+
+},
+
+"transit": false
+
+},
+
+{
+
+"original_point": {
+
+"lat": 55.76508155193333,
+
+"lon": 37.6565548416369
+
+},
+
+"projected_point": {
+
+"lat": 55.76508155193333,
+
+"lon": 37.6565548416369
+
+},
+
+"transit": false
+
+}
+
+]
+
+}
+
+],
+
+"status": "OK",
+
+"type": "result"
+
+}
+
+```  
+</details>  
+<br />
+
+### На общественном транспорте {#public-transport}  
+Вы можете строить маршруты для одного или нескольких видов общественного транспорта в одном запросе:  
+* `metro` — метро;  
+* `light_metro` — лёгкое метро;  
+* `suburban_train` — пригородный поезд;  
+* `aeroexpress` — аэроэкспресс;  
+* `tram` — трамвай;  
+* `bus` — автобус;  
+* `trolleybus` — троллейбус;  
+* `shuttle_bus` — маршрутное такси;  
+* `monorail` — монорельс;  
+* `funicular_railway` — фуникулёр;  
+* `river_transport` — речной транспорт;  
+* `cable_car` — канатная дорога;  
+* `light_rail` — легкорельсовый транспорт;  
+* `premetro` — подземный трамвай;  
+* `mcc` — Московское центральное кольцо;  
+* `mcd` — Московские центральные диаметры.  
+Если вы укажете в запросе несколько видов транспорта, маршруты могут содержать пересадки: между маршрутами одного вида транспорта или между разными видами (например, с метро на автобус).  
+Чтобы построить маршрут на разных видах общественного транспорта, отправьте POST-запрос на [/public_transport/2.0](/api/navigation/routing/reference/public_transport) со следующими параметрами:  
+* `source` (обязательный параметр) — координаты начальной точки (широта и долгота).  
+* `target` (обязательный параметр) — координаты конечной точки (широта и долгота).  
+* `transport` (обязательный параметр) — массив видов общественного транспорта. Например, `tram` — трамвай и `metro` — метро.  
+* `locale` — язык текстовых описаний элементов маршрута: русский.  
+**Пример запроса:**  
+```curl
+
+curl --request POST \
+
+--url 'https://routing.api.2gis.com/public_transport/2.0?key=API_KEY' \
+
+--header 'Content-Type: application/json' \
+
+--data '{
+
+"source":
+
+{
+
+"point":
+
+{
+
+"lat": 55.798227,
+
+"lon": 37.697461
+
+}
+
+},
+
+"target":
+
+{
+
+"point":
+
+{
+
+"lat": 55.821029,
+
+"lon": 37.641507
+
+}
+
+},
+
+"transport": ["tram", "metro"],
+
+"locale": "ru"
+
+}'
+
+```  
+**Пример ответа:**  
+<details>  
+<summary><code>response.json</code></summary>  
+```json
+
+[
+
+{
+
+"crossing_count": 2,
+
+"id": "1",
+
+"movements": [
+
+{
+
+"alternatives": [
+
+{
+
+"geometry": [
+
+{
+
+"selection": "LINESTRING(37.697461 55.798227, 37.697219 55.798105)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.697219 55.798105, 37.697600 55.797760, 37.697687 55.797682, 37.697740 55.797635, 37.697693 55.797614, 37.697671 55.797589, 37.697657 55.797556, 37.697681 55.797476, 37.697803 55.797366, 37.698029 55.797180, 37.698081 55.797127, 37.698640 55.796631, 37.698676 55.796592, 37.698690 55.796566, 37.698686 55.796541, 37.698678 55.796519, 37.698617 55.796470, 37.698844 55.796290)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.698844 55.796290, 37.698888 55.796256)",
+
+"z_first": 0,
+
+"z_last": -1
+
+},
+
+{
+
+"selection": "LINESTRING(37.698888 55.796256, 37.698982 55.796182)",
+
+"z_first": -1,
+
+"z_last": -1
+
+},
+
+{
+
+"selection": "LINESTRING(37.698982 55.796182, 37.699025 55.796149)",
+
+"z_first": -1,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.699025 55.796149, 37.699182 55.796025)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.699182 55.796025, 37.698839 55.795885, 37.698818 55.795866, 37.698820 55.795851, 37.698834 55.795833, 37.698981 55.795717, 37.698986 55.795701, 37.698979 55.795689, 37.698958 55.795673, 37.698667 55.795556)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.698667 55.795556, 37.698585 55.795522)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.698585 55.795522, 37.698510 55.795492)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.698510 55.795492, 37.698444 55.795462)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.698444 55.795462, 37.698654 55.795317, 37.698686 55.795223, 37.698696 55.795198, 37.698786 55.794971, 37.698826 55.794872, 37.698926 55.794618)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.698926 55.794618, 37.699009 55.794627, 37.699033 55.794567)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.699033 55.794567, 37.699064 55.794491)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.699064 55.794491, 37.699525 55.794549)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.699525 55.794549, 37.699518 55.794568)",
+
+"z_first": 0,
+
+"z_last": 0
+
+}
+
+]
+
+}
+
+],
+
+"distance": 528,
+
+"id": "2",
+
+"moving_duration": 380,
+
+"platforms": null,
+
+"routes": null,
+
+"type": "walkway",
+
+"waiting_duration": 0,
+
+"waypoint": {
+
+"comment": "пешком 530 м",
+
+"name": "",
+
+"subtype": "start"
+
+}
+
+},
+
+{
+
+"alternatives": [
+
+{
+
+"geometry": [
+
+{
+
+"selection": "LINESTRING(37.699518 55.794568, 37.694828 55.793954, 37.692085 55.793544, 37.691745 55.793477, 37.691460 55.793399, 37.691205 55.793311, 37.690796 55.793155, 37.690796 55.793155, 37.687102 55.791737, 37.687102 55.791737, 37.686904 55.791661, 37.686904 55.791661, 37.682733 55.790060, 37.682733 55.790060, 37.682423 55.789939, 37.682423 55.789939, 37.681916 55.789744, 37.681720 55.789664, 37.681720 55.789664, 37.681095 55.789408, 37.680983 55.789358)"
+
+}
+
+],
+
+"platforms": [
+
+{
+
+"geometry": "POINT(37.699518 55.794568)",
+
+"id": "9"
+
+},
+
+{
+
+"geometry": "POINT(37.690796 55.793155)",
+
+"id": "10"
+
+},
+
+{
+
+"geometry": "POINT(37.686904 55.791661)",
+
+"id": "11"
+
+},
+
+{
+
+"geometry": "POINT(37.680983 55.789358)",
+
+"id": "12"
+
+}
+
+]
+
+}
+
+],
+
+"distance": 1318,
+
+"id": "3",
+
+"moving_duration": 360,
+
+"platforms": {
+
+"names": [
+
+"Малая Остроумовская",
+
+"Клуб Русакова - Сцена Мельников"
+
+]
+
+},
+
+"routes": [
+
+{
+
+"color": "#eb5a2b",
+
+"names": [
+
+"13",
+
+"Т1",
+
+"7"
+
+],
+
+"subtype": "tram",
+
+"subtype_name": "трамвай"
+
+}
+
+],
+
+"type": "passage",
+
+"waiting_duration": 28,
+
+"waypoint": {
+
+"combined": false,
+
+"comment": "",
+
+"name": "Трамвайное депо им. Русакова",
+
+"subtype": "tram"
+
+}
+
+},
+
+{
+
+"alternatives": [
+
+{
+
+"entrances": [
+
+{
+
+"color": "#56c09c",
+
+"exit": true,
+
+"exit_comment": "ул. Стромынка, 2-й Полевой переулок, ул. Барболина, торговый центр «Престиж-М», центр госуслуг \"Мои документы района Сокольники\", клиническая больница им. братьев Бахрушиных, центр борьбы с туберкулёзом (клиника №2)",
+
+"geometry": "POINT(37.680915 55.789655)",
+
+"line_name": "Большая кольцевая линия",
+
+"metro_logo": "metro_moscow_11",
+
+"name": "Сокольники",
+
+"number": "4",
+
+"show_other_station": true
+
+}
+
+],
+
+"geometry": [
+
+{
+
+"selection": "LINESTRING(37.680966 55.789367, 37.680773 55.789272)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.680773 55.789272, 37.680719 55.789313, 37.680667 55.789340)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.680667 55.789340, 37.680664 55.789347, 37.680601 55.789454, 37.680889 55.789507, 37.681036 55.789564)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.681036 55.789564, 37.681016 55.789598)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.681016 55.789598, 37.680976 55.789666, 37.680915 55.789654)",
+
+"z_first": 0,
+
+"z_last": -1
+
+},
+
+{
+
+"selection": "LINESTRING(37.680915 55.789654, 37.680697 55.789611)",
+
+"z_first": -1,
+
+"z_last": -1
+
+},
+
+{
+
+"selection": "LINESTRING(37.680697 55.789611, 37.680551 55.789584, 37.680224 55.789901, 37.680197 55.789908, 37.680168 55.789905, 37.679935 55.789829)",
+
+"z_first": -1,
+
+"z_last": -1
+
+},
+
+{
+
+"selection": "LINESTRING(37.679935 55.789829, 37.680086 55.789683, 37.679954 55.789640, 37.679911 55.789682, 37.679160 55.790415)",
+
+"z_first": -1,
+
+"z_last": -2
+
+}
+
+]
+
+}
+
+],
+
+"distance": 295,
+
+"id": "13",
+
+"moving_duration": 269,
+
+"platforms": null,
+
+"routes": null,
+
+"type": "crossing",
+
+"waiting_duration": 0,
+
+"waypoint": {
+
+"comment": "пешком 300 м",
+
+"name": "Метро Сокольники·4C",
+
+"subtype": "pedestrian"
+
+}
+
+},
+
+{
+
+"alternatives": [
+
+{
+
+"geometry": [
+
+{
+
+"selection": "LINESTRING(37.679160 55.790415, 37.678544 55.791015, 37.676497 55.792584, 37.675917 55.792970, 37.675273 55.793344, 37.674479 55.793658, 37.673557 55.793959, 37.672613 55.794225, 37.671583 55.794406, 37.670553 55.794514, 37.669480 55.794563, 37.660403 55.794599, 37.659309 55.794623, 37.658279 55.794756, 37.654502 55.795286, 37.653408 55.795383, 37.652271 55.795407, 37.651241 55.795359, 37.650018 55.795190, 37.643945 55.793996, 37.642894 55.793851, 37.641950 55.793766, 37.641305 55.793735, 37.634533 55.793908)"
+
+}
+
+],
+
+"platforms": [
+
+{
+
+"geometry": "POINT(37.679160 55.790415)",
+
+"id": "18"
+
+},
+
+{
+
+"geometry": "POINT(37.634533 55.793908)",
+
+"id": "19"
+
+}
+
+]
+
+}
+
+],
+
+"distance": 3033,
+
+"id": "14",
+
+"metro": {
+
+"boarding_parts_suggest": [
+
+2,
+
+3
+
+],
+
+"boarding_parts_suggest_5_wagons": [
+
+3,
+
+4
+
+],
+
+"color": "#56c09c",
+
+"exit_comment": "",
+
+"exit_entrance_number": "",
+
+"line_name": "Большая кольцевая линия",
+
+"ui_direction_suggest": "в сторону станции «Рижская»"
+
+},
+
+"moving_duration": 240,
+
+"platforms": {
+
+"penultimate_stop": ""
+
+},
+
+"routes": null,
+
+"type": "passage",
+
+"waiting_duration": 90,
+
+"waypoint": {
+
+"combined": false,
+
+"comment": "",
+
+"name": "Сокольники",
+
+"subtype": "metro"
+
+}
+
+},
+
+{
+
+"alternatives": [
+
+{
+
+"geometry": [
+
+{
+
+"selection": "LINESTRING(37.634533 55.793908, 37.635736 55.793877, 37.635926 55.793872, 37.635938 55.794025, 37.635912 55.794050, 37.635899 55.794101, 37.636225 55.794247, 37.636302 55.794193, 37.636668 55.794160, 37.636653 55.794107, 37.636509 55.793613)",
+
+"z_first": -2,
+
+"z_last": -1
+
+}
+
+]
+
+}
+
+],
+
+"distance": 250,
+
+"id": "20",
+
+"moving_duration": 195,
+
+"platforms": null,
+
+"routes": null,
+
+"type": "crossing",
+
+"waiting_duration": 0,
+
+"waypoint": {
+
+"comment": "переход",
+
+"name": "Рижская",
+
+"subtype": "pedestrian"
+
+}
+
+},
+
+{
+
+"alternatives": [
+
+{
+
+"geometry": [
+
+{
+
+"selection": "LINESTRING(37.636509 55.793613, 37.636698 55.794277, 37.638788 55.807856, 37.638915 55.808717, 37.638915 55.808717, 37.639231 55.810886, 37.639660 55.812547, 37.639864 55.813308, 37.640157 55.814045, 37.640576 55.814806, 37.641154 55.816676, 37.641341 55.817512, 37.641399 55.818401, 37.641390 55.820409, 37.641420 55.821135)"
+
+}
+
+],
+
+"platforms": [
+
+{
+
+"geometry": "POINT(37.636509 55.793613)",
+
+"id": "26"
+
+},
+
+{
+
+"geometry": "POINT(37.638915 55.808717)",
+
+"id": "27"
+
+},
+
+{
+
+"geometry": "POINT(37.641420 55.821135)",
+
+"id": "28"
+
+}
+
+]
+
+}
+
+],
+
+"distance": 3084,
+
+"id": "21",
+
+"metro": {
+
+"boarding_parts_suggest": [
+
+3
+
+],
+
+"boarding_parts_suggest_5_wagons": [
+
+4
+
+],
+
+"color": "#fe7f01",
+
+"exit_comment": "ул. Космонавтов, проспект Мира, 146, Ярославская ул., Гостиница \"Космос\"",
+
+"exit_entrance_number": "4",
+
+"line_name": "Калужско-Рижская линия",
+
+"ui_direction_suggest": "в сторону станции «Медведково»",
+
+"ui_station_count": "1 станция"
+
+},
+
+"moving_duration": 240,
+
+"platforms": {
+
+"names": [
+
+"Алексеевская"
+
+],
+
+"penultimate_stop": "Алексеевская"
+
+},
+
+"routes": null,
+
+"type": "passage",
+
+"waiting_duration": 90,
+
+"waypoint": {
+
+"combined": false,
+
+"comment": "",
+
+"name": "Рижская",
+
+"subtype": "metro"
+
+}
+
+},
+
+{
+
+"alternatives": [
+
+{
+
+"entrances": [
+
+{
+
+"color": "#fe7f01",
+
+"exit": true,
+
+"exit_comment": "ул. Космонавтов, проспект Мира, 146, Ярославская ул., Гостиница \"Космос\"",
+
+"geometry": "POINT(37.641114 55.819993)",
+
+"metro_logo": "metro_moscow_6",
+
+"name": "ВДНХ",
+
+"number": "4",
+
+"show_other_station": false
+
+}
+
+],
+
+"geometry": [
+
+{
+
+"selection": "LINESTRING(37.641420 55.821134, 37.641395 55.820528, 37.641237 55.820530, 37.641055 55.820533, 37.641044 55.820532, 37.641033 55.820527, 37.640926 55.820423, 37.640647 55.819896, 37.640486 55.819744, 37.640444 55.819671, 37.640446 55.819662, 37.640460 55.819656, 37.640507 55.819640, 37.640718 55.819839)",
+
+"z_first": -1,
+
+"z_last": -1
+
+},
+
+{
+
+"selection": "LINESTRING(37.640718 55.819839, 37.640888 55.819781, 37.640926 55.819816)",
+
+"z_first": -1,
+
+"z_last": -1
+
+},
+
+{
+
+"selection": "LINESTRING(37.640926 55.819816, 37.641112 55.819991)",
+
+"z_first": -1,
+
+"z_last": -1
+
+},
+
+{
+
+"selection": "LINESTRING(37.641112 55.819991, 37.641201 55.820075, 37.641292 55.820163, 37.641339 55.820208, 37.641494 55.820353, 37.641545 55.820400, 37.642069 55.820892, 37.641883 55.820954, 37.641737 55.821003, 37.641765 55.821037, 37.641777 55.821051, 37.641767 55.821066, 37.641753 55.821076, 37.641595 55.821125, 37.641504 55.821039)",
+
+"z_first": -1,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.641504 55.821039, 37.641507 55.821029)",
+
+"z_first": 0,
+
+"z_last": 0
+
+}
+
+]
+
+}
+
+],
+
+"distance": 431,
+
+"id": "29",
+
+"moving_duration": 436,
+
+"platforms": null,
+
+"routes": null,
+
+"type": "walkway",
+
+"waiting_duration": 0,
+
+"waypoint": {
+
+"comment": "пешком 440 м",
+
+"name": "ВДНХ",
+
+"subtype": "pedestrian"
+
+}
+
+},
+
+{
+
+"distance": 0,
+
+"id": "30",
+
+"moving_duration": 0,
+
+"type": "walkway",
+
+"waiting_duration": 0,
+
+"waypoint": {
+
+"comment": "Вы на месте в 17:24.",
+
+"name": "",
+
+"subtype": "finish"
+
+}
+
+}
+
+],
+
+"pedestrian": false,
+
+"route_id": "moscow-ctx-back.m9/ctxrouting/17727183120000.00000",
+
+"schedules": [
+
+{
+
+"origin_from": "eta",
+
+"precise_time": "16:52",
+
+"start_time": 60720,
+
+"start_time_utc": 1772718720,
+
+"type": "precise"
+
+},
+
+{
+
+"origin_from": "eta",
+
+"precise_time": "16:53",
+
+"start_time": 60780,
+
+"start_time_utc": 1772718780,
+
+"type": "precise"
+
+},
+
+{
+
+"origin_from": "eta",
+
+"precise_time": "16:58",
+
+"start_time": 61080,
+
+"start_time_utc": 1772719080,
+
+"type": "precise"
+
+},
+
+{
+
+"origin_from": "eta",
+
+"precise_time": "17:01",
+
+"start_time": 61260,
+
+"start_time_utc": 1772719260,
+
+"type": "precise"
+
+}
+
+],
+
+"total_distance": 8939,
+
+"total_duration": 2328,
+
+"total_walkway_distance": "пешком 20 мин",
+
+"transfer_count": 2,
+
+"transport": [
+
+"pedestrian",
+
+"bus",
+
+"trolleybus",
+
+"tram",
+
+"shuttle_bus",
+
+"metro",
+
+"suburban_train",
+
+"funicular_railway",
+
+"monorail",
+
+"river_transport",
+
+"cable_car",
+
+"light_rail",
+
+"premetro",
+
+"light_metro",
+
+"aeroexpress",
+
+"mcd",
+
+"mcc"
+
+],
+
+"waypoints": [
+
+{
+
+"combined": false,
+
+"routes_names": [
+
+"13",
+
+"7",
+
+"Т1"
+
+],
+
+"subtype": "tram"
+
+},
+
+{
+
+"combined": false,
+
+"routes_names": [
+
+"Большая кольцевая линия"
+
+],
+
+"subtype": "metro"
+
+},
+
+{
+
+"combined": false,
+
+"routes_names": [
+
+"Калужско-Рижская линия"
+
+],
+
+"subtype": "metro"
+
+}
+
+]
+
+},
+
+{
+
+"crossing_count": 0,
+
+"id": "31",
+
+"movements": [
+
+{
+
+"alternatives": [
+
+{
+
+"geometry": [
+
+{
+
+"selection": "LINESTRING(37.697461 55.798227, 37.697219 55.798105)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.697219 55.798105, 37.696846 55.798442, 37.696773 55.798416, 37.696651 55.798526, 37.696566 55.798495, 37.696479 55.798464, 37.696468 55.798491, 37.696255 55.798682, 37.696146 55.798780, 37.696077 55.798843, 37.695057 55.799763, 37.694602 55.800173, 37.694537 55.800239, 37.694243 55.800507, 37.694229 55.800526, 37.694197 55.800540, 37.694151 55.800542, 37.692213 55.800149, 37.692207 55.800147, 37.692178 55.800202, 37.692165 55.800246)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.692165 55.800246, 37.692111 55.800420)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.692111 55.800420, 37.691998 55.800791, 37.691872 55.801172)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.691872 55.801172, 37.691668 55.801667, 37.691519 55.802111, 37.691425 55.802391, 37.691121 55.802404, 37.691043 55.802426, 37.690760 55.802501)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.690760 55.802501, 37.690329 55.802565, 37.690284 55.802572, 37.689865 55.802584, 37.689708 55.802600, 37.689474 55.802625, 37.689262 55.802597, 37.689094 55.802576, 37.688655 55.802660)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.688655 55.802660, 37.688643 55.802662)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.688643 55.802662, 37.688763 55.802770)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.688763 55.802770, 37.688736 55.802779)",
+
+"z_first": 0,
+
+"z_last": 0
+
+}
+
+]
+
+}
+
+],
+
+"distance": 943,
+
+"id": "32",
+
+"moving_duration": 678,
+
+"platforms": null,
+
+"routes": null,
+
+"type": "walkway",
+
+"waiting_duration": 0,
+
+"waypoint": {
+
+"comment": "пешком 950 м",
+
+"name": "",
+
+"subtype": "start"
+
+}
+
+},
+
+{
+
+"alternatives": [
+
+{
+
+"geometry": [
+
+{
+
+"selection": "LINESTRING(37.688736 55.802779, 37.691783 55.805522, 37.691783 55.805522, 37.691818 55.805554, 37.691845 55.805605, 37.691850 55.805654, 37.691833 55.805706, 37.691801 55.805749, 37.688260 55.808460, 37.688260 55.808460, 37.685191 55.810809, 37.685191 55.810809, 37.685033 55.810930, 37.684952 55.810992, 37.684916 55.811028, 37.684896 55.811062, 37.684892 55.811096, 37.684896 55.811129, 37.684909 55.811162, 37.686836 55.813675, 37.686944 55.813828, 37.686980 55.813929, 37.686960 55.814036, 37.686939 55.814092, 37.686932 55.814099, 37.686852 55.814155, 37.685514 55.815093, 37.685514 55.815093, 37.685416 55.815161, 37.685416 55.815161, 37.685287 55.815223, 37.685095 55.815285, 37.684827 55.815345, 37.683910 55.815484, 37.683910 55.815484, 37.683906 55.815485, 37.683505 55.815543, 37.683137 55.815632, 37.682842 55.815735, 37.679923 55.817113, 37.679697 55.817198, 37.679697 55.817198, 37.679452 55.817263, 37.679197 55.817316, 37.678881 55.817370, 37.678881 55.817370, 37.676014 55.817855, 37.675427 55.817966, 37.674852 55.818113, 37.670645 55.819328, 37.670645 55.819328, 37.670268 55.819436, 37.670268 55.819436, 37.670210 55.819453, 37.670210 55.819453, 37.668247 55.820018, 37.668247 55.820018, 37.667630 55.820196, 37.667630 55.820196, 37.667327 55.820283, 37.665856 55.820705, 37.665856 55.820705, 37.664176 55.821188, 37.662182 55.821803, 37.662182 55.821803, 37.658375 55.822966, 37.658375 55.822966, 37.657575 55.823211, 37.652794 55.824836, 37.652402 55.824974, 37.652402 55.824974, 37.652265 55.825022, 37.651428 55.825471, 37.651068 55.825617, 37.650897 55.825687, 37.650698 55.825761, 37.648796 55.826395)"
+
+}
+
+],
+
+"platforms": [
+
+{
+
+"geometry": "POINT(37.688736 55.802779)",
+
+"id": "46"
+
+},
+
+{
+
+"geometry": "POINT(37.691783 55.805522)",
+
+"id": "47"
+
+},
+
+{
+
+"geometry": "POINT(37.688260 55.808460)",
+
+"id": "48"
+
+},
+
+{
+
+"geometry": "POINT(37.685191 55.810809)",
+
+"id": "49"
+
+},
+
+{
+
+"geometry": "POINT(37.685514 55.815093)",
+
+"id": "50"
+
+},
+
+{
+
+"geometry": "POINT(37.678881 55.817370)",
+
+"id": "51"
+
+},
+
+{
+
+"geometry": "POINT(37.670645 55.819328)",
+
+"id": "52"
+
+},
+
+{
+
+"geometry": "POINT(37.662182 55.821803)",
+
+"id": "53"
+
+},
+
+{
+
+"geometry": "POINT(37.658375 55.822966)",
+
+"id": "54"
+
+},
+
+{
+
+"geometry": "POINT(37.652402 55.824974)",
+
+"id": "55"
+
+},
+
+{
+
+"geometry": "POINT(37.648796 55.826395)",
+
+"id": "56"
+
+}
+
+]
+
+}
+
+],
+
+"distance": 4263,
+
+"id": "33",
+
+"moving_duration": 780,
+
+"platforms": {
+
+"names": [
+
+"Большая Оленья",
+
+"2-й Ширяевский пер.",
+
+"Большая Ширяевская",
+
+"Ростокинский проезд",
+
+"Институт иностранных языков",
+
+"Станция юных натуралистов",
+
+"пл. Академика Люльки",
+
+"Бориса Галушкина д.17",
+
+"Ярославская"
+
+]
+
+},
+
+"routes": [
+
+{
+
+"color": "#eb5a2b",
+
+"names": [
+
+"25"
+
+],
+
+"subtype": "tram",
+
+"subtype_name": "трамвай"
+
+}
+
+],
+
+"type": "passage",
+
+"waiting_duration": 270,
+
+"waypoint": {
+
+"combined": false,
+
+"comment": "",
+
+"name": "Майский просек",
+
+"subtype": "tram"
+
+}
+
+},
+
+{
+
+"alternatives": [
+
+{
+
+"geometry": [
+
+{
+
+"selection": "LINESTRING(37.648796 55.826395, 37.648862 55.826459)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.648862 55.826459, 37.648624 55.826537, 37.648520 55.826563, 37.648211 55.826631, 37.648173 55.826650, 37.648163 55.826660, 37.648136 55.826652, 37.648073 55.826591)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.648073 55.826591, 37.647982 55.826506)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.647982 55.826506, 37.647935 55.826465, 37.647864 55.826404, 37.647828 55.826373, 37.646517 55.825081, 37.645719 55.824322, 37.645260 55.823904, 37.645026 55.823696, 37.644816 55.823497, 37.644672 55.823352, 37.644411 55.823145, 37.643613 55.822410, 37.643656 55.822397, 37.643382 55.822134, 37.643203 55.821964, 37.643018 55.821773, 37.642977 55.821735)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.642977 55.821735, 37.642882 55.821644)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.642882 55.821644, 37.642812 55.821579, 37.642669 55.821442, 37.642378 55.821171, 37.642309 55.821107, 37.642222 55.821021, 37.642069 55.820892, 37.641883 55.820954, 37.641737 55.821003, 37.641765 55.821037, 37.641777 55.821051, 37.641767 55.821066, 37.641753 55.821076, 37.641595 55.821125, 37.641504 55.821039)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.641504 55.821039, 37.641507 55.821029)",
+
+"z_first": 0,
+
+"z_last": 0
+
+}
+
+]
+
+}
+
+],
+
+"distance": 848,
+
+"id": "57",
+
+"moving_duration": 640,
+
+"platforms": null,
+
+"routes": null,
+
+"type": "walkway",
+
+"waiting_duration": 0,
+
+"waypoint": {
+
+"comment": "пешком 850 м",
+
+"name": "Проспект Мира",
+
+"subtype": "pedestrian"
+
+}
+
+},
+
+{
+
+"distance": 0,
+
+"id": "58",
+
+"moving_duration": 0,
+
+"type": "walkway",
+
+"waiting_duration": 0,
+
+"waypoint": {
+
+"comment": "Вы на месте в 17:24.",
+
+"name": "",
+
+"subtype": "finish"
+
+}
+
+}
+
+],
+
+"pedestrian": false,
+
+"route_id": "moscow-ctx-back.m9/ctxrouting/17727183120000.00000",
+
+"schedules": [
+
+{
+
+"precise_time": "17:01",
+
+"start_time": 61260,
+
+"start_time_utc": 1772719260,
+
+"type": "precise"
+
+},
+
+{
+
+"precise_time": "17:11",
+
+"start_time": 61860,
+
+"start_time_utc": 1772719860,
+
+"type": "precise"
+
+},
+
+{
+
+"precise_time": "17:24",
+
+"start_time": 62640,
+
+"start_time_utc": 1772720640,
+
+"type": "precise"
+
+},
+
+{
+
+"precise_time": "17:36",
+
+"start_time": 63360,
+
+"start_time_utc": 1772721360,
+
+"type": "precise"
+
+}
+
+],
+
+"total_distance": 6054,
+
+"total_duration": 2368,
+
+"total_walkway_distance": "пешком 21 мин",
+
+"transfer_count": 0,
+
+"waypoints": [
+
+{
+
+"combined": false,
+
+"routes_names": [
+
+"25"
+
+],
+
+"subtype": "tram"
+
+}
+
+]
+
+},
+
+{
+
+"crossing_count": 0,
+
+"id": "59",
+
+"movements": [
+
+{
+
+"alternatives": [
+
+{
+
+"geometry": [
+
+{
+
+"selection": "LINESTRING(37.697461 55.798227, 37.697219 55.798105)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.697219 55.798105, 37.696846 55.798442, 37.696913 55.798465, 37.697097 55.798530, 37.697169 55.798555)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.697169 55.798555, 37.697179 55.798578, 37.697239 55.798712, 37.697257 55.798766, 37.697271 55.798807, 37.697283 55.798855, 37.697316 55.798894, 37.697373 55.798924, 37.697344 55.799044, 37.697373 55.799165)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.697373 55.799165, 37.697336 55.799173, 37.697319 55.799189, 37.697312 55.799205, 37.697312 55.799216, 37.697311 55.799245, 37.697306 55.799513, 37.697305 55.799548, 37.697340 55.799579, 37.697414 55.799597, 37.697602 55.799600, 37.697758 55.799602)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.697758 55.799602, 37.697797 55.799705, 37.697797 55.799785, 37.697792 55.800052, 37.697707 55.800163, 37.697603 55.800241)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.697603 55.800241, 37.697599 55.800487)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.697599 55.800487, 37.698127 55.800700, 37.698175 55.801181, 37.698172 55.801194, 37.698166 55.801209, 37.698148 55.801220, 37.698123 55.801228, 37.698093 55.801236, 37.698080 55.801276, 37.698069 55.801333, 37.698057 55.801363, 37.698121 55.801383, 37.698177 55.801414, 37.698228 55.801461, 37.698339 55.801460, 37.698442 55.801463, 37.698469 55.801445, 37.698502 55.801435, 37.698546 55.801430, 37.699031 55.801478, 37.699181 55.801497, 37.699362 55.801514, 37.699412 55.801519, 37.699633 55.801539, 37.699757 55.801565, 37.699887 55.801601, 37.700890 55.801933, 37.701170 55.802010, 37.702352 55.802286, 37.703161 55.802510, 37.703468 55.802629, 37.704171 55.802825, 37.704450 55.802867, 37.704570 55.802901, 37.705703 55.803212, 37.705873 55.803259, 37.706145 55.803334, 37.706603 55.803460, 37.706942 55.803561, 37.707241 55.803652, 37.707213 55.803686, 37.707186 55.804016, 37.707151 55.804106, 37.707204 55.804110, 37.707139 55.804288)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.707139 55.804288, 37.707220 55.804366)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.707220 55.804366, 37.707143 55.804574, 37.707098 55.804701, 37.707167 55.804708)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.707167 55.804708, 37.707292 55.804723)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.707292 55.804723, 37.707312 55.804669)",
+
+"z_first": 0,
+
+"z_last": 0
+
+}
+
+]
+
+}
+
+],
+
+"distance": 1205,
+
+"id": "60",
+
+"moving_duration": 867,
+
+"platforms": null,
+
+"routes": null,
+
+"type": "walkway",
+
+"waiting_duration": 0,
+
+"waypoint": {
+
+"comment": "пешком 1,3 км",
+
+"name": "",
+
+"subtype": "start"
+
+}
+
+},
+
+{
+
+"alternatives": [
+
+{
+
+"geometry": [
+
+{
+
+"selection": "LINESTRING(37.707312 55.804669, 37.706638 55.806534, 37.706486 55.806866, 37.706486 55.806866, 37.706407 55.807038, 37.706084 55.807743, 37.706035 55.807876, 37.705796 55.808663, 37.705773 55.808723, 37.705744 55.808773, 37.705703 55.808819, 37.705699 55.808823, 37.703964 55.809913, 37.703964 55.809913, 37.703053 55.810485, 37.702896 55.810572, 37.702753 55.810643, 37.702591 55.810720, 37.701972 55.810999, 37.701730 55.811093, 37.701529 55.811163, 37.697667 55.812512, 37.697667 55.812512, 37.697577 55.812544, 37.697468 55.812589, 37.697389 55.812631, 37.697304 55.812685, 37.697201 55.812755, 37.695285 55.814300, 37.695285 55.814300, 37.695073 55.814471, 37.695005 55.814519, 37.694910 55.814576, 37.694437 55.814790, 37.694437 55.814790, 37.694374 55.814818, 37.694374 55.814818, 37.693834 55.815062, 37.692710 55.815512, 37.691279 55.816219, 37.691111 55.816299, 37.690935 55.816377, 37.690742 55.816451, 37.690543 55.816517, 37.689091 55.816899, 37.689091 55.816899, 37.688232 55.817120, 37.688133 55.817135, 37.688044 55.817144, 37.687983 55.817146, 37.687925 55.817140, 37.685300 55.816091, 37.685151 55.816005, 37.685146 55.816002, 37.685043 55.815903, 37.685039 55.815899, 37.684968 55.815746, 37.684968 55.815746, 37.684943 55.815685, 37.684943 55.815679, 37.684943 55.815679, 37.684915 55.815595, 37.684858 55.815490, 37.684811 55.815453, 37.684746 55.815427, 37.684666 55.815413, 37.684585 55.815409, 37.683910 55.815484, 37.683910 55.815484, 37.683906 55.815485, 37.683505 55.815543, 37.683137 55.815632, 37.682842 55.815735, 37.679923 55.817113, 37.679697 55.817198, 37.679697 55.817198, 37.679452 55.817263, 37.679197 55.817316, 37.678881 55.817370, 37.678881 55.817370, 37.676014 55.817855, 37.675427 55.817966, 37.674852 55.818113, 37.670645 55.819328, 37.670645 55.819328, 37.670268 55.819436, 37.670268 55.819436, 37.670210 55.819453, 37.670210 55.819453, 37.668247 55.820018, 37.668247 55.820018, 37.667630 55.820196, 37.667630 55.820196, 37.667327 55.820283, 37.665856 55.820705, 37.665856 55.820705, 37.664176 55.821188, 37.662182 55.821803, 37.662182 55.821803, 37.658375 55.822966, 37.658375 55.822966, 37.657575 55.823211, 37.652794 55.824836, 37.652402 55.824974, 37.652402 55.824974, 37.652265 55.825022, 37.651428 55.825471, 37.651068 55.825617, 37.650897 55.825687, 37.650698 55.825761, 37.648796 55.826395)"
+
+}
+
+],
+
+"platforms": [
+
+{
+
+"geometry": "POINT(37.707312 55.804669)",
+
+"id": "76"
+
+},
+
+{
+
+"geometry": "POINT(37.706486 55.806866)",
+
+"id": "77"
+
+},
+
+{
+
+"geometry": "POINT(37.703964 55.809913)",
+
+"id": "78"
+
+},
+
+{
+
+"geometry": "POINT(37.697667 55.812512)",
+
+"id": "79"
+
+},
+
+{
+
+"geometry": "POINT(37.694374 55.814818)",
+
+"id": "80"
+
+},
+
+{
+
+"geometry": "POINT(37.689091 55.816899)",
+
+"id": "81"
+
+},
+
+{
+
+"geometry": "POINT(37.684968 55.815746)",
+
+"id": "82"
+
+},
+
+{
+
+"geometry": "POINT(37.678881 55.817370)",
+
+"id": "83"
+
+},
+
+{
+
+"geometry": "POINT(37.670645 55.819328)",
+
+"id": "84"
+
+},
+
+{
+
+"geometry": "POINT(37.662182 55.821803)",
+
+"id": "85"
+
+},
+
+{
+
+"geometry": "POINT(37.658375 55.822966)",
+
+"id": "86"
+
+},
+
+{
+
+"geometry": "POINT(37.652402 55.824974)",
+
+"id": "87"
+
+},
+
+{
+
+"geometry": "POINT(37.648796 55.826395)",
+
+"id": "88"
+
+}
+
+]
+
+}
+
+],
+
+"distance": 4809,
+
+"id": "61",
+
+"moving_duration": 840,
+
+"platforms": {
+
+"names": [
+
+"Телерадиокомпания МИР",
+
+"1-я Прогонная",
+
+"Инновационный университет",
+
+"Богородский храм",
+
+"Богатырский мост",
+
+"Ростокинский проезд",
+
+"Институт иностранных языков",
+
+"Станция юных натуралистов",
+
+"пл. Академика Люльки",
+
+"Бориса Галушкина д.17",
+
+"Ярославская"
+
+]
+
+},
+
+"routes": [
+
+{
+
+"color": "#eb5a2b",
+
+"names": [
+
+"11"
+
+],
+
+"subtype": "tram",
+
+"subtype_name": "трамвай"
+
+}
+
+],
+
+"type": "passage",
+
+"waiting_duration": 1161,
+
+"waypoint": {
+
+"combined": false,
+
+"comment": "",
+
+"name": "Мосгорсуд",
+
+"subtype": "tram"
+
+}
+
+},
+
+{
+
+"alternatives": [
+
+{
+
+"geometry": [
+
+{
+
+"selection": "LINESTRING(37.648796 55.826395, 37.648862 55.826459)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.648862 55.826459, 37.648624 55.826537, 37.648520 55.826563, 37.648211 55.826631, 37.648173 55.826650, 37.648163 55.826660, 37.648136 55.826652, 37.648073 55.826591)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.648073 55.826591, 37.647982 55.826506)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.647982 55.826506, 37.647935 55.826465, 37.647864 55.826404, 37.647828 55.826373, 37.646517 55.825081, 37.645719 55.824322, 37.645260 55.823904, 37.645026 55.823696, 37.644816 55.823497, 37.644672 55.823352, 37.644411 55.823145, 37.643613 55.822410, 37.643656 55.822397, 37.643382 55.822134, 37.643203 55.821964, 37.643018 55.821773, 37.642977 55.821735)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.642977 55.821735, 37.642882 55.821644)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.642882 55.821644, 37.642812 55.821579, 37.642669 55.821442, 37.642378 55.821171, 37.642309 55.821107, 37.642222 55.821021, 37.642069 55.820892, 37.641883 55.820954, 37.641737 55.821003, 37.641765 55.821037, 37.641777 55.821051, 37.641767 55.821066, 37.641753 55.821076, 37.641595 55.821125, 37.641504 55.821039)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.641504 55.821039, 37.641507 55.821029)",
+
+"z_first": 0,
+
+"z_last": 0
+
+}
+
+]
+
+}
+
+],
+
+"distance": 848,
+
+"id": "89",
+
+"moving_duration": 640,
+
+"platforms": null,
+
+"routes": null,
+
+"type": "walkway",
+
+"waiting_duration": 0,
+
+"waypoint": {
+
+"comment": "пешком 850 м",
+
+"name": "Проспект Мира",
+
+"subtype": "pedestrian"
+
+}
+
+},
+
+{
+
+"distance": 0,
+
+"id": "90",
+
+"moving_duration": 0,
+
+"type": "walkway",
+
+"waiting_duration": 0,
+
+"waypoint": {
+
+"comment": "Вы на месте в 17:43.",
+
+"name": "",
+
+"subtype": "finish"
+
+}
+
+}
+
+],
+
+"pedestrian": false,
+
+"route_id": "moscow-ctx-back.m9/ctxrouting/17727183120000.00000",
+
+"schedules": [
+
+{
+
+"origin_from": "eta",
+
+"precise_time": "17:19",
+
+"start_time": 62340,
+
+"start_time_utc": 1772720340,
+
+"type": "precise"
+
+}
+
+],
+
+"total_distance": 6862,
+
+"total_duration": 3508,
+
+"total_walkway_distance": "пешком 24 мин",
+
+"transfer_count": 0,
+
+"waypoints": [
+
+{
+
+"combined": false,
+
+"routes_names": [
+
+"11"
+
+],
+
+"subtype": "tram"
+
+}
+
+]
+
+}
+
+]
+
+```  
 </details>  
 Если вы выберете вид транспорта, не представленный на территории между точками маршрута, Routing API попытается построить пешеходный маршрут. Подробнее см. в разделе [Транспорт и пересадки](/api/navigation/routing/start#route-transport).  
 Например, если для координат из примера выше вы укажете способ передвижения `"transport": ["cable_car"]` (канатная дорога), вернётся пустой ответ, т. к. расстояние между точками превышает 3,5 км.  
@@ -27205,22 +31179,23 @@ Document: routingapi
 Вы можете указать желаемое количество вариантов маршрута:  
 * Для [общественного транспорта](#options-public): ограничить количество вариантов маршрута в ответе или указать желаемое количество маршрутов без пересадок.  
 * Для [других способов передвижения](#options-other): указать желаемое количество вариантов маршрута в ответе.
+
 ### Общественный транспорт {#options-public}  
 Для каждого варианта маршрута на общественном транспорте рассчитывается [продолжительность](#route-duration), используемый [транспорт и количество пересадок](#route-transport), а также данные об [участках маршрута](#route-parts) (полная геометрия, продолжительность, транспорт и другие).  
-ID каждого варианта маршрута в рамках запроса возвращается в поле `id`, а уникальный идентификатор варианта — в поле `route_id`:
+ID каждого варианта маршрута в рамках запроса возвращается в поле `id`, а уникальный идентификатор варианта — в поле `route_id`:  
 ```json
 
 "id": "1", // ID варианта маршрута в рамках запроса
 
 "route_id": "moscow-ctx-back.m1/ctxrouting/176..." // уникальный ID варианта маршрута
 
-```
+```  
 Вы можете [ограничить количество вариантов маршрута](#options-public-limit) в ответе.  
 #### Общая продолжительность {#route-duration}  
 Продолжительность каждого варианта маршрута на общественном транспорте возвращается в полях:  
 * `total_distance` — общая длина маршрута в метрах.  
 * `total_duration` — общее время в пути в секундах.  
-* `total_walkway_distance` — общее время в пути пешком в текстовом виде.
+* `total_walkway_distance` — общее время в пути пешком в текстовом виде.  
 ```json
 
 "total_distance": 8939 // общая длина маршрута 8939 метров
@@ -27229,20 +31204,7 @@ ID каждого варианта маршрута в рамках запрос
 
 "total_walkway_distance": "пешком 20 мин" // из них 20 минут пешком
 
-```
-
---- CHUNK 31 (803 tokens / 2019 chars) ---
-Document: routingapi
-
-```json
-
-"total_distance": 8939 // общая длина маршрута 8939 метров
-
-"total_duration": 2464, // общее время в пути около 41 минут
-
-"total_walkway_distance": "пешком 20 мин" // из них 20 минут пешком
-
-```
+```  
 #### Транспорт и пересадки {#route-transport}  
 Для каждого варианта маршрута на общественном транспорте в ответе указывается, какие виды транспорта используются и сколько пересадок необходимо сделать.  
 Если для выбранных видов транспорта невозможно построить маршрут (например, они не представлены на территории между точками маршрута):  
@@ -27253,7 +31215,7 @@ Document: routingapi
 * `combined` — можно ли проехать этот участок маршрута на разных видах транспорта.  
 * `routes_names` — названия маршрутов общественного транспорта.  
 * `subtype` — вид общественного транспорта.  
-Например, текущий маршрут содержит один участок на трамвае и два участка на метро:
+Например, текущий маршрут содержит один участок на трамвае и два участка на метро:  
 ```json
 
 "waypoints": [
@@ -27306,30 +31268,18 @@ Document: routingapi
 
 ]
 
-```
+```  
 <br />  
 Количество пересадок, используемых в варианте маршрута, указано в полях:  
 * `crossing_count` — количество пересадок между остановочными платформами. Например, пересадка с метро на автобус или переход между разными линиями метро.  
-* `transfer_count` — количество пересадок в рамках одной остановочной платформы. Например, пересадка с одного маршрута автобуса на другой.
+* `transfer_count` — количество пересадок в рамках одной остановочной платформы. Например, пересадка с одного маршрута автобуса на другой.  
 ```json
 
 "crossing_count": 2 // пересадки между платформами
 
 "transfer_count": 2, // пересадки в рамках одной платформы
 
-```
-
---- CHUNK 32 (635 tokens / 1674 chars) ---
-Document: routingapi
-
-* `transfer_count` — количество пересадок в рамках одной остановочной платформы. Например, пересадка с одного маршрута автобуса на другой.
-```json
-
-"crossing_count": 2 // пересадки между платформами
-
-"transfer_count": 2, // пересадки в рамках одной платформы
-
-```
+```  
 <br />  
 Массив `schedules` содержит расписание транспорта на маршруте. Каждый элемент массива содержит:  
 * `period` — период движения транспорта в минутах. Если транспорт ходит по точному расписанию, поле отсутствует.  
@@ -27337,7 +31287,7 @@ Document: routingapi
 * `start_time` — время прибытия транспорта на остановку по местному времени в формате Unix.  
 * `start_time_utc` — время прибытия транспорта на остановку по UTC в формате Unix.  
 * `type` — тип расписания: `precise` — точное, `periodic` — периодическое.  
-* `origin_from` — использовалось ли прогнозное расписание. Возвращается только для точного расписания (`"type": "precise"`). Возможное значение: `eta`.
+* `origin_from` — использовалось ли прогнозное расписание. Возвращается только для точного расписания (`"type": "precise"`). Возможное значение: `eta`.  
 ```json
 
 "schedules": [
@@ -27382,11 +31332,7 @@ Document: routingapi
 
 ]
 
-```
-
---- CHUNK 33 (943 tokens / 2373 chars) ---
-Document: routingapi
-
+```  
 #### Участки маршрута {#route-parts}  
 Каждый вариант маршрута на общественном транспорте может быть разделён на несколько участков. Список участков возвращается в массиве `movements`.  
 Например, трамвайный маршрут без пересадок может состоять из четырёх участков:  
@@ -27407,7 +31353,7 @@ ID каждого участка маршрута возвращается в п
 * `name` — название остановки.  
 * `subtype` — тип точки (начало или конец маршрута) или способ передвижения.  
 <br />  
-Пример для пешеходного участка:
+Пример для пешеходного участка:  
 ```json
 
 "type": "walkway", // пешеходный участок маршрута
@@ -27422,8 +31368,8 @@ ID каждого участка маршрута возвращается в п
 
 }
 
-```
-Пример для участка на общественном транспорте:
+```  
+Пример для участка на общественном транспорте:  
 ```json
 
 "type": "passage", // проезд на транспорте
@@ -27440,8 +31386,8 @@ ID каждого участка маршрута возвращается в п
 
 }
 
-```
-Пример перехода между платформами:
+```  
+Пример перехода между платформами:  
 ```json
 
 "type": "crossing", // переход между платформами
@@ -27456,8 +31402,8 @@ ID каждого участка маршрута возвращается в п
 
 }
 
-```
-Пример для конечной точки:
+```  
+Пример для конечной точки:  
 ```json
 
 {
@@ -27476,13 +31422,9 @@ ID каждого участка маршрута возвращается в п
 
 }
 
-```
-
---- CHUNK 34 (951 tokens / 2458 chars) ---
-Document: routingapi
-
+```  
 ##### Геометрия участка маршрута {#route-part-geometry}  
-Геометрия участка маршрута на общественном транспорте возвращается в виде линии или набора линий (`LINESTRING`) в массиве `alternatives.geometry`:
+Геометрия участка маршрута на общественном транспорте возвращается в виде линии или набора линий (`LINESTRING`) в массиве `alternatives.geometry`:  
 ```json
 
 "alternatives": [
@@ -27509,8 +31451,8 @@ Document: routingapi
 
 ]
 
-```
-Для участков маршрута на общественном транспорте будут указаны координаты остановок в виде точек (`POINT`) в массиве `alternatives.platforms`:
+```  
+Для участков маршрута на общественном транспорте будут указаны координаты остановок в виде точек (`POINT`) в массиве `alternatives.platforms`:  
 ```json
 
 "alternatives": [
@@ -27555,12 +31497,12 @@ Document: routingapi
 
 ]
 
-```
+```  
 ##### Продолжительность участка маршрута {#route-part-duration}  
 Продолжительность каждого участка маршрута на общественном транспорте возвращается в массиве `movements` в полях:  
 * `distance` — длина участка маршрута в метрах.  
 * `moving_duration` — время в пути на участке маршрута в секундах.  
-* `waiting_duration` — время ожидания на участке маршрута. Для пешеходных участков это значение равно `0`.
+* `waiting_duration` — время ожидания на участке маршрута. Для пешеходных участков это значение равно `0`.  
 ```json
 
 "movements": [
@@ -27581,10 +31523,10 @@ Document: routingapi
 
 ]
 
-```
+```  
 ##### Транспорт и остановки {#route-part-transport}  
 Для участков маршрута на общественном транспорте в массиве `movements` возвращаются дополнительные поля `platforms`, `routes` и `metro` (при использовании метро).  
-Поле `platforms` содержит названия всех промежуточных остановок на участке маршрута: всех остановок, кроме посадки и высадки. Последняя остановка в списке промежуточных — это остановка, после которой нужно выйти:
+Поле `platforms` содержит названия всех промежуточных остановок на участке маршрута: всех остановок, кроме посадки и высадки. Последняя остановка в списке промежуточных — это остановка, после которой нужно выйти:  
 ```json
 
 "movements": [
@@ -27611,22 +31553,13 @@ Document: routingapi
 
 ]
 
-```
+```  
 Поле `routes` содержит список всех маршрутов транспорта, которые можно использовать для проезда на текущем участке:  
 * `color` — цвет маршрута на карте в формате HEX.  
 * `names` — названия маршрутов общественного транспорта.  
 * `subtype` — вид общественного транспорта.  
 * `subtype_name` — название вида общественного транспорта в текстовом виде.  
-Например, текущий участок можно проехать на трамваях №7, №Т1 и №13:
-
---- CHUNK 35 (648 tokens / 1601 chars) ---
-Document: routingapi
-
-* `color` — цвет маршрута на карте в формате HEX.  
-* `names` — названия маршрутов общественного транспорта.  
-* `subtype` — вид общественного транспорта.  
-* `subtype_name` — название вида общественного транспорта в текстовом виде.  
-Например, текущий участок можно проехать на трамваях №7, №Т1 и №13:
+Например, текущий участок можно проехать на трамваях №7, №Т1 и №13:  
 ```json
 
 "movements": [
@@ -27665,7 +31598,7 @@ Document: routingapi
 
 ]
 
-```
+```  
 Если участок маршрута можно проехать на метро, в поле `metro` будут указаны параметры:  
 * `boarding_parts_suggest_5_wagons` — номера частей состава от 1 до 5, в которые рекомендуется посадка.  
 * `color` — цвет линии метро на карте в формате HEX.  
@@ -27674,7 +31607,7 @@ Document: routingapi
 * `line_name` — название линии метро.  
 * `ui_direction_suggest` — направление движения.  
 * `ui_station_count` — количество станций метро.  
-Пример:
+Пример:  
 ```json
 
 "movements": [
@@ -27715,27 +31648,7 @@ Document: routingapi
 
 ...
 
-```
-
---- CHUNK 36 (712 tokens / 1802 chars) ---
-Document: routingapi
-
-
-"ui_direction_suggest": "в сторону станции «Медведково»", // направление движения
-
-"ui_station_count": "1 станция" // количество станций
-
-},
-
-},
-
-...
-
-]
-
-...
-
-```
+```  
 #### Ограничение вариантов {#options-public-limit}  
 Для маршрутов на общественном транспорте вы можете ограничить количество вариантов маршрута в ответе. Для этого укажите максимальное количество вариантов или желаемое количество прямых маршрутов (без пересадок).  
 При ограничении максимального количества вариантов (`max_result_count`) в ответе возвращаются кратчайшие по времени маршруты, отсортированные по возрастанию общего времени в пути (`total_duration`).  
@@ -27744,18 +31657,13 @@ Document: routingapi
 * Вернётся меньше прямых маршрутов, если их желаемое количество не удалось построить.  
 Например, при ограничении количества маршрутов через `"max_result_count": 3` в ответе возвращаются три маршрута с пересадками, кратчайших по времени. Если вы укажете желаемое количество прямых маршрутов через `"direct_routes_count": 2`, то в ответе вернётся один маршрут с пересадками и два прямых маршрута, даже если их время в пути выше.  
 Чтобы построить маршрут на общественном транспорте с ограниченным количества вариантов, отправьте POST-запрос на [/public_transport/2.0](/api/navigation/routing/reference/public_transport) со следующими параметрами:  
-* `source` (обязательный параметр) — координаты начальной точки (широта и долгота).
-
---- CHUNK 37 (477 tokens / 1349 chars) ---
-Document: routingapi
-
-* `source` (обязательный параметр) — координаты начальной точки (широта и долгота).
+* `source` (обязательный параметр) — координаты начальной точки (широта и долгота).  
 * `target` (обязательный параметр) — координаты конечной точки (широта и долгота).  
 * `transport` (обязательный параметр) — массив видов общественного транспорта. Например, `tram` — трамвай. Полный список видов общественного транспорта см. в описании параметра `transport` в [Справочнике API](/api/navigation/routing/reference/public_transport) или в разделе [Способы передвижения](#public-transport).  
 * `max_result_count` — максимальное количество вариантов маршрута в ответе.  
 * `direct_routes_count` — желаемое количество маршрутов без пересадок в ответе. Если невозможно построить указанное количество маршрутов без пересадок, вернётся меньшее количество.  
 * `locale` — язык текстовых описаний элементов маршрута: русский.  
-**Пример запроса:**
+**Пример запроса:**  
 ```curl
 
 curl --request POST \
@@ -27808,14 +31716,10 @@ curl --request POST \
 
 }'
 
-```
+```  
 **Пример ответа:**  
 <details>  
-<summary><code>response.json</code></summary>
-
---- CHUNK 38 (7851 tokens / 18476 chars) ---
-Document: routingapi
-
+<summary><code>response.json</code></summary>  
 ```json
 
 [
@@ -29276,35 +33180,32 @@ Document: routingapi
 
 ]
 
-```
-
---- CHUNK 39 (964 tokens / 2660 chars) ---
-Document: routingapi
-
+```  
 </details>  
 <br />
+
 ### Другие способы передвижения {#options-other}  
 Для каждого варианта маршрута для других способов передвижения рассчитывается продолжительность и данные о манёврах (полная геометрия, продолжительность, и другие).  
-Уникальные ID каждого варианта маршрута возвращаются в полях `id` и `route_id`:
+Уникальные ID каждого варианта маршрута возвращаются в полях `id` и `route_id`:  
 ```json
 
 "id": "4574667871883235027",
 
 "route_id": "moscow-cr-back..."
 
-```
+```  
 Вы можете [указать желаемое количество дополнительных вариантов маршрута](#options-other-alternative) в ответе.  
 #### Общая продолжительность {#options-other-duration}  
 Продолжительность каждого варианта маршрута возвращается в полях:  
 * `total_distance` — общая длина маршрута в метрах.  
-* `total_duration` — общее время в пути в секундах.
+* `total_duration` — общее время в пути в секундах.  
 ```json
 
 "total_distance": 5904, // общая длина маршрута 5904 метров
 
 "total_duration": 1099, // общее время в пути около 18 минут
 
-```
+```  
 #### Построение дополнительных вариантов {#options-other-alternative}  
 Пример построения нескольких вариантов маршрутов для автомобиля:  
 <HtmlExampleWithSrcCode iframeStyles={{ height: '350px' }}>  
@@ -29368,24 +33269,7 @@ method: "POST",
 headers: {  
 "Content-Type": "application/json"  
 },  
-body: JSON.stringify({
-
---- CHUNK 40 (704 tokens / 2368 chars) ---
-Document: routingapi
-
-size: [32, 32],  
-anchor: [16, 32],  
-icon: 'https://disk.2gis.com/styles/assets/icons/finish-22966aee51020ebd9f1a6c0a4a5e4333cb5f8a18fbffeeee693b7e18e6e5df78.svg'  
-});  
-let mainRouteLine;  
-let alternativeRouteLine;  
-function fetchRoute() {  
-fetch(reqUrl, {  
-method: "POST",  
-headers: {  
-"Content-Type": "application/json"  
-},  
-body: JSON.stringify({
+body: JSON.stringify({  
 points,  
 locale: "ru",  
 transport: "driving",  
@@ -29463,24 +33347,7 @@ fetchRoute();
 </html>  
 `}  
 </HtmlExampleWithSrcCode>  
-<br />
-
---- CHUNK 41 (642 tokens / 1708 chars) ---
-Document: routingapi
-
-mainRouteLine = routeLine;  
-} else if (color === "#248A3F") {  
-if (alternativeRouteLine) alternativeRouteLine.destroy();  
-alternativeRouteLine = routeLine;  
-}  
-}  
-fetchRoute();  
-</script>  
-</body>  
-</html>  
-`}  
-</HtmlExampleWithSrcCode>  
-<br />
+<br />  
 Чтобы построить несколько вариантов маршрута, отправьте POST-запрос на [/routing/7.0.0/global](/api/navigation/routing/reference/routing) со следующими параметрами:  
 * `points` (обязательный параметр) — массив координат [точек маршрута](#point-types). Укажите минимум две точки: начальную и конечную.  
 * `transport` — способ передвижения.  
@@ -29491,7 +33358,7 @@ fetchRoute();
 * `alternative` — количество дополнительных вариантов маршрута:  
 * Для маршрутов на автомобиле, такси или мотоцикле: до 10.  
 * Для остальных способов передвижения: до 2.  
-**Пример запроса:**
+**Пример запроса:**  
 ```curl
 
 curl --request POST \
@@ -29536,15 +33403,11 @@ curl --request POST \
 
 }'
 
-```
+```  
 Список маршрутов вернётся в поле `result`. Первый маршрут в списке является основным: наиболее оптимальным. Другие варианты маршрута могут значительно отличаться от основного по геометрии и времени в пути.  
 **Пример ответа:**  
 <details>  
-<summary><code>response.json</code></summary>
-
---- CHUNK 42 (19588 tokens / 47359 chars) ---
-Document: routingapi
-
+<summary><code>response.json</code></summary>  
 ```json
 
 {
@@ -32761,11 +36624,866 @@ Document: routingapi
 
 }
 
-```
+```  
+</details>  
+<br />
 
---- CHUNK 43 (860 tokens / 2190 chars) ---
+--- CHUNK 5 (58243 tokens / 141458 chars) ---
 Document: routingapi
 
+H1: Примеры
+H2: Построение маршрутов {#routing}
+
+H3: 
+
+
+"style": "normal"
+
+},
+
+{
+
+"color": "normal",
+
+"length": 41,
+
+"selection": "LINESTRING(37.584702 55.759192, 37.584583 55.758920, 37.584552 55.758831)",
+
+"style": "normal"
+
+},
+
+{
+
+"color": "normal",
+
+"length": 244,
+
+"selection": "LINESTRING(37.584552 55.758831, 37.584540 55.758798, 37.584481 55.758631, 37.584447 55.758512, 37.584395 55.758321, 37.584344 55.758079, 37.584186 55.757315, 37.584176 55.757269, 37.584125 55.757023, 37.584043 55.756629)",
+
+"style": "normal"
+
+},
+
+{
+
+"color": "fast",
+
+"length": 122,
+
+"selection": "LINESTRING(37.584043 55.756629, 37.583822 55.755538)",
+
+"style": "normal"
+
+}
+
+],
+
+"names": [
+
+"Большая Садовая"
+
+]
+
+},
+
+"outcoming_path_comment": "1.6 км прямо",
+
+"turn_angle": 83,
+
+"turn_direction": "right",
+
+"type": "crossroad"
+
+},
+
+{
+
+"comment": "Держитесь правее на ул. Новинский бульвар",
+
+"icon": "crossroad_keep_right",
+
+"id": "10675149391242650323",
+
+"outcoming_path": {
+
+"distance": 287,
+
+"duration": 42,
+
+"geometry": [
+
+{
+
+"color": "normal",
+
+"length": 287,
+
+"selection": "LINESTRING(37.583822 55.755538, 37.583700 55.755320, 37.583677 55.755270, 37.583651 55.755185, 37.583580 55.754874, 37.583460 55.754497, 37.583368 55.754261, 37.583347 55.754147, 37.583324 55.754018, 37.583209 55.753360, 37.583139 55.752970)",
+
+"style": "normal"
+
+}
+
+],
+
+"names": [
+
+"Новинский бульвар"
+
+]
+
+},
+
+"outcoming_path_comment": "300 м прямо",
+
+"turn_angle": 10,
+
+"turn_direction": "keep_right",
+
+"type": "crossroad"
+
+},
+
+{
+
+"comment": "Разворот на ул. Новинский бульвар",
+
+"icon": "turn_over_right_hand",
+
+"id": "5410189847226050853",
+
+"outcoming_path": {
+
+"distance": 91,
+
+"duration": 13,
+
+"geometry": [
+
+{
+
+"color": "fast",
+
+"length": 45,
+
+"selection": "LINESTRING(37.583139 55.752970, 37.583154 55.752938, 37.583184 55.752911, 37.583221 55.752892, 37.583281 55.752879, 37.583339 55.752872, 37.583584 55.752866, 37.583623 55.752870, 37.583655 55.752880, 37.583683 55.752898, 37.583702 55.752933)",
+
+"style": "normal"
+
+},
+
+{
+
+"color": "normal",
+
+"length": 46,
+
+"selection": "LINESTRING(37.583702 55.752933, 37.583775 55.753348)",
+
+"style": "normal"
+
+}
+
+],
+
+"names": [
+
+"Новинский бульвар"
+
+]
+
+},
+
+"outcoming_path_comment": "90 м прямо",
+
+"turn_angle": -180,
+
+"turn_direction": "uturn_left",
+
+"type": "crossroad"
+
+},
+
+{
+
+"comment": "Держитесь левее на ул. Новинский бульвар",
+
+"icon": "crossroad_keep_left",
+
+"id": "13334618759097315724",
+
+"outcoming_path": {
+
+"distance": 6154,
+
+"duration": 973,
+
+"geometry": [
+
+{
+
+"color": "normal",
+
+"length": 432,
+
+"selection": "LINESTRING(37.583775 55.753348, 37.584019 55.754613, 37.584049 55.754877, 37.584040 55.754980, 37.584014 55.755103, 37.583987 55.755277, 37.583989 55.755285, 37.584368 55.757099, 37.584373 55.757134, 37.584393 55.757231)",
+
+"style": "normal"
+
+},
+
+{
+
+"color": "slow",
+
+"length": 1156,
+
+"selection": "LINESTRING(37.584393 55.757231, 37.584599 55.758224, 37.584616 55.758305, 37.584701 55.758610, 37.584799 55.758885, 37.584902 55.759123, 37.584918 55.759161, 37.584980 55.759280, 37.585062 55.759437, 37.585108 55.759517, 37.585197 55.759670, 37.585321 55.759863, 37.585480 55.760112, 37.585610 55.760316, 37.585641 55.760359, 37.585860 55.760655, 37.586396 55.761385, 37.586592 55.761651, 37.586717 55.761822, 37.586860 55.762016, 37.587004 55.762212, 37.587116 55.762364, 37.587445 55.762789, 37.587551 55.762927, 37.587782 55.763201, 37.587849 55.763280, 37.587936 55.763384, 37.588134 55.763606, 37.588203 55.763684, 37.588416 55.763898, 37.588471 55.763953, 37.588784 55.764248, 37.588984 55.764428, 37.589118 55.764549, 37.589422 55.764814, 37.589738 55.765068, 37.590030 55.765294, 37.590045 55.765304, 37.590722 55.765784, 37.590908 55.765916, 37.591349 55.766228, 37.591622 55.766422, 37.591802 55.766547, 37.591951 55.766651)",
+
+"style": "normal"
+
+},
+
+{
+
+"color": "normal",
+
+"length": 341,
+
+"selection": "LINESTRING(37.591951 55.766651, 37.592175 55.766807, 37.592529 55.767054, 37.592988 55.767375, 37.593622 55.767817, 37.594008 55.768087, 37.594339 55.768318, 37.594632 55.768511, 37.594932 55.768694, 37.595214 55.768858, 37.595486 55.769004)",
+
+"style": "normal"
+
+},
+
+{
+
+"color": "slow",
+
+"length": 81,
+
+"selection": "LINESTRING(37.595486 55.769004, 37.596007 55.769269, 37.596454 55.769495)",
+
+"style": "tunnel"
+
+},
+
+{
+
+"color": "normal",
+
+"length": 28,
+
+"selection": "LINESTRING(37.596454 55.769495, 37.596797 55.769669)",
+
+"style": "tunnel"
+
+},
+
+{
+
+"color": "slow",
+
+"length": 87,
+
+"selection": "LINESTRING(37.596797 55.769669, 37.597193 55.769869, 37.597838 55.770195)",
+
+"style": "tunnel"
+
+},
+
+{
+
+"color": "normal",
+
+"length": 259,
+
+"selection": "LINESTRING(37.597838 55.770195, 37.598115 55.770332, 37.598389 55.770458, 37.598674 55.770579, 37.599125 55.770758, 37.599606 55.770937, 37.599820 55.771001, 37.600450 55.771189, 37.600775 55.771293, 37.601329 55.771460)",
+
+"style": "normal"
+
+},
+
+{
+
+"color": "slow",
+
+"length": 205,
+
+"selection": "LINESTRING(37.601329 55.771460, 37.602336 55.771763, 37.602421 55.771789, 37.602861 55.771922, 37.603929 55.772247, 37.604227 55.772338)",
+
+"style": "normal"
+
+},
+
+{
+
+"color": "normal",
+
+"length": 20,
+
+"selection": "LINESTRING(37.604227 55.772338, 37.604516 55.772426)",
+
+"style": "normal"
+
+},
+
+{
+
+"color": "slow",
+
+"length": 240,
+
+"selection": "LINESTRING(37.604516 55.772426, 37.605210 55.772564, 37.605213 55.772565, 37.605268 55.772575, 37.605728 55.772651, 37.605822 55.772664, 37.607062 55.772839, 37.607333 55.772877, 37.607382 55.772884, 37.608251 55.772986)",
+
+"style": "normal"
+
+},
+
+{
+
+"color": "normal",
+
+"length": 156,
+
+"selection": "LINESTRING(37.608251 55.772986, 37.608986 55.773080, 37.609121 55.773096, 37.609234 55.773109, 37.610156 55.773194, 37.610728 55.773247)",
+
+"style": "normal"
+
+},
+
+{
+
+"color": "fast",
+
+"length": 416,
+
+"selection": "LINESTRING(37.610728 55.773247, 37.611026 55.773277, 37.611498 55.773310, 37.612248 55.773363, 37.612442 55.773370, 37.613457 55.773408, 37.615054 55.773470, 37.617345 55.773557)",
+
+"style": "normal"
+
+},
+
+{
+
+"color": "fast",
+
+"length": 370,
+
+"selection": "LINESTRING(37.617345 55.773557, 37.619000 55.773621, 37.619209 55.773628, 37.621035 55.773684, 37.621922 55.773690, 37.623161 55.773671, 37.623250 55.773668)",
+
+"style": "bridge"
+
+},
+
+{
+
+"color": "normal",
+
+"length": 250,
+
+"selection": "LINESTRING(37.623250 55.773668, 37.624510 55.773622, 37.625672 55.773548, 37.625906 55.773531, 37.626549 55.773483, 37.627213 55.773398)",
+
+"style": "normal"
+
+},
+
+{
+
+"color": "slow",
+
+"length": 325,
+
+"selection": "LINESTRING(37.627213 55.773398, 37.627407 55.773378, 37.627898 55.773317, 37.628220 55.773274, 37.629057 55.773153, 37.630300 55.772978, 37.630537 55.772946, 37.631810 55.772768, 37.631859 55.772761, 37.632302 55.772699)",
+
+"style": "normal"
+
+},
+
+{
+
+"color": "normal",
+
+"length": 61,
+
+"selection": "LINESTRING(37.632302 55.772699, 37.632528 55.772668, 37.633038 55.772597, 37.633286 55.772569)",
+
+"style": "normal"
+
+},
+
+{
+
+"color": "fast",
+
+"length": 614,
+
+"selection": "LINESTRING(37.633286 55.772569, 37.633809 55.772511, 37.635934 55.772276, 37.636482 55.772197, 37.636863 55.772130, 37.637246 55.772053, 37.637383 55.772024, 37.637746 55.771946, 37.638398 55.771787, 37.638671 55.771709, 37.639223 55.771539, 37.639458 55.771467, 37.640138 55.771258, 37.641596 55.770815, 37.642386 55.770573)",
+
+"style": "normal"
+
+},
+
+{
+
+"color": "normal",
+
+"length": 38,
+
+"selection": "LINESTRING(37.642386 55.770573, 37.642720 55.770474, 37.642942 55.770406)",
+
+"style": "normal"
+
+},
+
+{
+
+"color": "fast",
+
+"length": 99,
+
+"selection": "LINESTRING(37.642942 55.770406, 37.643525 55.770234, 37.643708 55.770178, 37.643975 55.770092, 37.644348 55.769976)",
+
+"style": "normal"
+
+},
+
+{
+
+"color": "normal",
+
+"length": 93,
+
+"selection": "LINESTRING(37.644348 55.769976, 37.644647 55.769882, 37.645657 55.769580)",
+
+"style": "normal"
+
+},
+
+{
+
+"color": "fast",
+
+"length": 32,
+
+"selection": "LINESTRING(37.645657 55.769580, 37.645818 55.769531, 37.646121 55.769442)",
+
+"style": "normal"
+
+},
+
+{
+
+"color": "normal",
+
+"length": 76,
+
+"selection": "LINESTRING(37.646121 55.769442, 37.646389 55.769364, 37.647223 55.769158)",
+
+"style": "normal"
+
+},
+
+{
+
+"color": "fast",
+
+"length": 746,
+
+"selection": "LINESTRING(37.647223 55.769158, 37.647789 55.769017, 37.648564 55.768776, 37.649337 55.768557, 37.649691 55.768459, 37.649817 55.768424, 37.649886 55.768391, 37.650113 55.768283, 37.650280 55.768171, 37.651022 55.767635, 37.651497 55.767307, 37.651966 55.766988, 37.652654 55.766522, 37.653423 55.765990, 37.653591 55.765874, 37.653911 55.765652, 37.654967 55.764923, 37.655597 55.764466)",
+
+"style": "normal"
+
+},
+
+{
+
+"color": "normal",
+
+"length": 29,
+
+"selection": "LINESTRING(37.655597 55.764466, 37.655881 55.764258)",
+
+"style": "normal"
+
+}
+
+],
+
+"names": [
+
+"Новинский бульвар"
+
+]
+
+},
+
+"outcoming_path_comment": "6.2 км прямо",
+
+"turn_angle": 0,
+
+"turn_direction": "keep_left",
+
+"type": "crossroad"
+
+},
+
+{
+
+"comment": "Разворот на ул. Садовая-Черногрязская",
+
+"icon": "turn_over_right_hand",
+
+"id": "6434601248905950874",
+
+"outcoming_path": {
+
+"distance": 71,
+
+"duration": 18,
+
+"geometry": [
+
+{
+
+"color": "fast",
+
+"length": 22,
+
+"selection": "LINESTRING(37.655881 55.764258, 37.655917 55.764246, 37.655955 55.764239, 37.655993 55.764237, 37.656027 55.764240, 37.656049 55.764245, 37.656067 55.764253, 37.656086 55.764271, 37.656095 55.764288, 37.656094 55.764310, 37.656076 55.764339)",
+
+"style": "normal"
+
+},
+
+{
+
+"color": "slow",
+
+"length": 49,
+
+"selection": "LINESTRING(37.656076 55.764339, 37.655591 55.764691)",
+
+"style": "normal"
+
+}
+
+],
+
+"names": [
+
+"Садовая-Черногрязская"
+
+]
+
+},
+
+"outcoming_path_comment": "70 м прямо",
+
+"turn_angle": -180,
+
+"turn_direction": "uturn_left",
+
+"type": "crossroad"
+
+},
+
+{
+
+"comment": "Поворот направо",
+
+"icon": "crossroad_right",
+
+"id": "5743155022271605562",
+
+"outcoming_path": {
+
+"distance": 36,
+
+"duration": 10,
+
+"geometry": [
+
+{
+
+"color": "ignore",
+
+"length": 21,
+
+"selection": "LINESTRING(37.655591 55.764691, 37.655782 55.764778, 37.655867 55.764818)",
+
+"style": "living_zone"
+
+},
+
+{
+
+"color": "ignore",
+
+"length": 12,
+
+"selection": "LINESTRING(37.655867 55.764818, 37.656014 55.764887)",
+
+"style": "archway"
+
+},
+
+{
+
+"color": "ignore",
+
+"length": 3,
+
+"selection": "LINESTRING(37.656014 55.764887, 37.656064 55.764909)",
+
+"style": "living_zone"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "40 м прямо",
+
+"turn_angle": 89,
+
+"turn_direction": "right",
+
+"type": "crossroad"
+
+},
+
+{
+
+"comment": "Поворот направо",
+
+"icon": "crossroad_right",
+
+"id": "13804885631616694287",
+
+"outcoming_path": {
+
+"distance": 93,
+
+"duration": 26,
+
+"geometry": [
+
+{
+
+"color": "ignore",
+
+"length": 93,
+
+"selection": "LINESTRING(37.656064 55.764909, 37.656554 55.764570, 37.656591 55.764558, 37.656635 55.764560, 37.656674 55.764578, 37.656728 55.764601, 37.656741 55.764609, 37.656749 55.764617, 37.656755 55.764630, 37.656755 55.764641, 37.656749 55.764655, 37.656538 55.764857)",
+
+"style": "living_zone"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "90 м прямо",
+
+"turn_angle": 90,
+
+"turn_direction": "right",
+
+"type": "crossroad"
+
+},
+
+{
+
+"comment": "Поворот налево",
+
+"icon": "crossroad_left",
+
+"id": "3296477686701001818",
+
+"outcoming_path": {
+
+"distance": 21,
+
+"duration": 6,
+
+"geometry": [
+
+{
+
+"color": "ignore",
+
+"length": 21,
+
+"selection": "LINESTRING(37.656538 55.764857, 37.656510 55.764857, 37.656485 55.764865, 37.656303 55.764992)",
+
+"style": "living_zone"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "20 м прямо",
+
+"turn_angle": -46,
+
+"turn_direction": "left",
+
+"type": "crossroad"
+
+},
+
+{
+
+"comment": "Поворот направо",
+
+"icon": "crossroad_right",
+
+"id": "4920960549958296784",
+
+"outcoming_path": {
+
+"distance": 18,
+
+"duration": 5,
+
+"geometry": [
+
+{
+
+"color": "ignore",
+
+"length": 18,
+
+"selection": "LINESTRING(37.656303 55.764992, 37.656543 55.765075, 37.656553 55.765080)",
+
+"style": "living_zone"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "20 м прямо",
+
+"turn_angle": 91,
+
+"turn_direction": "right",
+
+"type": "crossroad"
+
+},
+
+{
+
+"comment": "finish",
+
+"icon": "finish",
+
+"id": "16377021944685554640",
+
+"outcoming_path_comment": "Вы на месте!",
+
+"type": "end"
+
+}
+
+],
+
+"reliability": 0.0,
+
+"route_id": "moscow-cr-back.m9/carrouting/1772721452.929739",
+
+"total_distance": 9415,
+
+"total_duration": 1943,
+
+"type": "carrouting",
+
+"ui_total_distance": {
+
+"unit": "км",
+
+"value": "9.4"
+
+},
+
+"ui_total_duration": "32 мин",
+
+"waypoints": [
+
+{
+
+"original_point": {
+
+"lat": 55.77548691400483,
+
+"lon": 37.58308675494588
+
+},
+
+"projected_point": {
+
+"lat": 55.77548691400483,
+
+"lon": 37.58308675494588
+
+},
+
+"transit": false
+
+},
+
+{
+
+"original_point": {
+
+"lat": 55.76508099601444,
+
+"lon": 37.65655367382703
+
+},
+
+"projected_point": {
+
+"lat": 55.76508099601444,
+
+"lon": 37.65655367382703
+
+},
+
+"transit": false
+
+}
+
+]
+
+}
+
+],
+
+"status": "OK",
+
+"type": "result"
+
+}
+
+```  
 </details>  
 <br />
 ## Построение маршрутов {#routing}  
@@ -32781,7 +37499,7 @@ Document: routingapi
 * `summary` — упрощённая выдача, в ответе только время и длина маршрута.  
 * `detailed` — полная выдача с геометрией маршрута.  
 * `locale` — язык текстовых описаний элементов маршрута: русский.  
-**Пример запроса:**
+**Пример запроса:**  
 ```curl
 
 curl --request POST \
@@ -32852,10 +37570,10 @@ curl --request POST \
 
 }'
 
-```
+```  
 **Пример ответа:**  
 <details>  
-<summary><code>response.json</code></summary>
+<summary><code>response.json</code></summary>  
 ```json
 
 [
@@ -32902,51 +37620,10 @@ curl --request POST \
 
 ]
 
-```
+```  
 </details>  
 <br />
 
---- CHUNK 44 (764 tokens / 1968 chars) ---
-Document: routingapi
-
-
-"lat2": 55.765036,
-
-"lon1": 37.582591,
-
-"lon2": 37.656625,
-
-"reliability": 1,
-
-"status": "OK"
-
-},
-
-{
-
-"distance": 5948,
-
-"duration": 1764,
-
-"lat1": 55.798227,
-
-"lat2": 55.821029,
-
-"lon1": 37.697461,
-
-"lon2": 37.641507,
-
-"reliability": 1,
-
-"status": "OK"
-
-}
-
-]
-
-```
-</details>  
-<br />
 ### Кратчайший по времени или расстоянию {#shortest-route}  
 По умолчанию для любого способа передвижения строится кратчайший по времени маршрут. Для всех способов, кроме общественного транспорта, также [учитываются пробки](#traffic-jams).  
 Вы также можете построить кратчайший по расстоянию маршрут. В этом случае пробки учитываться не будут, и маршрут может оказаться не оптимальным по времени.  
@@ -32997,24 +37674,7 @@ const points = [
 "lat": 55.765036  
 }  
 ];  
-const map = new mapgl.Map('container', {
-
---- CHUNK 45 (707 tokens / 2162 chars) ---
-Document: routingapi
-
-const points = [  
-{  
-"type": "stop",  
-"lon": 37.582591,  
-"lat": 55.775364  
-},  
-{  
-"type": "stop",  
-"lon": 37.656625,  
-"lat": 55.765036  
-}  
-];  
-const map = new mapgl.Map('container', {
+const map = new mapgl.Map('container', {  
 center: [37.615655, 55.768005],  
 zoom: 13,  
 key: 'Your API access key',  
@@ -33080,25 +37740,7 @@ return selection
 .replace(")", "")  
 .split(",")  
 .map((point) => point.trim().split(" ").map(Number));  
-});
-
---- CHUNK 46 (732 tokens / 2223 chars) ---
-Document: routingapi
-
-if (  
-maneuver.outcoming_path &&  
-maneuver.outcoming_path.geometry &&  
-maneuver.outcoming_path.geometry.length > 0  
-) {  
-return maneuver.outcoming_path.geometry  
-.flatMap((geometry) => {  
-const selection = geometry.selection;  
-return selection  
-.replace("LINESTRING(", "")  
-.replace(")", "")  
-.split(",")  
-.map((point) => point.trim().split(" ").map(Number));  
-});
+});  
 }  
 return [];  
 });  
@@ -33141,7 +37783,7 @@ fetchRoute();
 * `route_mode` — тип построения маршрута:  
 * `fastest` — кратчайший по времени.  
 * `shortest` — кратчайший по расстоянию.  
-**Пример запроса:**
+**Пример запроса:**  
 ```curl
 
 curl --request POST \
@@ -33186,14 +37828,10 @@ curl --request POST \
 
 }'
 
-```
+```  
 **Пример ответа:**  
 <details>  
-<summary><code>response.json</code></summary>
-
---- CHUNK 47 (11966 tokens / 29456 chars) ---
-Document: routingapi
-
+<summary><code>response.json</code></summary>  
 ```json
 
 {
@@ -35334,69 +39972,10 @@ Document: routingapi
 
 }
 
-```
-
---- CHUNK 48 (813 tokens / 2212 chars) ---
-Document: routingapi
-
-
-"original_point": {
-
-"lat": 55.77548691400483,
-
-"lon": 37.58308675494588
-
-},
-
-"projected_point": {
-
-"lat": 55.77548691400483,
-
-"lon": 37.58308675494588
-
-},
-
-"transit": false
-
-},
-
-{
-
-"original_point": {
-
-"lat": 55.76508099601444,
-
-"lon": 37.65655367382703
-
-},
-
-"projected_point": {
-
-"lat": 55.76508099601444,
-
-"lon": 37.65655367382703
-
-},
-
-"transit": false
-
-}
-
-]
-
-}
-
-],
-
-"status": "OK",
-
-"type": "result"
-
-}
-
-```
+```  
 </details>  
 <br />
+
 ### Время отправления {#start-time}  
 По умолчанию маршруты на общественном транспорте строятся на текущее время по местному времени. При расчёте учитывается [расписание движения](#schedule) общественного транспорта.  
 :::note[Доступность для способов передвижения]  
@@ -35408,7 +39987,7 @@ Document: routingapi
 * `transport` (обязательный параметр) — массив видов общественного транспорта. Например, `tram` — трамвай. Полный список видов общественного транспорта см. в описании параметра `transport` в [Справочнике API](/api/navigation/routing/reference/public_transport) или в разделе [Способы передвижения](#public-transport).  
 * `start_time` — дата и время начала движения в формате Unix-времени (например, `1766646000`).  
 * `locale` — язык текстовых описаний элементов маршрута: русский.  
-**Пример запроса:**
+**Пример запроса:**  
 ```curl
 
 curl --request POST \
@@ -35459,14 +40038,10 @@ curl --request POST \
 
 }'
 
-```
+```  
 **Пример ответа:**  
 <details>  
-<summary><code>response.json</code></summary>
-
---- CHUNK 49 (3424 tokens / 7854 chars) ---
-Document: routingapi
-
+<summary><code>response.json</code></summary>  
 ```json
 
 [
@@ -36051,86 +40626,9 @@ Document: routingapi
 
 ]
 
-```
-
---- CHUNK 50 (807 tokens / 2221 chars) ---
-Document: routingapi
-
-
-}
-
-],
-
-"total_distance": 6054,
-
-"total_duration": 2140,
-
-"total_walkway_distance": "пешком 21 мин",
-
-"transfer_count": 0,
-
-"transport": [
-
-"pedestrian",
-
-"bus",
-
-"trolleybus",
-
-"tram",
-
-"shuttle_bus",
-
-"metro",
-
-"suburban_train",
-
-"funicular_railway",
-
-"monorail",
-
-"river_transport",
-
-"cable_car",
-
-"light_rail",
-
-"premetro",
-
-"light_metro",
-
-"aeroexpress",
-
-"mcd",
-
-"mcc"
-
-],
-
-"waypoints": [
-
-{
-
-"combined": false,
-
-"routes_names": [
-
-"25"
-
-],
-
-"subtype": "tram"
-
-}
-
-]
-
-}
-
-]
-
-```
+```  
 </details>
+
 ### Учёт пробок {#traffic-jams}  
 По умолчанию при расчёте маршрутов для всех способов передвижения (кроме общественного транспорта) используются данные о пробках, актуальные на момент отправки запроса.  
 Вы можете построить маршрут на определённую дату и время. В этом случае будут использованы статистические данные о пробках, чтобы предсказать длительность маршрута. Детальные данные о пробках (например, цветовая индикация или уровень загруженности) в ответе API не предоставляются.  
@@ -36179,24 +40677,7 @@ const points = [
 "type": "stop",  
 "lon": 37.656625,  
 "lat": 55.765036  
-}
-
---- CHUNK 51 (730 tokens / 2237 chars) ---
-Document: routingapi
-
-<script>  
-const reqUrl = \`https://routing.api.2gis.com/routing/7.0.0/global?key=Your directions API access key\`;  
-const points = [  
-{  
-"type": "stop",  
-"lon": 37.582591,  
-"lat": 55.775364  
-},  
-{  
-"type": "stop",  
-"lon": 37.656625,  
-"lat": 55.765036  
-}
+}  
 ];  
 const map = new mapgl.Map('container', {  
 center: [37.615655, 55.768005],  
@@ -36262,23 +40743,7 @@ maneuver.outcoming_path.geometry &&
 maneuver.outcoming_path.geometry.length > 0  
 ) {  
 return maneuver.outcoming_path.geometry  
-.flatMap((geometry) => {
-
---- CHUNK 52 (788 tokens / 2448 chars) ---
-Document: routingapi
-
-})  
-.then((parsed) => {  
-if (parsed.result && parsed.result.length > 0) {  
-const coordinates = parsed.result[0].maneuvers  
-.flatMap((maneuver) => {  
-if (  
-maneuver.outcoming_path &&  
-maneuver.outcoming_path.geometry &&  
-maneuver.outcoming_path.geometry.length > 0  
-) {  
-return maneuver.outcoming_path.geometry  
-.flatMap((geometry) => {
+.flatMap((geometry) => {  
 const selection = geometry.selection;  
 return selection  
 .replace("LINESTRING(", "")  
@@ -36326,7 +40791,7 @@ fetchRoute();
 * `locale` — язык текстовых описаний элементов маршрута: русский.  
 * `utc` — дата и время в формате Unix.  
 * `traffic_mode: statistics` — построение маршрута с учётом статистических данных о пробках на указанное время.  
-**Пример запроса:**
+**Пример запроса:**  
 ```curl
 
 curl --request POST \
@@ -36373,14 +40838,10 @@ curl --request POST \
 
 }'
 
-```
+```  
 **Пример ответа:**  
 <details>  
-<summary><code>response.json</code></summary>
-
---- CHUNK 53 (9791 tokens / 23431 chars) ---
-Document: routingapi
-
+<summary><code>response.json</code></summary>  
 ```json
 
 {
@@ -37887,89 +42348,10 @@ Document: routingapi
 
 }
 
-```
-
---- CHUNK 54 (813 tokens / 2169 chars) ---
-Document: routingapi
-
-
-"total_distance": 6810,
-
-"total_duration": 784,
-
-"type": "carrouting",
-
-"ui_total_distance": {
-
-"unit": "км",
-
-"value": "6.8"
-
-},
-
-"ui_total_duration": "13 мин",
-
-"waypoints": [
-
-{
-
-"original_point": {
-
-"lat": 55.77548691400483,
-
-"lon": 37.58308675494588
-
-},
-
-"projected_point": {
-
-"lat": 55.77548691400483,
-
-"lon": 37.58308675494588
-
-},
-
-"transit": false
-
-},
-
-{
-
-"original_point": {
-
-"lat": 55.76508099601444,
-
-"lon": 37.65655367382703
-
-},
-
-"projected_point": {
-
-"lat": 55.76508099601444,
-
-"lon": 37.65655367382703
-
-},
-
-"transit": false
-
-}
-
-]
-
-}
-
-],
-
-"status": "OK",
-
-"type": "result"
-
-}
-
-```
+```  
 </details>  
 <br />
+
 ### Учёт дорожных перекрытий {#road-closures}  
 По умолчанию при расчёте маршрута используются данные о дорожных перекрытиях, актуальные на момент отправки запроса, и перекрытые участки дорог избегаются. Вы можете отключить эту возможность.  
 :::note[Доступность для способов передвижения]  
@@ -37983,7 +42365,7 @@ Document: routingapi
 * `detailed` — полная выдача с геометрией маршрута.  
 * `locale` — язык текстовых описаний элементов маршрута: русский.  
 * `allow_locked_roads: true` — учитывать перекрытые дороги.  
-**Пример запроса:**
+**Пример запроса:**  
 ```curl
 
 curl --request POST \
@@ -38028,14 +42410,10 @@ curl --request POST \
 
 }'
 
-```
+```  
 **Пример ответа:**  
 <details>  
-<summary><code>response.json</code></summary>
-
---- CHUNK 55 (12099 tokens / 28952 chars) ---
-Document: routingapi
-
+<summary><code>response.json</code></summary>  
 ```json
 
 {
@@ -39916,81 +44294,10 @@ Document: routingapi
 
 }
 
-```
-
---- CHUNK 56 (812 tokens / 2140 chars) ---
-Document: routingapi
-
-
-"unit": "км",
-
-"value": "9.4"
-
-},
-
-"ui_total_duration": "33 мин",
-
-"waypoints": [
-
-{
-
-"original_point": {
-
-"lat": 55.77548691400483,
-
-"lon": 37.58308675494588
-
-},
-
-"projected_point": {
-
-"lat": 55.77548691400483,
-
-"lon": 37.58308675494588
-
-},
-
-"transit": false
-
-},
-
-{
-
-"original_point": {
-
-"lat": 55.76508099601444,
-
-"lon": 37.65655367382703
-
-},
-
-"projected_point": {
-
-"lat": 55.76508099601444,
-
-"lon": 37.65655367382703
-
-},
-
-"transit": false
-
-}
-
-]
-
-}
-
-],
-
-"status": "OK",
-
-"type": "result"
-
-}
-
-```
+```  
 </details>  
 <br />
+
 ### Учёт расписания общественного транспорта {#schedule}  
 По умолчанию маршруты на общественном транспорте строятся с учётом расписания движения:  
 * Если для маршрута транспорта доступно прогнозное расписание, то оно используется для расчёта. В ответе вернётся поле `"origin_from": "eta"` в блоке `"schedules"`. В прогнозном расписании указано время прибытия транспорта на остановки. Оно рассчитывается на основе статистики, за какое время этот маршрут транспорта проезжал участки пути ранее.  
@@ -39999,18 +44306,12 @@ Document: routingapi
 В расписании также учитываются ночные перерывы в работе транспорта. Например, время начала движения трамвая — 06:10. Если вы строите маршрут со временем начала движения (`start_time`) 04:00, то время ожидания составит 2 часа 10 минут и повлияет на общее время движения. Если не учитывать расписание, будет использоваться только стандартное время ожидания для выбранного вида транспорта.  
 Чтобы построить маршрут без учёта расписания, отправьте POST-запрос на [/public_transport/2.0](/api/navigation/routing/reference/public_transport) со следующими параметрами:  
 * `source` (обязательный параметр) — координаты начальной точки (широта и долгота).  
-* `target` (обязательный параметр) — координаты конечной точки (широта и долгота).
-
---- CHUNK 57 (707 tokens / 2006 chars) ---
-Document: routingapi
-
-* `source` (обязательный параметр) — координаты начальной точки (широта и долгота).  
-* `target` (обязательный параметр) — координаты конечной точки (широта и долгота).
+* `target` (обязательный параметр) — координаты конечной точки (широта и долгота).  
 * `transport` (обязательный параметр) — массив видов общественного транспорта. Например, `tram` — трамвай. Полный список видов общественного транспорта см. в описании параметра `transport` в [Справочнике API](/api/navigation/routing/reference/public_transport) или в разделе [Способы передвижения](#public-transport).  
 * `start_time` — дата и время начала движения в формате Unix-времени (например, `1766620800`).  
 * `enable_schedule` — учитывать ли расписание транспорта в ответе. Если указано значение `false`, маршрут строится без учёта расписания движения транспорта.  
 * `locale` — язык текстовых описаний элементов маршрута: русский.  
-**Пример запроса:**
+**Пример запроса:**  
 ```curl
 
 curl --request POST \
@@ -40063,9 +44364,9 @@ curl --request POST \
 
 }'
 
-```
+```  
 **Пример ответа:**  
-По расписанию трамвай начинает движение в 06:04. В ответе не учтено время ожидания транспорта (`waiting_duration`), а для участка маршрута в комментарии не указано время прибытия:
+По расписанию трамвай начинает движение в 06:04. В ответе не учтено время ожидания транспорта (`waiting_duration`), а для участка маршрута в комментарии не указано время прибытия:  
 ```json
 
 ...
@@ -40118,13 +44419,9 @@ curl --request POST \
 
 ...
 
-```
+```  
 <details>  
-<summary><code>response.json</code></summary>
-
---- CHUNK 58 (8415 tokens / 18620 chars) ---
-Document: routingapi
-
+<summary><code>response.json</code></summary>  
 ```json
 
 [
@@ -41325,11 +45622,1122 @@ Document: routingapi
 
 ]
 
-```
+```  
+</details>  
+<br />
 
---- CHUNK 59 (808 tokens / 2243 chars) ---
+--- CHUNK 6 (85920 tokens / 204629 chars) ---
 Document: routingapi
 
+H1: Примеры
+H2: Специальные возможности {#special-features}
+
+H3: 
+
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.692111 55.800420, 37.691998 55.800791, 37.691872 55.801172)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.691872 55.801172, 37.691668 55.801667, 37.691519 55.802111, 37.691425 55.802391, 37.691121 55.802404, 37.691043 55.802426, 37.690760 55.802501)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.690760 55.802501, 37.690329 55.802565, 37.690284 55.802572, 37.689865 55.802584, 37.689708 55.802600, 37.689474 55.802625, 37.689262 55.802597, 37.689094 55.802576, 37.688655 55.802660)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.688655 55.802660, 37.688643 55.802662)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.688643 55.802662, 37.688763 55.802770)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.688763 55.802770, 37.688736 55.802779)",
+
+"z_first": 0,
+
+"z_last": 0
+
+}
+
+]
+
+}
+
+],
+
+"distance": 943,
+
+"id": "2",
+
+"moving_duration": 678,
+
+"platforms": null,
+
+"routes": null,
+
+"type": "walkway",
+
+"waiting_duration": 0,
+
+"waypoint": {
+
+"comment": "пешком 950 м",
+
+"name": "",
+
+"subtype": "start"
+
+}
+
+},
+
+{
+
+"alternatives": [
+
+{
+
+"geometry": [
+
+{
+
+"selection": "LINESTRING(37.688736 55.802779, 37.691783 55.805522, 37.691783 55.805522, 37.691818 55.805554, 37.691845 55.805605, 37.691850 55.805654, 37.691833 55.805706, 37.691801 55.805749, 37.688260 55.808460, 37.688260 55.808460, 37.685191 55.810809, 37.685191 55.810809, 37.685033 55.810930, 37.684952 55.810992, 37.684916 55.811028, 37.684896 55.811062, 37.684892 55.811096, 37.684896 55.811129, 37.684909 55.811162, 37.686836 55.813675, 37.686944 55.813828, 37.686980 55.813929, 37.686960 55.814036, 37.686939 55.814092, 37.686932 55.814099, 37.686852 55.814155, 37.685514 55.815093, 37.685514 55.815093, 37.685416 55.815161, 37.685416 55.815161, 37.685287 55.815223, 37.685095 55.815285, 37.684827 55.815345, 37.683910 55.815484, 37.683910 55.815484, 37.683906 55.815485, 37.683505 55.815543, 37.683137 55.815632, 37.682842 55.815735, 37.679923 55.817113, 37.679697 55.817198, 37.679697 55.817198, 37.679452 55.817263, 37.679197 55.817316, 37.678881 55.817370, 37.678881 55.817370, 37.676014 55.817855, 37.675427 55.817966, 37.674852 55.818113, 37.670645 55.819328, 37.670645 55.819328, 37.670268 55.819436, 37.670268 55.819436, 37.670210 55.819453, 37.670210 55.819453, 37.668247 55.820018, 37.668247 55.820018, 37.667630 55.820196, 37.667630 55.820196, 37.667327 55.820283, 37.665856 55.820705, 37.665856 55.820705, 37.664176 55.821188, 37.662182 55.821803, 37.662182 55.821803, 37.658375 55.822966, 37.658375 55.822966, 37.657575 55.823211, 37.652794 55.824836, 37.652402 55.824974, 37.652402 55.824974, 37.652265 55.825022, 37.651428 55.825471, 37.651068 55.825617, 37.650897 55.825687, 37.650698 55.825761, 37.648796 55.826395, 37.648796 55.826395, 37.648505 55.826484, 37.648464 55.826494, 37.648137 55.826562, 37.647230 55.826868, 37.647230 55.826868, 37.646884 55.826966, 37.646611 55.827047, 37.646611 55.827047, 37.645893 55.827260, 37.645893 55.827260, 37.645695 55.827318, 37.645583 55.827334, 37.645447 55.827336, 37.645322 55.827321, 37.645189 55.827290, 37.645083 55.827251, 37.638657 55.823945)"
+
+}
+
+],
+
+"platforms": [
+
+{
+
+"geometry": "POINT(37.688736 55.802779)",
+
+"id": "18"
+
+},
+
+{
+
+"geometry": "POINT(37.691783 55.805522)",
+
+"id": "19"
+
+},
+
+{
+
+"geometry": "POINT(37.688260 55.808460)",
+
+"id": "20"
+
+},
+
+{
+
+"geometry": "POINT(37.685191 55.810809)",
+
+"id": "21"
+
+},
+
+{
+
+"geometry": "POINT(37.685514 55.815093)",
+
+"id": "22"
+
+},
+
+{
+
+"geometry": "POINT(37.678881 55.817370)",
+
+"id": "23"
+
+},
+
+{
+
+"geometry": "POINT(37.670645 55.819328)",
+
+"id": "24"
+
+},
+
+{
+
+"geometry": "POINT(37.662182 55.821803)",
+
+"id": "25"
+
+},
+
+{
+
+"geometry": "POINT(37.658375 55.822966)",
+
+"id": "26"
+
+},
+
+{
+
+"geometry": "POINT(37.652402 55.824974)",
+
+"id": "27"
+
+},
+
+{
+
+"geometry": "POINT(37.648796 55.826395)",
+
+"id": "28"
+
+},
+
+{
+
+"geometry": "POINT(37.645893 55.827260)",
+
+"id": "29"
+
+},
+
+{
+
+"geometry": "POINT(37.638657 55.823945)",
+
+"id": "30"
+
+}
+
+]
+
+}
+
+],
+
+"distance": 5069,
+
+"id": "3",
+
+"moving_duration": 963,
+
+"platforms": {
+
+"names": [
+
+"Большая Оленья",
+
+"2-й Ширяевский пер.",
+
+"Большая Ширяевская",
+
+"Ростокинский проезд",
+
+"Институт иностранных языков",
+
+"Станция юных натуралистов",
+
+"пл. Академика Люльки",
+
+"Бориса Галушкина д.17",
+
+"Ярославская",
+
+"Проспект Мира",
+
+"ВДНХ (Северная)"
+
+]
+
+},
+
+"routes": [
+
+{
+
+"color": "#eb5a2b",
+
+"names": [
+
+"25"
+
+],
+
+"subtype": "tram",
+
+"subtype_name": "трамвай"
+
+}
+
+],
+
+"type": "passage",
+
+"waiting_duration": 360,
+
+"waypoint": {
+
+"combined": false,
+
+"comment": "",
+
+"name": "Майский просек",
+
+"subtype": "tram"
+
+}
+
+},
+
+{
+
+"alternatives": [
+
+{
+
+"geometry": [
+
+{
+
+"selection": "LINESTRING(37.638657 55.823945, 37.638631 55.823961)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.638631 55.823961, 37.638746 55.824020, 37.639012 55.824157, 37.639305 55.824308)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.639305 55.824308, 37.639349 55.824281, 37.639382 55.824262, 37.639424 55.824235)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.639424 55.824235, 37.639502 55.824188)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.639502 55.824188, 37.639560 55.824152, 37.639459 55.824097, 37.639938 55.823801, 37.640514 55.823445, 37.641224 55.823008, 37.641585 55.822786, 37.641599 55.822592, 37.641617 55.822539, 37.641675 55.822529, 37.641775 55.822496, 37.641858 55.822451, 37.641922 55.822397, 37.641962 55.822336, 37.641975 55.822271, 37.642003 55.822265)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.642003 55.822265, 37.642122 55.822253)",
+
+"z_first": 0,
+
+"z_last": -1
+
+},
+
+{
+
+"selection": "LINESTRING(37.642122 55.822253, 37.643316 55.822132, 37.643282 55.822100)",
+
+"z_first": -1,
+
+"z_last": -1
+
+},
+
+{
+
+"selection": "LINESTRING(37.643282 55.822100, 37.643183 55.822009)",
+
+"z_first": -1,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.643183 55.822009, 37.643155 55.821980, 37.643203 55.821964, 37.643018 55.821773, 37.642977 55.821735)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.642977 55.821735, 37.642882 55.821644)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.642882 55.821644, 37.642812 55.821579, 37.642669 55.821442, 37.642378 55.821171, 37.642309 55.821107, 37.642222 55.821021, 37.642069 55.820892, 37.641883 55.820954, 37.641737 55.821003, 37.641765 55.821037, 37.641777 55.821051, 37.641767 55.821066, 37.641753 55.821076, 37.641595 55.821125, 37.641504 55.821039)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.641504 55.821039, 37.641507 55.821029)",
+
+"z_first": 0,
+
+"z_last": 0
+
+}
+
+]
+
+}
+
+],
+
+"distance": 645,
+
+"id": "31",
+
+"moving_duration": 494,
+
+"platforms": null,
+
+"routes": null,
+
+"type": "walkway",
+
+"waiting_duration": 0,
+
+"waypoint": {
+
+"comment": "пешком 650 м",
+
+"name": "Метро ВДНХ·1F",
+
+"subtype": "pedestrian"
+
+}
+
+},
+
+{
+
+"distance": 0,
+
+"id": "32",
+
+"moving_duration": 0,
+
+"type": "walkway",
+
+"waiting_duration": 0,
+
+"waypoint": {
+
+"comment": "Вы на месте!",
+
+"name": "",
+
+"subtype": "finish"
+
+}
+
+}
+
+],
+
+"pedestrian": false,
+
+"route_id": "moscow-ctx-back.m1/ctxrouting/17666208000000.00000",
+
+"total_distance": 6657,
+
+"total_duration": 2495,
+
+"total_walkway_distance": "пешком 19 мин",
+
+"transfer_count": 0,
+
+"transport": [
+
+"pedestrian",
+
+"bus",
+
+"trolleybus",
+
+"tram",
+
+"shuttle_bus",
+
+"metro",
+
+"suburban_train",
+
+"funicular_railway",
+
+"monorail",
+
+"river_transport",
+
+"cable_car",
+
+"light_rail",
+
+"premetro",
+
+"light_metro",
+
+"aeroexpress",
+
+"mcd",
+
+"mcc"
+
+],
+
+"waypoints": [
+
+{
+
+"combined": false,
+
+"routes_names": [
+
+"25"
+
+],
+
+"subtype": "tram"
+
+}
+
+]
+
+},
+
+{
+
+"crossing_count": 0,
+
+"id": "33",
+
+"movements": [
+
+{
+
+"alternatives": [
+
+{
+
+"geometry": [
+
+{
+
+"selection": "LINESTRING(37.697461 55.798227, 37.697219 55.798105)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.697219 55.798105, 37.696846 55.798442, 37.696913 55.798465, 37.697097 55.798530, 37.697169 55.798555)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.697169 55.798555, 37.697179 55.798578, 37.697239 55.798712, 37.697257 55.798766, 37.697271 55.798807, 37.697283 55.798855, 37.697316 55.798894, 37.697373 55.798924, 37.697344 55.799044, 37.697373 55.799165)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.697373 55.799165, 37.697336 55.799173, 37.697319 55.799189, 37.697312 55.799205, 37.697312 55.799216, 37.697311 55.799245, 37.697306 55.799513, 37.697305 55.799548, 37.697340 55.799579, 37.697414 55.799597, 37.697602 55.799600, 37.697758 55.799602)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.697758 55.799602, 37.697797 55.799705, 37.697797 55.799785, 37.697792 55.800052, 37.697707 55.800163, 37.697603 55.800241)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.697603 55.800241, 37.697599 55.800487)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.697599 55.800487, 37.698127 55.800700, 37.698175 55.801181, 37.698172 55.801194, 37.698166 55.801209, 37.698148 55.801220, 37.698123 55.801228, 37.698093 55.801236, 37.698080 55.801276, 37.698069 55.801333, 37.698057 55.801363, 37.698121 55.801383, 37.698177 55.801414, 37.698228 55.801461, 37.698339 55.801460, 37.698442 55.801463, 37.698469 55.801445, 37.698502 55.801435, 37.698546 55.801430, 37.699031 55.801478, 37.699181 55.801497, 37.699362 55.801514, 37.699412 55.801519, 37.699633 55.801539, 37.699757 55.801565, 37.699887 55.801601, 37.700890 55.801933, 37.701170 55.802010, 37.702352 55.802286, 37.703161 55.802510, 37.703468 55.802629, 37.704171 55.802825, 37.704450 55.802867, 37.704570 55.802901, 37.705703 55.803212, 37.705873 55.803259, 37.706145 55.803334, 37.706603 55.803460, 37.706942 55.803561, 37.707241 55.803652, 37.707213 55.803686, 37.707186 55.804016, 37.707151 55.804106, 37.707204 55.804110, 37.707139 55.804288)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.707139 55.804288, 37.707220 55.804366)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.707220 55.804366, 37.707143 55.804574, 37.707098 55.804701, 37.707167 55.804708)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.707167 55.804708, 37.707292 55.804723)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.707292 55.804723, 37.707312 55.804669)",
+
+"z_first": 0,
+
+"z_last": 0
+
+}
+
+]
+
+}
+
+],
+
+"distance": 1205,
+
+"id": "34",
+
+"moving_duration": 867,
+
+"platforms": null,
+
+"routes": null,
+
+"type": "walkway",
+
+"waiting_duration": 0,
+
+"waypoint": {
+
+"comment": "пешком 1,3 км",
+
+"name": "",
+
+"subtype": "start"
+
+}
+
+},
+
+{
+
+"alternatives": [
+
+{
+
+"geometry": [
+
+{
+
+"selection": "LINESTRING(37.707312 55.804669, 37.706638 55.806534, 37.706486 55.806866, 37.706486 55.806866, 37.706407 55.807038, 37.706084 55.807743, 37.706035 55.807876, 37.705796 55.808663, 37.705773 55.808723, 37.705744 55.808773, 37.705703 55.808819, 37.705699 55.808823, 37.703964 55.809913, 37.703964 55.809913, 37.703053 55.810485, 37.702896 55.810572, 37.702753 55.810643, 37.702591 55.810720, 37.701972 55.810999, 37.701730 55.811093, 37.701529 55.811163, 37.697667 55.812512, 37.697667 55.812512, 37.697577 55.812544, 37.697468 55.812589, 37.697389 55.812631, 37.697304 55.812685, 37.697201 55.812755, 37.695285 55.814300, 37.695285 55.814300, 37.695073 55.814471, 37.695005 55.814519, 37.694910 55.814576, 37.694437 55.814790, 37.694437 55.814790, 37.694374 55.814818, 37.694374 55.814818, 37.693834 55.815062, 37.692710 55.815512, 37.691279 55.816219, 37.691111 55.816299, 37.690935 55.816377, 37.690742 55.816451, 37.690543 55.816517, 37.689091 55.816899, 37.689091 55.816899, 37.688232 55.817120, 37.688133 55.817135, 37.688044 55.817144, 37.687983 55.817146, 37.687925 55.817140, 37.685300 55.816091, 37.685151 55.816005, 37.685146 55.816002, 37.685043 55.815903, 37.685039 55.815899, 37.684968 55.815746, 37.684968 55.815746, 37.684943 55.815685, 37.684943 55.815679, 37.684943 55.815679, 37.684915 55.815595, 37.684858 55.815490, 37.684811 55.815453, 37.684746 55.815427, 37.684666 55.815413, 37.684585 55.815409, 37.683910 55.815484, 37.683910 55.815484, 37.683906 55.815485, 37.683505 55.815543, 37.683137 55.815632, 37.682842 55.815735, 37.679923 55.817113, 37.679697 55.817198, 37.679697 55.817198, 37.679452 55.817263, 37.679197 55.817316, 37.678881 55.817370, 37.678881 55.817370, 37.676014 55.817855, 37.675427 55.817966, 37.674852 55.818113, 37.670645 55.819328, 37.670645 55.819328, 37.670268 55.819436, 37.670268 55.819436, 37.670210 55.819453, 37.670210 55.819453, 37.668247 55.820018, 37.668247 55.820018, 37.667630 55.820196, 37.667630 55.820196, 37.667327 55.820283, 37.665856 55.820705, 37.665856 55.820705, 37.664176 55.821188, 37.662182 55.821803, 37.662182 55.821803, 37.658375 55.822966, 37.658375 55.822966, 37.657575 55.823211, 37.652794 55.824836, 37.652402 55.824974, 37.652402 55.824974, 37.652265 55.825022, 37.651428 55.825471, 37.651068 55.825617, 37.650897 55.825687, 37.650698 55.825761, 37.648796 55.826395, 37.648796 55.826395, 37.648505 55.826484, 37.648464 55.826494, 37.648137 55.826562, 37.647230 55.826868, 37.647230 55.826868, 37.646884 55.826966, 37.646611 55.827047, 37.646611 55.827047, 37.645893 55.827260, 37.645893 55.827260, 37.645695 55.827318, 37.645583 55.827334, 37.645447 55.827336, 37.645322 55.827321, 37.645189 55.827290, 37.645083 55.827251, 37.638657 55.823945)"
+
+}
+
+],
+
+"platforms": [
+
+{
+
+"geometry": "POINT(37.707312 55.804669)",
+
+"id": "52"
+
+},
+
+{
+
+"geometry": "POINT(37.706486 55.806866)",
+
+"id": "53"
+
+},
+
+{
+
+"geometry": "POINT(37.703964 55.809913)",
+
+"id": "54"
+
+},
+
+{
+
+"geometry": "POINT(37.697667 55.812512)",
+
+"id": "55"
+
+},
+
+{
+
+"geometry": "POINT(37.694374 55.814818)",
+
+"id": "56"
+
+},
+
+{
+
+"geometry": "POINT(37.689091 55.816899)",
+
+"id": "57"
+
+},
+
+{
+
+"geometry": "POINT(37.684968 55.815746)",
+
+"id": "58"
+
+},
+
+{
+
+"geometry": "POINT(37.678881 55.817370)",
+
+"id": "59"
+
+},
+
+{
+
+"geometry": "POINT(37.670645 55.819328)",
+
+"id": "60"
+
+},
+
+{
+
+"geometry": "POINT(37.662182 55.821803)",
+
+"id": "61"
+
+},
+
+{
+
+"geometry": "POINT(37.658375 55.822966)",
+
+"id": "62"
+
+},
+
+{
+
+"geometry": "POINT(37.652402 55.824974)",
+
+"id": "63"
+
+},
+
+{
+
+"geometry": "POINT(37.648796 55.826395)",
+
+"id": "64"
+
+},
+
+{
+
+"geometry": "POINT(37.645893 55.827260)",
+
+"id": "65"
+
+},
+
+{
+
+"geometry": "POINT(37.638657 55.823945)",
+
+"id": "66"
+
+}
+
+]
+
+}
+
+],
+
+"distance": 5615,
+
+"id": "35",
+
+"moving_duration": 1088,
+
+"platforms": {
+
+"names": [
+
+"Телерадиокомпания МИР",
+
+"1-я Прогонная",
+
+"Инновационный университет",
+
+"Богородский храм",
+
+"Богатырский мост",
+
+"Ростокинский проезд",
+
+"Институт иностранных языков",
+
+"Станция юных натуралистов",
+
+"пл. Академика Люльки",
+
+"Бориса Галушкина д.17",
+
+"Ярославская",
+
+"Проспект Мира",
+
+"ВДНХ (Северная)"
+
+]
+
+},
+
+"routes": [
+
+{
+
+"color": "#eb5a2b",
+
+"names": [
+
+"11"
+
+],
+
+"subtype": "tram",
+
+"subtype_name": "трамвай"
+
+}
+
+],
+
+"type": "passage",
+
+"waiting_duration": 300,
+
+"waypoint": {
+
+"combined": false,
+
+"comment": "",
+
+"name": "Мосгорсуд",
+
+"subtype": "tram"
+
+}
+
+},
+
+{
+
+"alternatives": [
+
+{
+
+"geometry": [
+
+{
+
+"selection": "LINESTRING(37.638657 55.823945, 37.638631 55.823961)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.638631 55.823961, 37.638746 55.824020, 37.639012 55.824157, 37.639305 55.824308)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.639305 55.824308, 37.639349 55.824281, 37.639382 55.824262, 37.639424 55.824235)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.639424 55.824235, 37.639502 55.824188)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.639502 55.824188, 37.639560 55.824152, 37.639459 55.824097, 37.639938 55.823801, 37.640514 55.823445, 37.641224 55.823008, 37.641585 55.822786, 37.641599 55.822592, 37.641617 55.822539, 37.641675 55.822529, 37.641775 55.822496, 37.641858 55.822451, 37.641922 55.822397, 37.641962 55.822336, 37.641975 55.822271, 37.642003 55.822265)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.642003 55.822265, 37.642122 55.822253)",
+
+"z_first": 0,
+
+"z_last": -1
+
+},
+
+{
+
+"selection": "LINESTRING(37.642122 55.822253, 37.643316 55.822132, 37.643282 55.822100)",
+
+"z_first": -1,
+
+"z_last": -1
+
+},
+
+{
+
+"selection": "LINESTRING(37.643282 55.822100, 37.643183 55.822009)",
+
+"z_first": -1,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.643183 55.822009, 37.643155 55.821980, 37.643203 55.821964, 37.643018 55.821773, 37.642977 55.821735)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.642977 55.821735, 37.642882 55.821644)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.642882 55.821644, 37.642812 55.821579, 37.642669 55.821442, 37.642378 55.821171, 37.642309 55.821107, 37.642222 55.821021, 37.642069 55.820892, 37.641883 55.820954, 37.641737 55.821003, 37.641765 55.821037, 37.641777 55.821051, 37.641767 55.821066, 37.641753 55.821076, 37.641595 55.821125, 37.641504 55.821039)",
+
+"z_first": 0,
+
+"z_last": 0
+
+},
+
+{
+
+"selection": "LINESTRING(37.641504 55.821039, 37.641507 55.821029)",
+
+"z_first": 0,
+
+"z_last": 0
+
+}
+
+]
+
+}
+
+],
+
+"distance": 645,
+
+"id": "67",
+
+"moving_duration": 494,
+
+"platforms": null,
+
+"routes": null,
+
+"type": "walkway",
+
+"waiting_duration": 0,
+
+"waypoint": {
+
+"comment": "пешком 650 м",
+
+"name": "Метро ВДНХ·1F",
+
+"subtype": "pedestrian"
+
+}
+
+},
+
+{
+
+"distance": 0,
+
+"id": "68",
+
+"moving_duration": 0,
 
 "type": "walkway",
 
@@ -41383,7 +46791,7 @@ Document: routingapi
 
 ]
 
-```
+```  
 </details>  
 <br />
 ## Специальные возможности {#special-features}  
@@ -41428,24 +46836,7 @@ const reqUrl = \`https://routing.api.2gis.com/routing/7.0.0/global?key=Your dire
 const points = [  
 {  
 "type": "stop",  
-"lon": 37.582591,
-
---- CHUNK 60 (723 tokens / 2144 chars) ---
-Document: routingapi
-
-border-radius: 4px;  
-}  
-</style>  
-</head>  
-<body>  
-<div id="container"></div>  
-<script src="__MAPGL_API_URL__"></script>  
-<script>  
-const reqUrl = \`https://routing.api.2gis.com/routing/7.0.0/global?key=Your directions API access key\`;  
-const points = [  
-{  
-"type": "stop",  
-"lon": 37.582591,
+"lon": 37.582591,  
 "lat": 55.775364  
 },  
 {  
@@ -41511,19 +46902,7 @@ return res.json();
 })  
 .then((parsed) => {  
 if (parsed.result && parsed.result.length > 0) {  
-const coordinates = parsed.result[0].maneuvers
-
---- CHUNK 61 (806 tokens / 2476 chars) ---
-Document: routingapi
-
-if (!res.ok) {  
-throw new Error(\`Ошибка HTTP! Статус: \${res.status}\`);  
-}  
-return res.json();  
-})  
-.then((parsed) => {  
-if (parsed.result && parsed.result.length > 0) {  
-const coordinates = parsed.result[0].maneuvers
+const coordinates = parsed.result[0].maneuvers  
 .flatMap((maneuver) => {  
 if (  
 maneuver.outcoming_path &&  
@@ -41578,7 +46957,7 @@ fetchRoute();
 * `summary` — упрощённая выдача, в ответе только время и длина маршрута.  
 * `detailed` — полная выдача с геометрией маршрута.  
 * `locale` — язык текстовых описаний элементов маршрута: русский.  
-**Пример запроса:**
+**Пример запроса:**  
 ```curl
 
 curl --request POST \
@@ -41623,14 +47002,10 @@ curl --request POST \
 
 }'
 
-```
+```  
 **Пример ответа:**  
 <details>  
-<summary><code>response.json</code></summary>
-
---- CHUNK 62 (11656 tokens / 28585 chars) ---
-Document: routingapi
-
+<summary><code>response.json</code></summary>  
 ```json
 
 {
@@ -43675,80 +49050,12 @@ Document: routingapi
 
 }
 
-```
-
---- CHUNK 63 (813 tokens / 2136 chars) ---
-Document: routingapi
-
-
-},
-
-"ui_total_duration": "28 мин",
-
-"waypoints": [
-
-{
-
-"original_point": {
-
-"lat": 55.77548691400483,
-
-"lon": 37.58308675494588
-
-},
-
-"projected_point": {
-
-"lat": 55.77548691400483,
-
-"lon": 37.58308675494588
-
-},
-
-"transit": false
-
-},
-
-{
-
-"original_point": {
-
-"lat": 55.76508099601444,
-
-"lon": 37.65655367382703
-
-},
-
-"projected_point": {
-
-"lat": 55.76508099601444,
-
-"lon": 37.65655367382703
-
-},
-
-"transit": false
-
-}
-
-]
-
-}
-
-],
-
-"status": "OK",
-
-"type": "result"
-
-}
-
-```
+```  
 </details>  
 <br />  
 При построении маршрутов для транспортного средства, которое уже находится в движении, может возникнуть другая проблема: на момент расчёта маршрут является оптимальным, но на момент реального начала движения он уже неактуален (оптимальная точка перехода на маршрут уже позади). Пример работы системы такси и распределения заказов между водителями: система рассчитала, что чтобы взять заказ, водитель такси должен повернуть направо через 100 метров, но пока заказ обрабатывался, водитель проехал нужный поворот, и новый маршрут стал длиннее и менее выгодным.  
 Чтобы решить эту проблему, вы можете задать расстояние от начальной точки, на протяжении которого транспортное средство не будет менять основного направления движения. Под основным направлением движения подразумевается наиболее вероятный путь водителя (не обязательно по прямой). Добавьте к начальной точке маршрута параметр `distance_direction` со значением от 0 до 10000 (в метрах).  
-**Пример запроса:**
+**Пример запроса:**  
 ```curl
 
 curl --request POST \
@@ -43793,11 +49100,8 @@ curl --request POST \
 
 }'
 
-```
+```  
 В ответе для каждого маршрута добавится поле `reliability` со значением от 0.0 до 1.0, которое указывает на вероятность того, что рассчитанный маршрут будет соответствовать реальному пути водителя. Вероятность 1.0 означает, что рассчитанный маршрут будет оптимальным для водителя.
-
---- CHUNK 64 (620 tokens / 1783 chars) ---
-Document: routingapi
 
 ### Маршрут внутри зданий {#indoor-route}  
 :::note[Доступность для способов передвижения]  
@@ -43869,21 +49173,7 @@ center: [37.625245, 55.759986],
 zoom: 19,  
 key: 'Your API access key',  
 });  
-window.addEventListener('resize', () => map.invalidateSize());
-
---- CHUNK 65 (690 tokens / 2179 chars) ---
-Document: routingapi
-
-"object_id": 70000001058655912,  
-"floor_id": 4504694860733246  
-}  
-];  
-const map = new mapgl.Map('container', {  
-center: [37.625245, 55.759986],  
-zoom: 19,  
-key: 'Your API access key',  
-});  
-window.addEventListener('resize', () => map.invalidateSize());
+window.addEventListener('resize', () => map.invalidateSize());  
 // UI-элемент для переключения этажей  
 const floorControl = new mapgl.FloorControl(map, {  
 position: 'topRight',  
@@ -43970,26 +49260,7 @@ filter: lineAboveFilter,
 style: lineStyle,  
 });  
 map.addLayer({  
-id: 'my-point',
-
---- CHUNK 66 (692 tokens / 2128 chars) ---
-Document: routingapi
-
-];  
-map.addLayer({  
-id: 'my-line-white-above',  
-type: 'line',  
-filter: lineAboveFilter,  
-style: whiteLineStyle,  
-});  
-map.addLayer({  
-id: 'my-line-above',  
-type: 'line',  
-filter: lineAboveFilter,  
-style: lineStyle,  
-});  
-map.addLayer({  
-id: 'my-point',
+id: 'my-point',  
 type: 'point',  
 filter: [  
 'all',  
@@ -44078,23 +49349,7 @@ data: {
 type: 'FeatureCollection',  
 features: [],  
 },  
-attributes: {
-
---- CHUNK 67 (675 tokens / 2299 chars) ---
-Document: routingapi
-
-}  
-return r.json();  
-})  
-.then((r) => drawRoute(query.points, r.result && r.result[0]))  
-.catch((reason) => console.error(reason));  
-}  
-const geojsonSource = new mapgl.GeoJsonSource(map, {  
-data: {  
-type: 'FeatureCollection',  
-features: [],  
-},  
-attributes: {
+attributes: {  
 foo: 'bar',  
 },  
 });  
@@ -44192,26 +49447,7 @@ floorId: maneuver.outcoming_path.floor_to,
 });  
 } else if (maneuver.comment) {  
 data.features.push({  
-type: 'Feature',
-
---- CHUNK 68 (682 tokens / 2123 chars) ---
-Document: routingapi
-
-floorId: maneuver.outcoming_path.floor_to,  
-},  
-geometry: {  
-type: 'LineString',  
-coordinates,  
-},  
-});  
-lastPoint = {  
-coordinates: coordinates[coordinates.length - 1],  
-floorId: maneuver.outcoming_path.floor_to,  
-};  
-});  
-} else if (maneuver.comment) {  
-data.features.push({  
-type: 'Feature',
+type: 'Feature',  
 properties: {  
 type: 'point',  
 comment: maneuver.comment,  
@@ -44274,12 +49510,7 @@ return wkt
 Чтобы построить маршрут внутри зданий (например, до организации в торговом центре), отправьте POST-запрос на [/routing/7.0.0/global](/api/navigation/routing/reference/routing) со следующими параметрами:  
 * `points` (обязательный параметр) — массив координат [точек маршрута](#point-types). Укажите минимум две точки: начальную и конечную. Для каждой точки укажите:  
 * `object_id` — идентификатор здания или организации, к которой будет привязана точка. Вы можете получить это значение из справочника <Brand /> с помощью [Places API](/api/search/places/overview).  
-* `floor_id` — идентификатор этажа здания. Вы можете получить это значение из справочника <Brand /> с помощью [Places API](/api/search/places/overview).
-
---- CHUNK 69 (550 tokens / 1499 chars) ---
-Document: routingapi
-
-* `floor_id` — идентификатор этажа здания. Вы можете получить это значение из справочника <Brand /> с помощью [Places API](/api/search/places/overview).
+* `floor_id` — идентификатор этажа здания. Вы можете получить это значение из справочника <Brand /> с помощью [Places API](/api/search/places/overview).  
 Хотя бы одна из точек маршрута должна находиться внутри здания или быть привязана к организации с помощью параметра `object_id`.  
 * `transport: walking` — способ передвижения: пешком.  
 * `output` — формат выдачи результата:  
@@ -44290,7 +49521,7 @@ Document: routingapi
 * `pedestrian` — параметры пешеходного маршрута:  
 * `use_indoor` — построить маршрут внутри зданий.  
 * `use_instructions` — выдача инструкций по навигации для пешеходных маршрутов.  
-**Пример запроса:**
+**Пример запроса:**  
 ```curl
 
 curl --request POST \
@@ -44353,14 +49584,10 @@ curl --request POST \
 
 }'
 
-```
+```  
 **Пример ответа:**  
 <details>  
-<summary><code>response.json</code></summary>
-
---- CHUNK 70 (2012 tokens / 5730 chars) ---
-Document: routingapi
-
+<summary><code>response.json</code></summary>  
 ```json
 
 {
@@ -44903,35 +50130,10 @@ Document: routingapi
 
 }
 
-```
-
---- CHUNK 71 (801 tokens / 2003 chars) ---
-Document: routingapi
-
-
-"lon": 37.62494752853362
-
-},
-
-"transit": false
-
-}
-
-]
-
-}
-
-],
-
-"status": "OK",
-
-"type": "result"
-
-}
-
-```
+```  
 </details>  
 <br />
+
 ### Избегание типов дорог {#avoid-road-types}  
 :::note[Доступность для способов передвижения]  
 Избегание типов дорог при построении маршрутов на общественном транспорте недоступно.  
@@ -44950,7 +50152,7 @@ Document: routingapi
 * `summary` — упрощённая выдача, в ответе только время и длина маршрута;  
 * `detailed` — полная выдача с геометрией маршрута.  
 * `locale` — язык текстовых описаний элементов маршрута: русский.  
-**Пример запроса:**
+**Пример запроса:**  
 ```curl
 
 curl --request POST \
@@ -45001,14 +50203,10 @@ curl --request POST \
 
 }'
 
-```
+```  
 **Пример ответа:**  
 <details>  
-<summary><code>response.json</code></summary>
-
---- CHUNK 72 (12057 tokens / 29630 chars) ---
-Document: routingapi
-
+<summary><code>response.json</code></summary>  
 ```json
 
 {
@@ -47135,33 +52333,10 @@ Document: routingapi
 
 }
 
-```
-
---- CHUNK 73 (798 tokens / 2110 chars) ---
-Document: routingapi
-
-
-},
-
-"transit": false
-
-}
-
-]
-
-}
-
-],
-
-"status": "OK",
-
-"type": "result"
-
-}
-
-```
+```  
 </details>  
 <br />
+
 ### Исключение определённых областей {#exclude-areas}  
 :::note[Доступность для способов передвижения]  
 Исключение областей при построении маршрутов на общественном транспорте недоступно.  
@@ -47183,7 +52358,7 @@ Document: routingapi
 * `severity` — как строго нужно избегать заданную область:  
 * `soft` — избегать по возможности.  
 * `hard` — избегать всегда.  
-**Пример запроса:**
+**Пример запроса:**  
 ```curl
 
 curl --request POST \
@@ -47252,14 +52427,10 @@ curl --request POST \
 
 }'
 
-```
+```  
 **Пример ответа:**  
 <details>  
-<summary><code>response.json</code></summary>
-
---- CHUNK 74 (12831 tokens / 30958 chars) ---
-Document: routingapi
-
+<summary><code>response.json</code></summary>  
 ```json
 
 {
@@ -49356,88 +54527,9 @@ Document: routingapi
 
 }
 
-```
-
---- CHUNK 75 (806 tokens / 2166 chars) ---
-Document: routingapi
-
-
-"total_distance": 9415,
-
-"total_duration": 1692,
-
-"type": "carrouting",
-
-"ui_total_distance": {
-
-"unit": "км",
-
-"value": "9.4"
-
-},
-
-"ui_total_duration": "28 мин",
-
-"waypoints": [
-
-{
-
-"original_point": {
-
-"lat": 55.77548691400483,
-
-"lon": 37.58308675494588
-
-},
-
-"projected_point": {
-
-"lat": 55.77548691400483,
-
-"lon": 37.58308675494588
-
-},
-
-"transit": false
-
-},
-
-{
-
-"original_point": {
-
-"lat": 55.76508099601444,
-
-"lon": 37.65655367382703
-
-},
-
-"projected_point": {
-
-"lat": 55.76508099601444,
-
-"lon": 37.65655367382703
-
-},
-
-"transit": false
-
-}
-
-]
-
-}
-
-],
-
-"status": "OK",
-
-"type": "result"
-
-}
-
-```
+```  
 </details>
+
 ### Стоимость проезда по платным дорогам {#toll-roads}  
 :::note[Доступность для способов передвижения]  
 Получение информации о платных дорогах при построении маршрутов на общественном транспорте недоступно.  
@@ -49450,7 +54542,7 @@ Document: routingapi
 * `detailed` — полная выдача с геометрией маршрута.  
 * `locale` — язык текстовых описаний элементов маршрута: русский.  
 * `need_payment_info: true` — получение информации о платных дорогах.  
-**Пример запроса:**
+**Пример запроса:**  
 ```curl
 
 curl --request POST \
@@ -49495,15 +54587,11 @@ curl --request POST \
 
 }'
 
-```
+```  
 В ответе общая стоимость проезда по платным дорогам указана в блоке `total_payments` в валюте страны, в которой проходит маршрут.  
 **Пример ответа:**  
 <details>  
-<summary><code>response.json</code></summary>
-
---- CHUNK 76 (30984 tokens / 67991 chars) ---
-Document: routingapi
-
+<summary><code>response.json</code></summary>  
 ```json
 
 {
@@ -52366,206 +57454,6 @@ Document: routingapi
 
 }
 
-```
-
---- CHUNK 77 (815 tokens / 2158 chars) ---
-Document: routingapi
-
-
-"duration": 28,
-
-"geometry": [
-
-{
-
-"color": "ignore",
-
-"length": 104,
-
-"selection": "LINESTRING(30.197083 60.000364, 30.197992 60.000266, 30.198603 60.000193, 30.198808 60.000159, 30.198848 60.000139, 30.198866 60.000114)",
-
-"style": "normal"
-
-}
-
-],
-
-"names": []
-
-},
-
-"outcoming_path_comment": "100 м прямо",
-
-"turn_angle": 88,
-
-"turn_direction": "right",
-
-"type": "crossroad"
-
-},
-
-{
-
-"comment": "Крутой поворот налево",
-
-"icon": "crossroad_sharply_left",
-
-"id": "3193651097185239703",
-
-"outcoming_path": {
-
-"distance": 54,
-
-"duration": 15,
-
-"geometry": [
-
-{
-
-"color": "ignore",
-
-"length": 47,
-
-"selection": "LINESTRING(30.198866 60.000114, 30.198872 60.000150, 30.198902 60.000197, 30.198928 60.000226, 30.198962 60.000260, 30.198994 60.000288, 30.199029 60.000315, 30.199067 60.000340, 30.199112 60.000367, 30.199170 60.000397, 30.199249 60.000430, 30.199328 60.000456)",
-
-"style": "normal"
-
-},
-
-{
-
-"color": "ignore",
-
-"length": 5,
-
-"selection": "LINESTRING(30.199328 60.000456, 30.199369 60.000467, 30.199409 60.000476)",
-
-"style": "archway"
-
-},
-
-{
-
-"color": "ignore",
-
-"length": 2,
-
-"selection": "LINESTRING(30.199409 60.000476, 30.199452 60.000483)",
-
-"style": "normal"
-
-}
-
-],
-
-"names": []
-
-},
-
-"outcoming_path_comment": "50 м прямо",
-
-"turn_angle": -123,
-
-"turn_direction": "sharply_left",
-
-"type": "crossroad"
-
-},
-
-{
-
-"comment": "finish",
-
-"icon": "finish",
-
-"id": "13825467108457580933",
-
-"outcoming_path_comment": "Вы на месте!",
-
-"type": "end"
-
-}
-
-],
-
-"reliability": 0.0,
-
-"route_id": "spb-tax-back.m1/taxirouting/1772724393.828349",
-
-"total_distance": 73589,
-
-"total_duration": 4875,
-
-"type": "taxirouting",
-
-"ui_total_distance": {
-
-"unit": "км",
-
-"value": "74"
-
-},
-
-"ui_total_duration": "1 час 21 мин",
-
-"waypoints": [
-
-{
-
-"original_point": {
-
-"lat": 59.79871679355101,
-
-"lon": 30.26951682933503
-
-},
-
-"projected_point": {
-
-"lat": 59.79871679355101,
-
-"lon": 30.26951682933503
-
-},
-
-"transit": false
-
-},
-
-{
-
-"original_point": {
-
-"lat": 60.00048378497443,
-
-"lon": 30.19945272875012
-
-},
-
-"projected_point": {
-
-"lat": 60.00048378497443,
-
-"lon": 30.19945272875012
-
-},
-
-"transit": false
-
-}
-
-]
-
-}
-
-],
-
-"status": "OK",
-
-"type": "result"
-
-}
-
-```
+```  
 </details>
 

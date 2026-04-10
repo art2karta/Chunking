@@ -1,34 +1,57 @@
 Source file: c:\Users\ar.kartavtsev\Desktop\Chunking\my-git-repo\input_docs\Routing API\start.docx
 Document: routingapi
-Total chunks: 12
-Chunk size before overlap: 500-700 tokens (LangChain: MarkdownHeaderTextSplitter + RecursiveCharacterTextSplitter)
+Total chunks: 5
+Chunk size before overlap: 500-700 tokens (hierarchy: H2 -> H3; code chunks are kept whole)
 Overlap: 15% (or 40% if previous chunk < 500 tokens), target max with overlap: 805 tokens
 ================================================================================
 
-Statistics: Min=273 tokens, Max=12516 tokens, Avg=2538 tokens
+Statistics: Min=148 tokens, Max=17248 tokens, Avg=6355 tokens
 ================================================================================
 
---- CHUNK 1 (915 tokens / 2499 chars) ---
+--- CHUNK 1 (148 tokens / 402 chars) ---
 Document: routingapi
 
----  
----
+H1: Начало работы
+H2: 
+
+H3: 
+
 # Начало работы  
 Выполните шаги ниже, чтобы познакомиться с возможностями Routing API и отправить запрос на построение маршрута на автомобиле или на общественном транспорте. Чтобы построить маршруты для других способов передвижения (например, на велосипеде или пешком), см. инструкцию [Примеры](/api/navigation/routing/examples).  
+Примеры запросов приведены с использованием [cURL](https://curl.se/).
+
+--- CHUNK 2 (212 tokens / 641 chars) ---
+Document: routingapi
+
+H1: Начало работы
+H2: Получение ключа доступа {#get-access-key}
+
+H3: 
+
 Примеры запросов приведены с использованием [cURL](https://curl.se/).
 ## Получение ключа доступа {#get-access-key}  
 1. Зарегистрируйтесь в личном кабинете [Менеджер Платформы](https://platform.2gis.ru/ru/?utm_source=docs&utm_medium=referral&utm_campaign=api_routing).  
 2. Создайте [демо-ключ](/platform-manager/subscription/keys#demo) или купите [подписку](/platform-manager/subscription/purchase) для доступа к API. Подробнее о стоимости сервиса см. в разделе [Тарифы](/api/navigation/routing/overview#tariffs).  
 Работать с ключами можно в Менеджере Платформы: подробнее см. в документации [личного кабинета](/platform-manager/overview).
+
+--- CHUNK 3 (13468 tokens / 33552 chars) ---
+Document: routingapi
+
+H1: Начало работы
+H2: Построение маршрута на автомобиле {#car-route}
+
+H3: 
+
+Работать с ключами можно в Менеджере Платформы: подробнее см. в документации [личного кабинета](/platform-manager/overview).
 ## Построение маршрута на автомобиле {#car-route}  
 Чтобы построить маршрут на автомобиле для одной пары точек, отправьте POST-запрос к `/routing/7.0.0/global`:  
-1. В строке запроса укажите значение API-ключа в параметре `key`:
+1. В строке запроса укажите значение API-ключа в параметре `key`:  
 ```http
 
 https://routing.api.2gis.com/routing/7.0.0/global?key=API_KEY
 
-```
-2. В теле запроса передайте JSON с необходимыми параметрами:
+```  
+2. В теле запроса передайте JSON с необходимыми параметрами:  
 ```json
 
 {
@@ -68,7 +91,8 @@ https://routing.api.2gis.com/routing/7.0.0/global?key=API_KEY
 }
 
 ```
-### Пример запроса {#car-request-example}
+
+### Пример запроса {#car-request-example}  
 ```curl
 
 curl --request POST \
@@ -113,7 +137,7 @@ curl --request POST \
 
 }'
 
-```
+```  
 Где:  
 * `points` — массив координат точек маршрута: начальной и конечной.  
 * `transport: driving` — способ передвижения: на автомобиле.  
@@ -122,15 +146,10 @@ curl --request POST \
 * `locale: ru` — язык текстовых описаний элементов маршрута: русский.  
 Подробную информацию о параметрах см. в [Справочнике API](/api/navigation/routing/reference/routing).
 
---- CHUNK 2 (800 tokens / 2296 chars) ---
-Document: routingapi
-
-* `locale: ru` — язык текстовых описаний элементов маршрута: русский.  
-Подробную информацию о параметрах см. в [Справочнике API](/api/navigation/routing/reference/routing).
 ### Пример ответа {#car-response-example}  
 Запрос вернёт массив нескольких [вариантов маршрута](/api/navigation/routing/examples#options-other), если их возможно построить.  
 Каждый вариант маршрута делится на несколько участков (манёвров).  
-Краткий пример ответа:
+Краткий пример ответа:  
 ```json
 
 {
@@ -353,59 +372,7 @@ Document: routingapi
 
 }
 
-```
-
---- CHUNK 3 (772 tokens / 1787 chars) ---
-Document: routingapi
-
-
-{
-
-"original_point": {
-
-"lat": 55.77548691400483,
-
-"lon": 37.58308675494588
-
-},
-
-"projected_point": {
-
-"lat": 55.77548691400483,
-
-"lon": 37.58308675494588
-
-},
-
-"transit": false
-
-},
-
-...
-
-]
-
-},
-
-{
-
-"algorithm": "с учётом пробок",
-
-"id": "636338359675513741",
-
-...
-
-}
-
-],
-
-"status": "OK",
-
-"type": "result"
-
-}
-
-```
+```  
 Где:  
 * `algorithm` — тип варианта маршрута в текстовом виде (например, кратчайший, с учётом пробок и т. д.).  
 * `begin_pedestrian_path` — геометрия пешеходного участка маршрута от начальной точки маршрута до первого манёвра в формате WKT (Well-Known Text).  
@@ -427,14 +394,7 @@ Document: routingapi
 * `reliability` — надёжность варианта маршрута от 0 до 1.  
 * `route_id` — уникальный идентификатор варианта маршрута.  
 * `total_distance` — общая длина варианта маршрута в метрах.  
-* `total_duration` — общее время в пути на варианте маршрута в секундах.
-
---- CHUNK 4 (273 tokens / 670 chars) ---
-Document: routingapi
-
-* `route_id` — уникальный идентификатор варианта маршрута.  
-* `total_distance` — общая длина варианта маршрута в метрах.  
-* `total_duration` — общее время в пути на варианте маршрута в секундах.
+* `total_duration` — общее время в пути на варианте маршрута в секундах.  
 * `type` — способ передвижения на варианте маршрута.  
 * `ui_total_distance` — общая длина варианта маршрута в текстовом виде.  
 * `ui_total_duration` — общее время в пути на варианте маршрута в текстовом виде.  
@@ -442,11 +402,7 @@ Document: routingapi
 Подробнее о каждом параметре см. в [Справочнике API](/api/navigation/routing/reference/routing).  
 Полный пример ответа:  
 <details>  
-<summary><code>response.json</code></summary>
-
---- CHUNK 5 (11303 tokens / 27808 chars) ---
-Document: routingapi
-
+<summary><code>response.json</code></summary>  
 ```json
 
 {
@@ -2455,11 +2411,423 @@ Document: routingapi
 
 }
 
-```
+```  
+</details>
 
---- CHUNK 6 (809 tokens / 2200 chars) ---
+--- CHUNK 4 (17248 tokens / 41389 chars) ---
 Document: routingapi
 
+H1: Начало работы
+H2: Построение маршрута на общественном транспорте {#public-transport-route}
+
+H3: 
+
+
+},
+
+{
+
+"color": "slow",
+
+"length": 230,
+
+"selection": "LINESTRING(37.642386 55.770573, 37.642720 55.770474, 37.642942 55.770406, 37.643525 55.770234, 37.643708 55.770178, 37.643975 55.770092, 37.644348 55.769976, 37.644647 55.769882, 37.645657 55.769580)",
+
+"style": "normal"
+
+},
+
+{
+
+"color": "normal",
+
+"length": 11,
+
+"selection": "LINESTRING(37.645657 55.769580, 37.645818 55.769531)",
+
+"style": "normal"
+
+},
+
+{
+
+"color": "fast",
+
+"length": 21,
+
+"selection": "LINESTRING(37.645818 55.769531, 37.646121 55.769442)",
+
+"style": "normal"
+
+},
+
+{
+
+"color": "normal",
+
+"length": 114,
+
+"selection": "LINESTRING(37.646121 55.769442, 37.646389 55.769364, 37.647223 55.769158, 37.647789 55.769017)",
+
+"style": "normal"
+
+},
+
+{
+
+"color": "fast",
+
+"length": 737,
+
+"selection": "LINESTRING(37.647789 55.769017, 37.648564 55.768776, 37.649337 55.768557, 37.649691 55.768459, 37.649817 55.768424, 37.649886 55.768391, 37.650113 55.768283, 37.650280 55.768171, 37.651022 55.767635, 37.651497 55.767307, 37.651966 55.766988, 37.652654 55.766522, 37.653423 55.765990, 37.653591 55.765874, 37.653911 55.765652, 37.654967 55.764923, 37.655597 55.764466, 37.655881 55.764258)",
+
+"style": "normal"
+
+}
+
+],
+
+"names": [
+
+"Большая Садовая"
+
+]
+
+},
+
+"outcoming_path_comment": "4.5 км прямо",
+
+"turn_angle": 82,
+
+"turn_direction": "right",
+
+"type": "crossroad"
+
+},
+
+{
+
+"comment": "Разворот на ул. Садовая-Черногрязская",
+
+"icon": "turn_over_right_hand",
+
+"id": "4169011539941138169",
+
+"outcoming_path": {
+
+"distance": 71,
+
+"duration": 17,
+
+"geometry": [
+
+{
+
+"color": "fast",
+
+"length": 22,
+
+"selection": "LINESTRING(37.655881 55.764258, 37.655917 55.764246, 37.655955 55.764239, 37.655993 55.764237, 37.656027 55.764240, 37.656049 55.764245, 37.656067 55.764253, 37.656086 55.764271, 37.656095 55.764288, 37.656094 55.764310, 37.656076 55.764339)",
+
+"style": "normal"
+
+},
+
+{
+
+"color": "slow",
+
+"length": 49,
+
+"selection": "LINESTRING(37.656076 55.764339, 37.655591 55.764691)",
+
+"style": "normal"
+
+}
+
+],
+
+"names": [
+
+"Садовая-Черногрязская"
+
+]
+
+},
+
+"outcoming_path_comment": "70 м прямо",
+
+"turn_angle": -180,
+
+"turn_direction": "uturn_left",
+
+"type": "crossroad"
+
+},
+
+{
+
+"comment": "Поворот направо",
+
+"icon": "crossroad_right",
+
+"id": "15938104688967471050",
+
+"outcoming_path": {
+
+"distance": 36,
+
+"duration": 10,
+
+"geometry": [
+
+{
+
+"color": "ignore",
+
+"length": 21,
+
+"selection": "LINESTRING(37.655591 55.764691, 37.655782 55.764778, 37.655867 55.764818)",
+
+"style": "living_zone"
+
+},
+
+{
+
+"color": "ignore",
+
+"length": 12,
+
+"selection": "LINESTRING(37.655867 55.764818, 37.656014 55.764887)",
+
+"style": "archway"
+
+},
+
+{
+
+"color": "ignore",
+
+"length": 3,
+
+"selection": "LINESTRING(37.656014 55.764887, 37.656064 55.764909)",
+
+"style": "living_zone"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "40 м прямо",
+
+"turn_angle": 89,
+
+"turn_direction": "right",
+
+"type": "crossroad"
+
+},
+
+{
+
+"comment": "Поворот направо",
+
+"icon": "crossroad_right",
+
+"id": "9167068033490042506",
+
+"outcoming_path": {
+
+"distance": 93,
+
+"duration": 26,
+
+"geometry": [
+
+{
+
+"color": "ignore",
+
+"length": 93,
+
+"selection": "LINESTRING(37.656064 55.764909, 37.656554 55.764570, 37.656591 55.764558, 37.656635 55.764560, 37.656674 55.764578, 37.656728 55.764601, 37.656741 55.764609, 37.656749 55.764617, 37.656755 55.764630, 37.656755 55.764641, 37.656749 55.764655, 37.656538 55.764857)",
+
+"style": "living_zone"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "90 м прямо",
+
+"turn_angle": 90,
+
+"turn_direction": "right",
+
+"type": "crossroad"
+
+},
+
+{
+
+"comment": "Поворот налево",
+
+"icon": "crossroad_left",
+
+"id": "1516284992735570568",
+
+"outcoming_path": {
+
+"distance": 21,
+
+"duration": 6,
+
+"geometry": [
+
+{
+
+"color": "ignore",
+
+"length": 21,
+
+"selection": "LINESTRING(37.656538 55.764857, 37.656510 55.764857, 37.656485 55.764865, 37.656303 55.764992)",
+
+"style": "living_zone"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "20 м прямо",
+
+"turn_angle": -46,
+
+"turn_direction": "left",
+
+"type": "crossroad"
+
+},
+
+{
+
+"comment": "Поворот направо",
+
+"icon": "crossroad_right",
+
+"id": "15075071041239725830",
+
+"outcoming_path": {
+
+"distance": 18,
+
+"duration": 5,
+
+"geometry": [
+
+{
+
+"color": "ignore",
+
+"length": 18,
+
+"selection": "LINESTRING(37.656303 55.764992, 37.656543 55.765075, 37.656553 55.765080)",
+
+"style": "living_zone"
+
+}
+
+],
+
+"names": []
+
+},
+
+"outcoming_path_comment": "20 м прямо",
+
+"turn_angle": 91,
+
+"turn_direction": "right",
+
+"type": "crossroad"
+
+},
+
+{
+
+"comment": "finish",
+
+"icon": "finish",
+
+"id": "16377021944685554640",
+
+"outcoming_path_comment": "Вы на месте!",
+
+"type": "end"
+
+}
+
+],
+
+"reliability": 0.0,
+
+"route_id": "moscow-cr-back.m9/carrouting/1772784267.746771",
+
+"total_distance": 6810,
+
+"total_duration": 1217,
+
+"type": "carrouting",
+
+"ui_total_distance": {
+
+"unit": "км",
+
+"value": "6.8"
+
+},
+
+"ui_total_duration": "20 мин",
+
+"waypoints": [
+
+{
+
+"original_point": {
+
+"lat": 55.77548691400483,
+
+"lon": 37.58308675494588
+
+},
+
+"projected_point": {
+
+"lat": 55.77548691400483,
+
+"lon": 37.58308675494588
+
+},
+
+"transit": false
+
+},
+
+{
+
+"original_point": {
 
 "lat": 55.76508099601444,
 
@@ -2491,17 +2859,17 @@ Document: routingapi
 
 }
 
-```
+```  
 </details>
 ## Построение маршрута на общественном транспорте {#public-transport-route}  
 Чтобы построить маршрут на общественном транспорте, отправьте POST-запрос к `/public_transport/2.0`:  
-1. В строке запроса укажите значение API-ключа в параметре `key`:
+1. В строке запроса укажите значение API-ключа в параметре `key`:  
 ```http
 
 https://routing.api.2gis.com/public_transport/2.0?key=API_KEY
 
-```
-2. В теле запроса передайте JSON с необходимыми параметрами:
+```  
+2. В теле запроса передайте JSON с необходимыми параметрами:  
 ```json
 
 {
@@ -2545,7 +2913,8 @@ https://routing.api.2gis.com/public_transport/2.0?key=API_KEY
 }
 
 ```
-### Пример запроса {#public-request-example}
+
+### Пример запроса {#public-request-example}  
 ```curl
 
 curl --request POST \
@@ -2594,23 +2963,18 @@ curl --request POST \
 
 }'
 
-```
+```  
 Где:  
 * `source` — координаты начальной точки (широта и долгота).  
 * `target` — координаты конечной точки (широта и долгота).  
 * `transport: [metro, tram]` — массив видов общественного транспорта: `metro` — метро и `tram` — трамвай.  
 * `locale: ru` — язык текстовых описаний элементов маршрута: русский.  
 Подробную информацию о параметрах см. в [Справочнике API](/api/navigation/routing/reference/public_transport).
+
 ### Пример ответа {#public-response-example}  
 Запрос вернёт массив нескольких [вариантов маршрута](/api/navigation/routing/examples#options-public). Если невозможно построить маршруты на общественном транспорте, вернётся полностью пешеходный маршрут или пустой ответ в зависимости от длины маршрута: подробнее см. в разделе [Транспорт и пересадки](/api/navigation/routing/examples#route-transport).  
 Каждый вариант маршрута (кроме полностью пешеходного) делится на несколько [участков](/api/navigation/routing/examples#route-parts).  
-Краткий пример ответа:
-
---- CHUNK 7 (501 tokens / 1457 chars) ---
-Document: routingapi
-
-Каждый вариант маршрута (кроме полностью пешеходного) делится на несколько [участков](/api/navigation/routing/examples#route-parts).  
-Краткий пример ответа:
+Краткий пример ответа:  
 ```json
 
 [
@@ -2811,85 +3175,7 @@ Document: routingapi
 
 ]
 
-```
-
---- CHUNK 8 (801 tokens / 2100 chars) ---
-Document: routingapi
-
-
-"start_time_utc": 1772785500,
-
-"type": "precise"
-
-},
-
-...
-
-],
-
-"total_distance": 8939,
-
-"total_duration": 2464,
-
-"total_walkway_distance": "пешком 20 мин",
-
-"transfer_count": 2,
-
-"transport": [...],
-
-"waypoints": [
-
-{
-
-"combined": false,
-
-"routes_names": [
-
-"13",
-
-"7",
-
-"Т1"
-
-],
-
-"subtype": "tram"
-
-},
-
-...
-
-],
-
-},
-
-{
-
-"crossing_count": 0,
-
-"id": "31",
-
-"movements": [
-
-{
-
-"alternatives": [...],
-
-...
-
-},
-
-...
-
-]
-
-},
-
-...
-
-]
-
-```
+```  
 Где:  
 * `crossing_count` — количество пересадок между остановочными платформами для варианта маршрута. Например, пересадка с метро на автобус или переход между разными линиями метро. Подробнее см. в разделе [Транспорт и пересадки](/api/navigation/routing/examples#route-transport).  
 * `id` — ID варианта маршрута.  
@@ -2901,12 +3187,7 @@ Document: routingapi
 * `id` — ID участка маршрута.  
 * `moving_duration` — время в пути на участке маршрута в секундах. Подробнее см. в разделе [Продолжительность участка маршрута](/api/navigation/routing/examples#route-part-duration).  
 * `platforms` — промежуточные остановки (только для участков проезда на общественном транспорте). Подробнее см. в разделе [Транспорт и остановки](/api/navigation/routing/examples#route-part-transport).  
-* `routes` — маршруты общественного транспорта на участке маршрута (только для участков проезда на общественном транспорте). Подробнее см. в разделе [Транспорт и остановки](/api/navigation/routing/examples#route-part-transport).
-
---- CHUNK 9 (701 tokens / 1801 chars) ---
-Document: routingapi
-
-* `routes` — маршруты общественного транспорта на участке маршрута (только для участков проезда на общественном транспорте). Подробнее см. в разделе [Транспорт и остановки](/api/navigation/routing/examples#route-part-transport).
+* `routes` — маршруты общественного транспорта на участке маршрута (только для участков проезда на общественном транспорте). Подробнее см. в разделе [Транспорт и остановки](/api/navigation/routing/examples#route-part-transport).  
 * `type` — тип перемещения на участке маршрута. Подробнее см. в разделе [Типы участков маршрута](/api/navigation/routing/examples#route-part-types).  
 * `waiting_duration` — время ожидания транспорта на участке маршрута в секундах. Для пешеходных участков значение равно `0`. Подробнее см. в разделе [Продолжительность участка маршрута](/api/navigation/routing/examples#route-part-duration).  
 * `waypoint` — краткая информация об участке маршрута: комментарий, тип точки, вид транспорта и т. д. Подробнее см. в разделе [Типы участков маршрута](/api/navigation/routing/examples#route-part-types).  
@@ -2915,22 +3196,13 @@ Document: routingapi
 * `schedules` — массив с расписанием общественного транспорта на варианте маршрута. Подробнее см. в разделе [Транспорт и пересадки](/api/navigation/routing/examples#route-transport).  
 * `total_distance` — общая длина варианта маршрута в метрах. Подробнее см. в разделе [Общая продолжительность маршрута](/api/navigation/routing/examples#route-duration).  
 * `total_duration` — общее время в пути на варианте маршрута в секундах. Подробнее см. в разделе [Общая продолжительность маршрута](/api/navigation/routing/examples#route-duration).  
-* `total_walkway_distance` — общее время в пути пешком на варианте маршрута в текстовом виде. Подробнее см. в разделе [Общая продолжительность маршрута](/api/navigation/routing/examples#route-duration).
-
---- CHUNK 10 (349 tokens / 961 chars) ---
-Document: routingapi
-
-* `total_walkway_distance` — общее время в пути пешком на варианте маршрута в текстовом виде. Подробнее см. в разделе [Общая продолжительность маршрута](/api/navigation/routing/examples#route-duration).
+* `total_walkway_distance` — общее время в пути пешком на варианте маршрута в текстовом виде. Подробнее см. в разделе [Общая продолжительность маршрута](/api/navigation/routing/examples#route-duration).  
 * `transfer_count` — количество пересадок в рамках одной остановочной платформы для варианта маршрута. Например, пересадка с одного маршрута автобуса на другой. Подробнее см. в разделе [Транспорт и пересадки](/api/navigation/routing/examples#route-transport).  
 * `waypoints` — краткая информация о варианте маршрута: можно ли проехать маршрут на одном виде транспорта, виды транспорта и т. д. Подробнее см. в разделе [Транспорт и пересадки](/api/navigation/routing/examples#route-transport).  
 Подробнее о каждом параметре см. в [Справочнике API](/api/navigation/routing/reference/public_transport) и в инструкции [Примеры](/api/navigation/routing/examples#options-public).  
 Полный пример ответа:  
 <details>  
-<summary><code>response.json</code></summary>
-
---- CHUNK 11 (12516 tokens / 28817 chars) ---
-Document: routingapi
-
+<summary><code>response.json</code></summary>  
 ```json
 
 [
@@ -5065,10 +5337,16 @@ Document: routingapi
 
 ]
 
-```
+```  
+</details>
 
---- CHUNK 12 (716 tokens / 1885 chars) ---
+--- CHUNK 5 (700 tokens / 1887 chars) ---
 Document: routingapi
+
+H1: Начало работы
+H2: Что дальше? {#whats-next}
+
+H3: 
 
 
 "z_first": 0,
@@ -5231,7 +5509,7 @@ Document: routingapi
 
 ]
 
-```
+```  
 </details>
 ## Что дальше? {#whats-next}  
 * [Узнайте](/api/navigation/routing/overview) о возможностях Routing API.  
