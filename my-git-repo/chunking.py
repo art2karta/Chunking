@@ -228,8 +228,8 @@ def main():
         # r"c:\Users\ar.kartavtsev\Desktop\Chunking\Test2.docx",
         # r"c:\Users\ar.kartavtsev\Desktop\Chunking\Test3.docx",
     ]
-    input_dir = r"c:\Users\ar.kartavtsev\Desktop\Chunking\input_docs"
-    output_dir = Path(r"c:\Users\ar.kartavtsev\Desktop\Chunking\chunks_output")
+    input_dir = r"c:\Users\ar.kartavtsev\Desktop\Chunking\my-git-repo\input_docs"
+    output_dir = Path(r"c:\Users\ar.kartavtsev\Desktop\Chunking\my-git-repo\chunks_output")
 
     files_to_process = collect_input_files(input_files, input_dir)
     if not files_to_process:
