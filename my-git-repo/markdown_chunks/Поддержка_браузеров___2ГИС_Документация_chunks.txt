@@ -1,0 +1,27 @@
+Source file: C:\Users\ar.kartavtsev\Desktop\Chunking\html_markdown\Поддержка браузеров _ 2ГИС Документация.md
+Total chunks: 2
+Chunk size target: 500-800 tokens, overlap: 15%
+================================================================================
+
+Statistics: Min=153 tokens, Max=185 tokens, Avg=169 tokens
+================================================================================
+
+--- CHUNK 1 (185 tokens / 498 chars) ---
+Document: Поддержка браузеров _ 2ГИС Документация
+H1: 
+H2: Тарифы[](https://docs.2gis.com/mapgl/overview/tariffs#tariffs)
+H3: 
+
+- Стоимость сервиса рассчитывается исходя из количества запросов в месяц к сервису
+[Map Tiles API](https://docs.2gis.com/maps/others/maptiles/overview), который предоставляет доступ к векторным тайлам карты. Один запрос соответствует загрузке одного векторного тайла. Безлимитный доступ к библиотеке MapGL JS API предоставляется бесплатно. - Актуальные тарифы можно посмотреть в
+[Менеджере Платформы](https://platform.2gis.ru/ru/tariffs?utm_source=docs&utm_medium=referral&utm_campaign=api_vector).
+
+--- CHUNK 2 (153 tokens / 454 chars) ---
+Document: Поддержка браузеров _ 2ГИС Документация
+H1: 
+H2: Использование с Map Tiles API[](https://docs.2gis.com/mapgl/overview/tariffs#distribution)
+H3: 
+
+Вы можете использовать библиотеку MapGL JS API с сервисом Map Tiles API в зависимости от варианта его размещения:  
+**Облако**: MapGL JS API доступна для использования с облачной версией[Map Tiles API](https://docs.2gis.com/maps/others/maptiles/overview).**On-Premise**: MapGL JS API доступна для использования с Tiles API, установленным в закрытом контуре в качестве компонента[API-платформы](https://docs.2gis.com/on-premise/api-platform/overview)2ГИС.
+

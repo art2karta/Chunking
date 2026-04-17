@@ -1,0 +1,66 @@
+Source file: C:\Users\ar.kartavtsev\Desktop\Chunking\html_markdown\Map Tiles API _ 2ГИС Документация.md
+Total chunks: 6
+Chunk size target: 500-800 tokens, overlap: 15%
+================================================================================
+
+Statistics: Min=110 tokens, Max=302 tokens, Avg=191 tokens
+================================================================================
+
+--- CHUNK 1 (274 tokens / 740 chars) ---
+Document: Map Tiles API _ 2ГИС Документация
+H1: 
+H2: 
+H3: 
+
+Сервис Map Tiles API предоставляет векторные тайлы для карт.  
+Для работы с векторными тайлами используйте JavaScript-библиотеку [MapGL JS API](https://docs.2gis.com/mapgl/overview/features) и размещайте на сайтах и в веб-приложениях трёхмерную интерактивную карту 2ГИС на WebGL-движке. При оформлении подписки на Map Tiles API безлимитный доступ к библиотеке MapGL JS API предоставляется бесплатно.  
+Также вы можете добавлять карты в мобильные приложения с помощью мобильных SDK для [iOS](https://docs.2gis.com/ios/sdk/overview), [Android](https://docs.2gis.com/android/sdk/overview) и [Flutter](https://docs.2gis.com/flutter/sdk/overview).  
+Прямая интеграция векторных тайлов без использования библиотеки или SDK 2ГИС не поддерживается.
+
+--- CHUNK 2 (302 tokens / 837 chars) ---
+Document: Map Tiles API _ 2ГИС Документация
+H1: 
+H2: Начало работы[](https://docs.2gis.com/maps/others/maptiles/overview#getting-started)
+H3: Получение ключа доступа[](https://docs.2gis.com/maps/others/maptiles/overview#getting-access-key)
+
+- Зарегистрируйтесь в личном кабинете
+[Менеджер Платформы](https://platform.2gis.ru/ru/?utm_source=docs&utm_medium=referral&utm_campaign=api_vector). - Создайте
+[демо-ключ](https://docs.2gis.com/platform-manager/subscription/keys#demo)или купите[подписку](https://docs.2gis.com/platform-manager/subscription/purchase)для доступа к API. Подробнее о стоимости сервиса см. в разделе[Тарифы](https://docs.2gis.com/maps/others/maptiles/overview#tariffs).  
+Если у вас уже есть действующий API-ключ, полученный для MapGL JS API, вы можете использовать его для доступа к Map Tiles API до истечения срока действия подписки. Срок действия можно посмотреть в личном кабинете, на вкладке **Главная**.  
+Работать с ключами можно в Менеджере Платформы: подробнее см. в [документации личного кабинета](https://docs.2gis.com/platform-manager/overview).
+
+--- CHUNK 3 (198 tokens / 504 chars) ---
+Document: Map Tiles API _ 2ГИС Документация
+H1: 
+H2: Начало работы[](https://docs.2gis.com/maps/others/maptiles/overview#getting-started)
+H3: Интеграция библиотеки MapGL JS API[](https://docs.2gis.com/maps/others/maptiles/overview#using-mapgl-js-api)
+
+MapGL JS API — это бесплатная JavaScript-библиотека для работы с трёхмерными интерактивными картами 2ГИС. Содержит готовый набор инструментов для взаимодействия с картой, автоматически запрашивает векторные тайлы и отображает их на странице.  
+Чтобы использовать с библиотекой MapGL JS API тайлы, предоставленные сервисом Map Tiles API, сначала получите ключ доступа, затем подключите библиотеку к вашему проекту. Подробнее см. в инструкции [Начало работы](https://docs.2gis.com/mapgl/start/first-steps).
+
+--- CHUNK 4 (122 tokens / 316 chars) ---
+Document: Map Tiles API _ 2ГИС Документация
+H1: 
+H2: Статистика[](https://docs.2gis.com/maps/others/maptiles/overview#statistics)
+H3: 
+
+При исчерпании лимитов сервис станет недоступен. Вы можете отслеживать расходование лимитов в подписке и статистику распределения запросов к сервису в личном кабинете. Подробнее об инструментах статистики см. в разделе [Статистика](https://docs.2gis.com/platform-manager/subscription/statistics#view-the-statistics).
+
+--- CHUNK 5 (140 tokens / 364 chars) ---
+Document: Map Tiles API _ 2ГИС Документация
+H1: 
+H2: Тарифы[](https://docs.2gis.com/maps/others/maptiles/overview#tariffs)
+H3: 
+
+- Стоимость сервиса рассчитывается исходя из количества запросов в месяц. Один запрос соответствует загрузке одного векторного тайла. Безлимитный доступ к библиотеке MapGL JS API предоставляется бесплатно.
+- Актуальные тарифы можно посмотреть в
+[Менеджере Платформы](https://platform.2gis.ru/ru/tariffs?utm_source=docs&utm_medium=referral&utm_campaign=api_vector).
+
+--- CHUNK 6 (110 tokens / 291 chars) ---
+Document: Map Tiles API _ 2ГИС Документация
+H1: 
+H2: Варианты размещения[](https://docs.2gis.com/maps/others/maptiles/overview#distribution)
+H3: 
+
+**Облако**: Map Tiles API доступен через публичные endpoint-ы 2ГИС.**On-Premise**: для получения векторных тайлов установите Tiles API в составе API-платформы 2ГИС в закрытом контуре. Подробнее см. в разделе[API-платформа для сервера](https://docs.2gis.com/on-premise/api-platform/overview).
+

@@ -1,0 +1,210 @@
+
+<!-- saved from url=(0012)about:srcdoc -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      
+      <title>MapGL JS API</title>
+      <meta name="description" content="Пример взаимодействия с картой в React-приложении">
+      <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+      <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+      <script src="https://mapgl.2gis.com/api/js/v1"></script><style>.mapgl-hover{cursor:pointer}.mapgl-dragging{cursor:grabbing}.mapgl-rotating{cursor:move}.mapgl_QEdaFvncPWE-{width:32px;box-shadow:0 1px 3px #26262680;border-radius:4px;display:flex;flex-direction:column;overflow:hidden;background:#fff}.mapgl_mjx-K8iaDdc-{all:revert;padding:0;outline:0;border:none;cursor:pointer;background:#fff;width:32px;height:32px;color:#262626;box-sizing:border-box}.mapgl_mjx-K8iaDdc-:hover{opacity:.7}.mapgl_mjx-K8iaDdc-:active{color:#028eff}.mapgl_mjx-K8iaDdc-:disabled{background:#f2f2f2;color:#929292;cursor:default}.mapgl_zKZCVsRur9c-{border-bottom:1px solid #e6e6e6}.mapgl_3t-wJELDATg-{border-bottom:none}.mapgl_ON-gf73kIU0-{background:#fff;box-shadow:0 1px 3px #26262680;border-radius:4px;width:32px;overflow:hidden}.mapgl_mWyZxMObEi8-{all:revert;padding:0;outline:0;border:none;cursor:pointer;box-sizing:border-box;font-size:18px;font-weight:400;width:32px;height:32px;color:#262626;background:#fff}.mapgl_FwnEmRmDBLg-:hover{opacity:.7}.mapgl_uSuUHuf71nM-{background:#299400;color:#fff}.mapgl_LdqAv9Ly624-{background:#ffb81c;color:#fff}.mapgl_udRZCM1quWE-{background:#fe5000;color:#fff}.mapgl_uSuUHuf71nM-:hover,.mapgl_LdqAv9Ly624-:hover,.mapgl_udRZCM1quWE-:hover{color:#262626b3}.mapgl_K-1Yb8HCVpQ-{display:block!important}.mapgl_K-1Yb8HCVpQ- .mapgl_CLps5xx6CNs-{height:20px!important;display:block!important}.mapgl_r8Wn2E5pGh0-{pointer-events:none;position:absolute;top:0;left:0;width:100%;height:100%;display:flex;justify-content:center;align-items:center;padding:10px;background-color:#0003;cursor:default}.mapgl_ir0vRf5QXrk-{text-align:center;font-size:24px;font-family:Helvetica,Arial,sans-serif;font-weight:700;color:#fff}.mapgl_h2pl79nAYpk-{position:relative}.mapgl_64D1bmNQN3Q-{display:flex;max-height:40vh;background:#fff;width:32px;overflow:hidden;border-radius:4px;box-shadow:0 1px 3px #26262680}.mapgl_jdJbkjpLO7k-{width:100%;overflow-x:hidden;overflow-y:auto;-moz-padding-end:17px;-webkit-padding-end:17px;-webkit-margin-end:-17px}.mapgl_54Rmy50n6Fw-{display:flex;flex-direction:column-reverse}.mapgl_3i1QoGerxio-{all:revert;padding:0;border:none;background:#fff;height:32px;width:32px;color:#262626;cursor:pointer;border-bottom:1px solid #e6e6e6;box-sizing:border-box;flex-shrink:0}.mapgl_3i1QoGerxio-:focus{outline:0}.mapgl_3i1QoGerxio-:first-child{border-bottom:none}.mapgl_3i1QoGerxio-:hover{color:#262626b3}.mapgl_3i1QoGerxio-:active{color:#028eff}.mapgl_3i1QoGerxio-:disabled{background:#f2f2f2;color:#929292;fill:#929292;cursor:default}.mapgl_wGplqJ4hHPc-{font-size:18px;line-height:32px;font-weight:400;overflow-wrap:break-word;position:relative;text-align:center;height:100%}.mapgl_wGplqJ4hHPc- svg{margin-top:3px}.mapgl_PkWXKxsq1Kc-:after{content:"";position:absolute;top:4px;bottom:4px;width:4px;height:4px;border-radius:50%;background:#028eff}.mapgl_z0m6n5pr5no-{position:absolute;pointer-events:none;inset:0}.mapgl_ITPUswrhaGk-{position:absolute;display:flex;z-index:50;pointer-events:none;width:100%;height:100%}.mapgl_ITPUswrhaGk->div>*{pointer-events:auto}.mapgl_Px-KwzXdVa0-{flex-direction:column;align-items:flex-start}.mapgl_SCX3EYsS-Cw-{flex-direction:row;justify-content:center;align-items:flex-start}.mapgl_i42TyWqpCPk-{flex-direction:column;align-items:flex-end}.mapgl_-zKby6nN-nU-{flex-direction:column;justify-content:center;align-items:flex-start}.mapgl_SlQM4-ZNKF0-{flex-direction:column;justify-content:center;align-items:flex-end}.mapgl_lNg3h7Hg-Mo-{flex-direction:column-reverse;align-items:flex-start}.mapgl_grOepPBwilk-{flex-direction:row;justify-content:center;align-items:flex-end}.mapgl_CiHYefDPhI0-{flex-direction:column-reverse;align-items:flex-end}.mapgl_Px-KwzXdVa0->div+div,.mapgl_i42TyWqpCPk->div+div,.mapgl_-zKby6nN-nU->div+div,.mapgl_SlQM4-ZNKF0->div+div{margin-top:10px}.mapgl_lNg3h7Hg-Mo->div+div,.mapgl_CiHYefDPhI0->div+div{margin-bottom:10px}.mapgl_SCX3EYsS-Cw->div+div,.mapgl_grOepPBwilk->div+div{margin-left:10px}.mapgl_9m2ynAxdBT0-{background:#ffffffad;border-width:0 1px 1px 1px;border-color:#7a7a7a;border-style:solid;border-radius:0;min-width:64px;height:16px;overflow:hidden;pointer-events:none!important}.mapgl_sR4nXEQ3L2M-{min-width:50px;height:12px;margin-top:2px;margin-left:6px;font-family:Helvetica,Arial,sans-serif!important;font-style:normal;font-weight:400;font-size:9px;line-height:12px;color:#262626}.mapgl_54Xq9OUdARA-{font-family:Helvetica,Arial,sans-serif!important;font-size:8px!important;line-height:8px!important;text-align:right!important;display:flex;align-items:flex-start;color:#6d7173!important}.mapgl_qYE18V9u8c0-{display:block}a.mapgl_wYSwIqldiqU-{color:#6d7173!important;text-decoration:none!important}a.mapgl_wYSwIqldiqU-:hover{color:#929292!important}
+/*$vite$:1*/</style>
+      <!-- Не используйте в проектах: -->
+      <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+      <style>
+          html,
+          body,
+          #root {
+              margin: 0;
+              width: 100%;
+              height: 100%;
+              overflow: hidden;
+          }
+      </style>
+  <script>"use strict";
+
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+var MapContext = React.createContext([undefined, function () {}]);
+var MapProvider = function MapProvider(props) {
+  var _React$useState = React.useState(),
+    _React$useState2 = _slicedToArray(_React$useState, 2),
+    mapInstance = _React$useState2[0],
+    setMapInstance = _React$useState2[1];
+  return /*#__PURE__*/React.createElement(MapContext.Provider, {
+    value: [mapInstance, setMapInstance]
+  }, props.children);
+};
+var MapWrapper = React.memo(function () {
+  return /*#__PURE__*/React.createElement("div", {
+    id: "map-container",
+    style: {
+      width: '100%',
+      height: '100%'
+    }
+  });
+}, function () {
+  return true;
+});
+var MapGL = function MapGL() {
+  var _React$useContext = React.useContext(MapContext),
+    _React$useContext2 = _slicedToArray(_React$useContext, 2),
+    _ = _React$useContext2[0],
+    setMapInstance = _React$useContext2[1];
+  React.useEffect(function () {
+    var map = new mapgl.Map('map-container', {
+      center: [37.615655, 55.768005],
+      zoom: 13,
+      key: '72df8181-6863-4cde-abaa-2f92ab6f4824'
+    });
+    setMapInstance(map);
+    return function () {
+      return map.destroy();
+    };
+  }, []);
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      width: '100%',
+      height: '100%'
+    }
+  }, /*#__PURE__*/React.createElement(MapWrapper, null));
+};
+var MoveMapButton = function MoveMapButton() {
+  var _React$useContext3 = React.useContext(MapContext),
+    _React$useContext4 = _slicedToArray(_React$useContext3, 1),
+    mapInstance = _React$useContext4[0];
+  var setInitialCenter = React.useCallback(function () {
+    if (mapInstance) {
+      mapInstance.setCenter([37.615655, 55.768005]);
+    }
+  }, [mapInstance]);
+  return /*#__PURE__*/React.createElement("button", {
+    style: {
+      padding: '4px 10px'
+    },
+    onClick: setInitialCenter
+  }, "\u0423\u0441\u0442\u0430\u043D\u043E\u0432\u0438\u0442\u044C \u043D\u0430\u0447\u0430\u043B\u044C\u043D\u044B\u0439 \u0446\u0435\u043D\u0442\u0440");
+};
+var App = function App() {
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      padding: '0 0 6px'
+    }
+  }, "\u041F\u0435\u0440\u0435\u0442\u0430\u0449\u0438\u0442\u0435 \u043A\u0430\u0440\u0442\u0443, \u0430 \u0437\u0430\u0442\u0435\u043C \u043D\u0430\u0436\u043C\u0438\u0442\u0435 \u043A\u043D\u043E\u043F\u043A\u0443 ", /*#__PURE__*/React.createElement(MoveMapButton, null)), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("div", {
+    style: {
+      width: '100%',
+      height: 250
+    }
+  }, /*#__PURE__*/React.createElement(MapGL, null)));
+};
+ReactDOM.render(/*#__PURE__*/React.createElement(MapProvider, null, /*#__PURE__*/React.createElement(App, null)), document.getElementById('root'));
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6WyJNYXBDb250ZXh0IiwiUmVhY3QiLCJjcmVhdGVDb250ZXh0IiwidW5kZWZpbmVkIiwiTWFwUHJvdmlkZXIiLCJwcm9wcyIsIl9SZWFjdCR1c2VTdGF0ZSIsInVzZVN0YXRlIiwiX1JlYWN0JHVzZVN0YXRlMiIsIl9zbGljZWRUb0FycmF5IiwibWFwSW5zdGFuY2UiLCJzZXRNYXBJbnN0YW5jZSIsImNyZWF0ZUVsZW1lbnQiLCJQcm92aWRlciIsInZhbHVlIiwiY2hpbGRyZW4iLCJNYXBXcmFwcGVyIiwibWVtbyIsImlkIiwic3R5bGUiLCJ3aWR0aCIsImhlaWdodCIsIk1hcEdMIiwiX1JlYWN0JHVzZUNvbnRleHQiLCJ1c2VDb250ZXh0IiwiX1JlYWN0JHVzZUNvbnRleHQyIiwiXyIsInVzZUVmZmVjdCIsIm1hcCIsIm1hcGdsIiwiTWFwIiwiY2VudGVyIiwiem9vbSIsImtleSIsImRlc3Ryb3kiLCJNb3ZlTWFwQnV0dG9uIiwiX1JlYWN0JHVzZUNvbnRleHQzIiwiX1JlYWN0JHVzZUNvbnRleHQ0Iiwic2V0SW5pdGlhbENlbnRlciIsInVzZUNhbGxiYWNrIiwic2V0Q2VudGVyIiwicGFkZGluZyIsIm9uQ2xpY2siLCJBcHAiLCJSZWFjdERPTSIsInJlbmRlciIsImRvY3VtZW50IiwiZ2V0RWxlbWVudEJ5SWQiXSwic291cmNlcyI6WyJJbmxpbmUgQmFiZWwgc2NyaXB0Il0sInNvdXJjZXNDb250ZW50IjpbIlxuICAgICAgICAgIGNvbnN0IE1hcENvbnRleHQgPSBSZWFjdC5jcmVhdGVDb250ZXh0KFt1bmRlZmluZWQsICgpID0+IHt9XSk7XG5cbiAgICAgICAgICBjb25zdCBNYXBQcm92aWRlciA9IChwcm9wcykgPT4ge1xuICAgICAgICAgICAgICBjb25zdCBbbWFwSW5zdGFuY2UsIHNldE1hcEluc3RhbmNlXSA9IFJlYWN0LnVzZVN0YXRlKCk7XG5cbiAgICAgICAgICAgICAgcmV0dXJuIChcbiAgICAgICAgICAgICAgICAgIDxNYXBDb250ZXh0LlByb3ZpZGVyIHZhbHVlPXtbbWFwSW5zdGFuY2UsIHNldE1hcEluc3RhbmNlXX0+XG4gICAgICAgICAgICAgICAgICAgICAge3Byb3BzLmNoaWxkcmVufVxuICAgICAgICAgICAgICAgICAgPC9NYXBDb250ZXh0LlByb3ZpZGVyPlxuICAgICAgICAgICAgICApO1xuICAgICAgICAgIH07XG5cbiAgICAgICAgICBjb25zdCBNYXBXcmFwcGVyID0gUmVhY3QubWVtbyhcbiAgICAgICAgICAgICAgKCkgPT4ge1xuICAgICAgICAgICAgICAgICAgcmV0dXJuIDxkaXYgaWQ9XCJtYXAtY29udGFpbmVyXCIgc3R5bGU9e3sgd2lkdGg6ICcxMDAlJywgaGVpZ2h0OiAnMTAwJScgfX0+PC9kaXY+O1xuICAgICAgICAgICAgICB9LFxuICAgICAgICAgICAgICAoKSA9PiB0cnVlLFxuICAgICAgICAgICk7XG4gICAgICAgICAgY29uc3QgTWFwR0wgPSAoKSA9PiB7XG4gICAgICAgICAgICAgIGNvbnN0IFtfLCBzZXRNYXBJbnN0YW5jZV0gPSBSZWFjdC51c2VDb250ZXh0KE1hcENvbnRleHQpO1xuXG4gICAgICAgICAgICAgIFJlYWN0LnVzZUVmZmVjdCgoKSA9PiB7XG4gICAgICAgICAgICAgICAgICBjb25zdCBtYXAgPSBuZXcgbWFwZ2wuTWFwKCdtYXAtY29udGFpbmVyJywge1xuICAgICAgICAgICAgICAgICAgICAgIGNlbnRlcjogWzM3LjYxNTY1NSwgNTUuNzY4MDA1XSxcbiAgICAgICAgICAgICAgICAgICAgICB6b29tOiAxMyxcbiAgICAgICAgICAgICAgICAgICAgICBrZXk6ICc3MmRmODE4MS02ODYzLTRjZGUtYWJhYS0yZjkyYWI2ZjQ4MjQnLFxuICAgICAgICAgICAgICAgICAgfSk7XG5cbiAgICAgICAgICAgICAgICAgIHNldE1hcEluc3RhbmNlKG1hcCk7XG4gICAgICAgICAgICAgICAgICByZXR1cm4gKCkgPT4gbWFwLmRlc3Ryb3koKTtcbiAgICAgICAgICAgICAgfSwgW10pO1xuXG4gICAgICAgICAgICAgIHJldHVybiAoXG4gICAgICAgICAgICAgICAgICA8ZGl2IHN0eWxlPXt7IHdpZHRoOiAnMTAwJScsIGhlaWdodDogJzEwMCUnIH19PlxuICAgICAgICAgICAgICAgICAgICAgIDxNYXBXcmFwcGVyIC8+XG4gICAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgKTtcbiAgICAgICAgICB9O1xuICAgICAgICAgIGNvbnN0IE1vdmVNYXBCdXR0b24gPSAoKSA9PiB7XG4gICAgICAgICAgICAgIGNvbnN0IFttYXBJbnN0YW5jZV0gPSBSZWFjdC51c2VDb250ZXh0KE1hcENvbnRleHQpO1xuXG4gICAgICAgICAgICAgIGNvbnN0IHNldEluaXRpYWxDZW50ZXIgPSBSZWFjdC51c2VDYWxsYmFjaygoKSA9PiB7XG4gICAgICAgICAgICAgICAgICBpZiAobWFwSW5zdGFuY2UpIHtcbiAgICAgICAgICAgICAgICAgICAgICBtYXBJbnN0YW5jZS5zZXRDZW50ZXIoWzM3LjYxNTY1NSwgNTUuNzY4MDA1XSk7XG4gICAgICAgICAgICAgICAgICB9XG4gICAgICAgICAgICAgIH0sIFttYXBJbnN0YW5jZV0pO1xuXG4gICAgICAgICAgICAgIHJldHVybiAoXG4gICAgICAgICAgICAgICAgICA8YnV0dG9uIHN0eWxlPXt7IHBhZGRpbmc6ICc0cHggMTBweCcgfX0gb25DbGljaz17c2V0SW5pdGlhbENlbnRlcn0+XG4gICAgICAgICAgICAgICAgICAgICAg0KPRgdGC0LDQvdC+0LLQuNGC0Ywg0L3QsNGH0LDQu9GM0L3Ri9C5INGG0LXQvdGC0YBcbiAgICAgICAgICAgICAgICAgIDwvYnV0dG9uPlxuICAgICAgICAgICAgICApO1xuICAgICAgICAgIH07XG4gICAgICAgICAgY29uc3QgQXBwID0gKCkgPT4ge1xuICAgICAgICAgICAgICByZXR1cm4gKFxuICAgICAgICAgICAgICAgICAgPGRpdj5cbiAgICAgICAgICAgICAgICAgICAgICA8ZGl2IHN0eWxlPXt7IHBhZGRpbmc6ICcwIDAgNnB4JyB9fT5cbiAgICAgICAgICAgICAgICAgICAgICAgICAg0J/QtdGA0LXRgtCw0YnQuNGC0LUg0LrQsNGA0YLRgywg0LAg0LfQsNGC0LXQvCDQvdCw0LbQvNC40YLQtSDQutC90L7Qv9C60YMgPE1vdmVNYXBCdXR0b24gLz5cbiAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgICAgICAgICA8YnIgLz5cbiAgICAgICAgICAgICAgICAgICAgICA8ZGl2IHN0eWxlPXt7IHdpZHRoOiAnMTAwJScsIGhlaWdodDogMjUwIH19PlxuICAgICAgICAgICAgICAgICAgICAgICAgICA8TWFwR0wgLz5cbiAgICAgICAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICApO1xuICAgICAgICAgIH07XG5cbiAgICAgICAgICBSZWFjdERPTS5yZW5kZXIoXG4gICAgICAgICAgICAgIDxNYXBQcm92aWRlcj5cbiAgICAgICAgICAgICAgICAgIDxBcHAgLz5cbiAgICAgICAgICAgICAgPC9NYXBQcm92aWRlcj4sXG4gICAgICAgICAgICAgIGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdyb290JyksXG4gICAgICAgICAgKTtcbiAgICAgICJdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7QUFDVSxJQUFNQSxVQUFVLEdBQUdDLEtBQUssQ0FBQ0MsYUFBYSxDQUFDLENBQUNDLFNBQVMsRUFBRSxZQUFNLENBQUMsQ0FBQyxDQUFDLENBQUM7QUFFN0QsSUFBTUMsV0FBVyxHQUFHLFNBQWRBLFdBQVdBLENBQUlDLEtBQUssRUFBSztFQUMzQixJQUFBQyxlQUFBLEdBQXNDTCxLQUFLLENBQUNNLFFBQVEsQ0FBQyxDQUFDO0lBQUFDLGdCQUFBLEdBQUFDLGNBQUEsQ0FBQUgsZUFBQTtJQUEvQ0ksV0FBVyxHQUFBRixnQkFBQTtJQUFFRyxjQUFjLEdBQUFILGdCQUFBO0VBRWxDLG9CQUNJUCxLQUFBLENBQUFXLGFBQUEsQ0FBQ1osVUFBVSxDQUFDYSxRQUFRO0lBQUNDLEtBQUssRUFBRSxDQUFDSixXQUFXLEVBQUVDLGNBQWM7RUFBRSxHQUNyRE4sS0FBSyxDQUFDVSxRQUNVLENBQUM7QUFFOUIsQ0FBQztBQUVELElBQU1DLFVBQVUsR0FBR2YsS0FBSyxDQUFDZ0IsSUFBSSxDQUN6QixZQUFNO0VBQ0Ysb0JBQU9oQixLQUFBLENBQUFXLGFBQUE7SUFBS00sRUFBRSxFQUFDLGVBQWU7SUFBQ0MsS0FBSyxFQUFFO01BQUVDLEtBQUssRUFBRSxNQUFNO01BQUVDLE1BQU0sRUFBRTtJQUFPO0VBQUUsQ0FBTSxDQUFDO0FBQ25GLENBQUMsRUFDRDtFQUFBLE9BQU0sSUFBSTtBQUFBLENBQ2QsQ0FBQztBQUNELElBQU1DLEtBQUssR0FBRyxTQUFSQSxLQUFLQSxDQUFBLEVBQVM7RUFDaEIsSUFBQUMsaUJBQUEsR0FBNEJ0QixLQUFLLENBQUN1QixVQUFVLENBQUN4QixVQUFVLENBQUM7SUFBQXlCLGtCQUFBLEdBQUFoQixjQUFBLENBQUFjLGlCQUFBO0lBQWpERyxDQUFDLEdBQUFELGtCQUFBO0lBQUVkLGNBQWMsR0FBQWMsa0JBQUE7RUFFeEJ4QixLQUFLLENBQUMwQixTQUFTLENBQUMsWUFBTTtJQUNsQixJQUFNQyxHQUFHLEdBQUcsSUFBSUMsS0FBSyxDQUFDQyxHQUFHLENBQUMsZUFBZSxFQUFFO01BQ3ZDQyxNQUFNLEVBQUUsQ0FBQyxTQUFTLEVBQUUsU0FBUyxDQUFDO01BQzlCQyxJQUFJLEVBQUUsRUFBRTtNQUNSQyxHQUFHLEVBQUU7SUFDVCxDQUFDLENBQUM7SUFFRnRCLGNBQWMsQ0FBQ2lCLEdBQUcsQ0FBQztJQUNuQixPQUFPO01BQUEsT0FBTUEsR0FBRyxDQUFDTSxPQUFPLENBQUMsQ0FBQztJQUFBO0VBQzlCLENBQUMsRUFBRSxFQUFFLENBQUM7RUFFTixvQkFDSWpDLEtBQUEsQ0FBQVcsYUFBQTtJQUFLTyxLQUFLLEVBQUU7TUFBRUMsS0FBSyxFQUFFLE1BQU07TUFBRUMsTUFBTSxFQUFFO0lBQU87RUFBRSxnQkFDMUNwQixLQUFBLENBQUFXLGFBQUEsQ0FBQ0ksVUFBVSxNQUFFLENBQ1osQ0FBQztBQUVkLENBQUM7QUFDRCxJQUFNbUIsYUFBYSxHQUFHLFNBQWhCQSxhQUFhQSxDQUFBLEVBQVM7RUFDeEIsSUFBQUMsa0JBQUEsR0FBc0JuQyxLQUFLLENBQUN1QixVQUFVLENBQUN4QixVQUFVLENBQUM7SUFBQXFDLGtCQUFBLEdBQUE1QixjQUFBLENBQUEyQixrQkFBQTtJQUEzQzFCLFdBQVcsR0FBQTJCLGtCQUFBO0VBRWxCLElBQU1DLGdCQUFnQixHQUFHckMsS0FBSyxDQUFDc0MsV0FBVyxDQUFDLFlBQU07SUFDN0MsSUFBSTdCLFdBQVcsRUFBRTtNQUNiQSxXQUFXLENBQUM4QixTQUFTLENBQUMsQ0FBQyxTQUFTLEVBQUUsU0FBUyxDQUFDLENBQUM7SUFDakQ7RUFDSixDQUFDLEVBQUUsQ0FBQzlCLFdBQVcsQ0FBQyxDQUFDO0VBRWpCLG9CQUNJVCxLQUFBLENBQUFXLGFBQUE7SUFBUU8sS0FBSyxFQUFFO01BQUVzQixPQUFPLEVBQUU7SUFBVyxDQUFFO0lBQUNDLE9BQU8sRUFBRUo7RUFBaUIsR0FBQyxvSkFFM0QsQ0FBQztBQUVqQixDQUFDO0FBQ0QsSUFBTUssR0FBRyxHQUFHLFNBQU5BLEdBQUdBLENBQUEsRUFBUztFQUNkLG9CQUNJMUMsS0FBQSxDQUFBVyxhQUFBLDJCQUNJWCxLQUFBLENBQUFXLGFBQUE7SUFBS08sS0FBSyxFQUFFO01BQUVzQixPQUFPLEVBQUU7SUFBVTtFQUFFLEdBQUMscU5BQ1MsZUFBQXhDLEtBQUEsQ0FBQVcsYUFBQSxDQUFDdUIsYUFBYSxNQUFFLENBQ3hELENBQUMsZUFDTmxDLEtBQUEsQ0FBQVcsYUFBQSxXQUFLLENBQUMsZUFDTlgsS0FBQSxDQUFBVyxhQUFBO0lBQUtPLEtBQUssRUFBRTtNQUFFQyxLQUFLLEVBQUUsTUFBTTtNQUFFQyxNQUFNLEVBQUU7SUFBSTtFQUFFLGdCQUN2Q3BCLEtBQUEsQ0FBQVcsYUFBQSxDQUFDVSxLQUFLLE1BQUUsQ0FDUCxDQUNKLENBQUM7QUFFZCxDQUFDO0FBRURzQixRQUFRLENBQUNDLE1BQU0sY0FDWDVDLEtBQUEsQ0FBQVcsYUFBQSxDQUFDUixXQUFXLHFCQUNSSCxLQUFBLENBQUFXLGFBQUEsQ0FBQytCLEdBQUcsTUFBRSxDQUNHLENBQUMsRUFDZEcsUUFBUSxDQUFDQyxjQUFjLENBQUMsTUFBTSxDQUNsQyxDQUFDIiwiaWdub3JlTGlzdCI6W119</script></head>
+  <body>
+      <div id="root"><div><div style="padding: 0px 0px 6px;">Перетащите карту, а затем нажмите кнопку <button style="padding: 4px 10px;">Установить начальный центр</button></div><br><div style="width: 100%; height: 250px;"><div style="width: 100%; height: 100%;"><div id="map-container" style="width: 100%; height: 100%;"><div style="position: relative; height: 100%; width: 100%; overflow: hidden;"><div style="position: relative; height: 100%; width: 100%; touch-action: none; user-select: none;"><canvas style="display: block; width: 884px; height: 250px;" width="1105" height="312"></canvas><div style="position: absolute; left: 0px; top: 0px; width: 100%; height: 0px; user-select: auto;"></div></div><div style="position: absolute; left: 0px; top: 0px; width: 100%; height: 0px;"></div><div class="mapgl_z0m6n5pr5no-" style="margin: 10px;"><div class="mapgl_ITPUswrhaGk- mapgl_i42TyWqpCPk-"><div style="user-select: none;">
+    <div class="mapgl_QEdaFvncPWE-">
+        <button type="button" class="mapgl_mjx-K8iaDdc- mapgl_zKZCVsRur9c-">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="currentColor">
+                <path d="M24 15h-7V8h-2v7H8v2h7v7h2v-7h7v-2z"></path>
+            </svg>
+        </button>
+        <button type="button" class="mapgl_mjx-K8iaDdc- mapgl_3t-wJELDATg-">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="currentColor" width="32" height="32">
+                <path d="M8 15h16v2H8z"></path>
+            </svg>
+        </button>
+    </div>
+</div></div><div class="mapgl_ITPUswrhaGk- mapgl_CiHYefDPhI0-"><div style="user-select: none;">
+    <div class="mapgl_K-1Yb8HCVpQ-">
+        <div class="mapgl_CLps5xx6CNs-">
+            <a href="https://dev.2gis.ru/link_api_map" target="_blank" style="height: 20px;">
+    <svg width="40" height="20" viewBox="0 0 40 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2.00011 8.72731C1.98229 5.72738 4.05025 4 6.80779 4C9.47674 4 11.2797 5.58179 11.2797 8.05437C11.2797 10.1091 10.0602 11.2546 7.99196 12.2727C7.21431 12.6547 6.34807 13.1818 5.46454 13.4544H11.3681V16H2.00011V12.66C3.85604 12.0235 4.88111 11.3271 6.59576 10.4728C7.90363 9.81815 8.71666 9.23633 8.71666 8.1819C8.71666 7.16358 7.97439 6.36366 6.80779 6.36366C5.27006 6.36366 4.52753 7.52729 4.56292 8.72731H2.00011Z" fill="#6E7173"></path>
+        <path d="M23.6348 9.63643V10.5453C23.6348 13.5455 21.6552 16 18.067 16C14.6202 16 12.2518 13.4727 12.2518 9.99986C12.2518 6.52731 14.5497 4 18.1554 4C21.2487 4 23.1751 5.8363 23.6348 7.99991H21.0717C20.6301 6.96353 19.534 6.36366 18.2261 6.36366C15.9813 6.36366 14.7263 8.14523 14.7263 9.99986C14.7263 11.8545 15.9991 13.6363 18.2086 13.6363C19.5872 13.6363 20.736 12.9456 21.0896 11.8181H17.7313V9.63643H23.6348Z" fill="#6E7173"></path>
+        <path d="M27.4528 16H24.9783V4H27.4528V16Z" fill="#6E7173"></path>
+        <path d="M38.4292 7.63648H35.8662C35.6185 6.85461 34.947 6.18167 33.4446 6.18167C32.1543 6.18167 31.5004 6.69096 31.5004 7.41809C31.5004 8.30915 32.7375 8.56366 34.293 8.83623L34.361 8.84818C36.4076 9.20779 38.5 9.57545 38.5 12.2727C38.5 14.8 36.4672 16 33.7274 16C31.1998 16 28.9373 14.4727 28.6899 12.1818H31.2527C31.5712 13.1273 32.5079 13.8181 33.8512 13.8181C35.1415 13.8181 35.8662 13.3818 35.8662 12.5455C35.8662 11.514 34.3606 11.2653 32.8555 11.0167C32.8221 11.0112 32.7887 11.0056 32.7553 11.0001C31.1468 10.7273 28.8844 9.9818 28.8844 7.54535C28.8844 5.34534 30.7581 4 33.5332 4C36.2727 4 38.164 5.41814 38.4292 7.63648Z" fill="#6E7173"></path>
+    </svg>
+</a>
+        </div>
+    </div>
+</div></div></div></div></div></div></div></div></div>
+      <script type="text/babel">
+          const MapContext = React.createContext([undefined, () => {}]);
+
+          const MapProvider = (props) => {
+              const [mapInstance, setMapInstance] = React.useState();
+
+              return (
+                  <MapContext.Provider value={[mapInstance, setMapInstance]}>
+                      {props.children}
+                  </MapContext.Provider>
+              );
+          };
+
+          const MapWrapper = React.memo(
+              () => {
+                  return <div id="map-container" style={{ width: '100%', height: '100%' }}></div>;
+              },
+              () => true,
+          );
+          const MapGL = () => {
+              const [_, setMapInstance] = React.useContext(MapContext);
+
+              React.useEffect(() => {
+                  const map = new mapgl.Map('map-container', {
+                      center: [37.615655, 55.768005],
+                      zoom: 13,
+                      key: '72df8181-6863-4cde-abaa-2f92ab6f4824',
+                  });
+
+                  setMapInstance(map);
+                  return () => map.destroy();
+              }, []);
+
+              return (
+                  <div style={{ width: '100%', height: '100%' }}>
+                      <MapWrapper />
+                  </div>
+              );
+          };
+          const MoveMapButton = () => {
+              const [mapInstance] = React.useContext(MapContext);
+
+              const setInitialCenter = React.useCallback(() => {
+                  if (mapInstance) {
+                      mapInstance.setCenter([37.615655, 55.768005]);
+                  }
+              }, [mapInstance]);
+
+              return (
+                  <button style={{ padding: '4px 10px' }} onClick={setInitialCenter}>
+                      Установить начальный центр
+                  </button>
+              );
+          };
+          const App = () => {
+              return (
+                  <div>
+                      <div style={{ padding: '0 0 6px' }}>
+                          Перетащите карту, а затем нажмите кнопку <MoveMapButton />
+                      </div>
+                      <br />
+                      <div style={{ width: '100%', height: 250 }}>
+                          <MapGL />
+                      </div>
+                  </div>
+              );
+          };
+
+          ReactDOM.render(
+              <MapProvider>
+                  <App />
+              </MapProvider>,
+              document.getElementById('root'),
+          );
+      </script>
+  
+
+</body></html>

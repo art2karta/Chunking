@@ -1,0 +1,46 @@
+Source file: C:\Users\ar.kartavtsev\Desktop\Chunking\html_markdown\Сценарии использования _ 2ГИС Документация.md
+Total chunks: 4
+Chunk size target: 500-800 tokens, overlap: 15%
+================================================================================
+
+Statistics: Min=24 tokens, Max=239 tokens, Avg=105 tokens
+================================================================================
+
+--- CHUNK 1 (24 tokens / 52 chars) ---
+Document: Сценарии использования _ 2ГИС Документация
+H1: 
+H2: 
+H3: 
+
+MapGL JS API совместима со следующим веб-браузерами:
+
+--- CHUNK 2 (111 tokens / 313 chars) ---
+Document: Сценарии использования _ 2ГИС Документация
+H1: 
+H2: Desktop[](https://docs.2gis.com/mapgl/overview/browser-support#desktop)
+H3: 
+
+- Браузеры на базе Chromium: Chrome, Microsoft Edge и другие (Windows, macOS, Linux) — две последние мажорные стабильные версии (за исключением режима IE для Microsoft Edge).
+- Firefox (Windows, macOS, Linux) — две последние мажорные стабильные версии.
+- Safari (macOS) — две последние мажорные стабильные версии.
+
+--- CHUNK 3 (46 tokens / 123 chars) ---
+Document: Сценарии использования _ 2ГИС Документация
+H1: 
+H2: Android 7+[](https://docs.2gis.com/mapgl/overview/browser-support#android-7)
+H3: 
+
+- Chrome 119+ — последняя версия с поддержкой Android 7+.
+- Chrome WebView 119+ — последняя версия с поддержкой Android 7+.
+
+--- CHUNK 4 (239 tokens / 642 chars) ---
+Document: Сценарии использования _ 2ГИС Документация
+H1: 
+H2: iOS 12+[](https://docs.2gis.com/mapgl/overview/browser-support#ios-12)
+H3: 
+
+- Safari 12+ версии.
+- WebView 12+ версии.  
+Присутствие браузера в списке не гарантирует корректную работу API: проблемы могут возникать на уровне аппаратного обеспечения, операционной системы или драйверов. Чтобы убедиться в поддержке API для вашей платформы, используйте [метод isSupported](https://docs.2gis.com/mapgl/reference/method#is-supported).  
+Чтобы использовать карты 2ГИС в неподдерживаемом браузере, рассмотрите растровую [Raster Tiles API](https://docs.2gis.com/maps/others/rastertiles/overview) или статичную [Static API](https://docs.2gis.com/maps/others/static/overview) карту или [напишите нам письмо](mailto:api@2gis.ru).
+
